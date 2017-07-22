@@ -36,8 +36,8 @@ const buildHttpMethodParams:Function = function():HttpMethodParams {
   return params;
 };
 export const initRegistry:Function = function():void {
-  let testSuiteDescriptor:ResourceDescriptor = new ResourceDescriptor();
-  ResourceDescriptorRegistry.registerDescriptor(testSuiteDescriptor);
+  let descriptor:ResourceDescriptor = new ResourceDescriptor();
+  ResourceDescriptorRegistry.registerDescriptor(descriptor);
 };
 export const resetRegistry:Function = function():void {
   ResourceDescriptorRegistry.registerDescriptor(null);
@@ -51,3 +51,4 @@ export const PARAMETER_INDEX:number = 0;
 export const PARAMS:HttpMethodParams = buildHttpMethodParams();
 export const PARAM_NAME_1:string = "foo";
 export const PARAM_NAME_2:string = "bar";
+export const RESOURCE_PATH:string = "/resource/path";

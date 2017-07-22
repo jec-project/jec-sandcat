@@ -29,6 +29,25 @@ export {SandcatError} from "./exceptions/SandcatError";
 export {SandcatConnector} from "./jcad/connectors/SandcatConnector";
 //--> com/onsoft/sandcat/jcad/decorators
 export {CONNECTDecorator} from "./jcad/decorators/CONNECTDecorator";
+export {CookieParamDecorator} from "./jcad/decorators/CookieParamDecorator";
+export {DELETEDecorator} from "./jcad/decorators/DELETEDecorator";
+export {DestroyDecorator} from "./jcad/decorators/DestroyDecorator";
+export {ExitDecorator} from "./jcad/decorators/ExitDecorator";
+export {GETDecorator} from "./jcad/decorators/GETDecorator";
+export {HEADDecorator} from "./jcad/decorators/HEADDecorator";
+export {InitDecorator} from "./jcad/decorators/InitDecorator";
+export {OPTIONSDecorator} from "./jcad/decorators/OPTIONSDecorator";
+export {PathParamDecorator} from "./jcad/decorators/PathParamDecorator";
+export {POSTDecorator} from "./jcad/decorators/POSTDecorator";
+export {PUTDecorator} from "./jcad/decorators/PUTDecorator";
+export {QueryParamDecorator} from "./jcad/decorators/QueryParamDecorator";
+export {RequestBodyDecorator} from "./jcad/decorators/RequestBodyDecorator";
+export {RequestParamDecorator} from "./jcad/decorators/RequestParamDecorator";
+export {ResourcePathDecorator} from "./jcad/decorators/ResourcePathDecorator";
+export {RootPathDecorator} from "./jcad/decorators/RootPathDecorator";
+export {RootPathRefsDecorator} from "./jcad/decorators/RootPathRefsDecorator";
+export {TRACEDecorator} from "./jcad/decorators/TRACEDecorator";
 //--> com/onsoft/sandcat/jcad
+export {JarsContextManager} from "./jcad/JarsContextManager";
 //--> com/onsoft/sandcat
 export {Sandcat} from "./Sandcat";

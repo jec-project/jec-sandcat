@@ -67,7 +67,6 @@ utils/**/*.js
 # temp
 #####################################
 src/com/onsoft/sandcat/core
-src/com/onsoft/sandcat/jcad
 src/com/onsoft/sandcat/jslet
 src/com/onsoft/sandcat/logging
 src/com/onsoft/sandcat/metadata
