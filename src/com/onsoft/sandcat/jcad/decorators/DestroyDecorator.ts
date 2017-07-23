@@ -19,7 +19,7 @@ import {ResourceDescriptorRegistry} from "../../metadata/ResourceDescriptorRegis
 import {JsletMethodDescriptorBuilder} from "../../builders/JsletMethodDescriptorBuilder";
 import {ResourceDescriptor} from "../../reflect/ResourceDescriptor";
 import {JsletMethodDescriptor} from "../../reflect/JsletMethodDescriptor";
-import {JsletMethods} from "../../reflect/JsletMethods"
+import {JsletMethod} from "../../reflect/JsletMethod"
 
 /**
  * The <code>DestroyDecorator</code> class defines the <code>Decorator</code>  
@@ -50,7 +50,7 @@ export class DestroyDecorator implements Decorator {
     let builder:JsletMethodDescriptorBuilder =
                                              new JsletMethodDescriptorBuilder();
     let methodDescriptor:JsletMethodDescriptor = builder.build(
-      JsletMethods.DESTROY, key, descriptor
+      JsletMethod.DESTROY, key, descriptor
     );
     resourceDesc.addJsletMethod(methodDescriptor);
     return target;

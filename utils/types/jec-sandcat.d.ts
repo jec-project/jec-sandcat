@@ -7,4 +7,6 @@
 
 declare module "jec-sandcat" {
 
+import * as UrlPattern from "url-pattern";
+
 /*PLACEHOLDER*/}

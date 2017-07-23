@@ -39,7 +39,7 @@ export class JsletMethodDescriptorBuilder {
    * 
    * @param {number} jsletMethod the jslet method associated with the decorated
    *                             method. Valid values are the constants of the 
-   *                             <code>JsletMethods</code> class.
+   *                             <code>JsletMethod</code> class.
    * @param {string} key the name of the decorated method.
    * @param {PropertyDescriptor} descriptor the property descriptor associated
    *                                        with the decorated method.

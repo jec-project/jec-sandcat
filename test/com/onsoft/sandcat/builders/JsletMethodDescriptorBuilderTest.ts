@@ -18,7 +18,7 @@ import { TestSuite, Test, BeforeAll, AfterAll } from "jec-juta";
 import { expect } from "chai";
 import { JsletMethodDescriptorBuilder } from "../../../../../src/com/onsoft/sandcat/builders/JsletMethodDescriptorBuilder";
 import { JsletMethodDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/JsletMethodDescriptor";
-import { JsletMethods } from "../../../../../src/com/onsoft/sandcat/reflect/JsletMethods";
+import { JsletMethod } from "../../../../../src/com/onsoft/sandcat/reflect/JsletMethod";
 
 @TestSuite({
   description: "Test the JsletMethodDescriptorBuilder class properties"
@@ -41,7 +41,7 @@ export class JsletMethodDescriptorBuilderTest {
   })
   public buildTest():void {
     expect(
-      this.builder.build(JsletMethods.AFTER, this.key, this.propertyDescriptor)
+      this.builder.build(JsletMethod.AFTER, this.key, this.propertyDescriptor)
     ).to.be.an.instanceOf(JsletMethodDescriptor);
   }
   
@@ -50,7 +50,7 @@ export class JsletMethodDescriptorBuilderTest {
   })
   public nameTest():void {
     let desc:JsletMethodDescriptor = 
-      this.builder.build(JsletMethods.AFTER, this.key, this.propertyDescriptor);
+      this.builder.build(JsletMethod.AFTER, this.key, this.propertyDescriptor);
     expect(desc.name).to.equal(this.key);
   }
   
@@ -59,7 +59,7 @@ export class JsletMethodDescriptorBuilderTest {
   })
   public actionTest():void {
     let desc:JsletMethodDescriptor = 
-      this.builder.build(JsletMethods.AFTER, this.key, this.propertyDescriptor);
+      this.builder.build(JsletMethod.AFTER, this.key, this.propertyDescriptor);
     expect(desc.action).to.equal(this.propertyDescriptor.value);
   }
   
@@ -68,7 +68,7 @@ export class JsletMethodDescriptorBuilderTest {
   })
   public jsletMethodTest():void {
     let desc:JsletMethodDescriptor = 
-      this.builder.build(JsletMethods.AFTER, this.key, this.propertyDescriptor);
-    expect(desc.jsletMethod).to.equal(JsletMethods.AFTER);
+      this.builder.build(JsletMethod.AFTER, this.key, this.propertyDescriptor);
+    expect(desc.jsletMethod).to.equal(JsletMethod.AFTER);
   }
 }

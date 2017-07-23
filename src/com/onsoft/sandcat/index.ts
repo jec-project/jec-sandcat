@@ -54,5 +54,19 @@ export {ResourceJsletProxy} from "./jslet/ResourceJsletProxy";
 export {SandcatResourceJsletProxy} from "./jslet/SandcatResourceJsletProxy";
 //--> com/onsoft/sandcat/logging
 export {SandcatLoggerProxy} from "./logging/SandcatLoggerProxy";
+//--> com/onsoft/sandcat/metadata
+export {ResourceDescriptorRegistry} from "./metadata/ResourceDescriptorRegistry";
+export {RootPathDescriptorRegistry} from "./metadata/RootPathDescriptorRegistry";
+//--> com/onsoft/sandcat/reflect
+export {AnnotationType} from "./reflect/AnnotationType";
+export {BasicRootPathVersion} from "./reflect/BasicRootPathVersion";
+export {JsletMethod} from "./reflect/JsletMethod";
+export {JsletMethodDescriptor} from "./reflect/JsletMethodDescriptor";
+export {MethodDescriptor} from "./reflect/MethodDescriptor";
+export {ParameterDescriptor} from "./reflect/ParameterDescriptor";
+export {ParameterInjector} from "./reflect/ParameterInjector";
+export {ResourceDescriptor} from "./reflect/ResourceDescriptor";
+export {RootPathDescriptor} from "./reflect/RootPathDescriptor";
+export {RouteDescriptor} from "./reflect/RouteDescriptor";
 //--> com/onsoft/sandcat
 export {Sandcat} from "./Sandcat";

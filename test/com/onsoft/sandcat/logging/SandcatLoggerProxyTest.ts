@@ -14,7 +14,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import { TestSuite, Test, Before, After } from "jec-juta";
+import { TestSuite, Test } from "jec-juta";
 import { expect } from "chai";
 import { SandcatLoggerProxy } from "../../../../../src/com/onsoft/sandcat/logging/SandcatLoggerProxy";
 import { SingletonError, LoggerProxy } from "jec-commons";

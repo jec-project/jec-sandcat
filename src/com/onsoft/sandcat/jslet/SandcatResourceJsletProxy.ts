@@ -25,7 +25,7 @@ import {UrlPatternMapper} from "../core/UrlPatternMapper";
 import {UrlPatternMatcher} from "../core/UrlPatternMatcher";
 import {ParameterInjector} from "../reflect/ParameterInjector";
 import {SandcatError} from "../exceptions/SandcatError";
-import {JsletMethods} from "../reflect/JsletMethods";
+import {JsletMethod} from "../reflect/JsletMethod";
 import {JsletMethodDescriptor} from "../reflect/JsletMethodDescriptor";
 import {Sandcat} from "../Sandcat";
 import {RequestPropertiesBuilder} from "../builders/RequestPropertiesBuilder";
@@ -243,28 +243,28 @@ export class SandcatResourceJsletProxy extends HttpJslet
    * @inheritDoc
    */
   public init():void {
-    this.processJsletOperation(JsletMethods.INIT);
+    this.processJsletOperation(JsletMethod.INIT);
   }
 
   /**
    * @inheritDoc
    */
   public destroy():void {
-    this.processJsletOperation(JsletMethods.DESTROY);
+    this.processJsletOperation(JsletMethod.DESTROY);
   }
   
   /**
    * @inheritDoc
    */
   public before():void {
-    this.processJsletOperation(JsletMethods.BEFORE);
+    this.processJsletOperation(JsletMethod.BEFORE);
   }
 
   /**
    * @inheritDoc
    */
   public after():void {
-    this.processJsletOperation(JsletMethods.AFTER);
+    this.processJsletOperation(JsletMethod.AFTER);
   }
 
   /**

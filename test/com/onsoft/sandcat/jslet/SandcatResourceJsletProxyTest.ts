@@ -18,7 +18,7 @@ import { TestSuite, Test, Before, After } from "jec-juta";
 import * as chai from "chai";
 import * as spies from "chai-spies";
 import { SandcatResourceJsletProxy } from "../../../../../src/com/onsoft/sandcat/jslet/SandcatResourceJsletProxy";
-import { JsletMethods } from "../../../../../src/com/onsoft/sandcat/reflect/JsletMethods";
+import { JsletMethod } from "../../../../../src/com/onsoft/sandcat/reflect/JsletMethod";
 import { HttpMethod } from "jec-commons";
 import { HttpRequest, HttpResponse } from "jec-exchange";
 
@@ -80,43 +80,43 @@ export class SandcatResourceJsletProxyTest {
   }
   
   @Test({
-    description: "should invoke the internal operation process with JsletMethods.INIT"
+    description: "should invoke the internal operation process with JsletMethod.INIT"
   })
   public initMethodTest():void {
     let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
     this.proxy.setResource(utils.buildRestource());
     this.proxy.init();
-    expect(spy).to.have.been.called.with(JsletMethods.INIT);
+    expect(spy).to.have.been.called.with(JsletMethod.INIT);
   }
   
   @Test({
-    description: "should invoke the internal operation process with JsletMethods.DESTROY"
+    description: "should invoke the internal operation process with JsletMethod.DESTROY"
   })
   public destroyMethodTest():void {
     let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
     this.proxy.setResource(utils.buildRestource());
     this.proxy.destroy();
-    expect(spy).to.have.been.called.with(JsletMethods.DESTROY);
+    expect(spy).to.have.been.called.with(JsletMethod.DESTROY);
   }
   
   @Test({
-    description: "should invoke the internal operation process with JsletMethods.BEFORE"
+    description: "should invoke the internal operation process with JsletMethod.BEFORE"
   })
   public beforeMethodTest():void {
     let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
     this.proxy.setResource(utils.buildRestource());
     this.proxy.before();
-    expect(spy).to.have.been.called.with(JsletMethods.BEFORE);
+    expect(spy).to.have.been.called.with(JsletMethod.BEFORE);
   }
   
   @Test({
-    description: "should invoke the internal operation process with JsletMethods.AFTER"
+    description: "should invoke the internal operation process with JsletMethod.AFTER"
   })
   public afterMethodTest():void {
     let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
     this.proxy.setResource(utils.buildRestource());
     this.proxy.after();
-    expect(spy).to.have.been.called.with(JsletMethods.AFTER);
+    expect(spy).to.have.been.called.with(JsletMethod.AFTER);
   }
   
   // TODO: for each method, we whould test operation invokation when they exist.
