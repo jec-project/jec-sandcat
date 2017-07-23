@@ -49,5 +49,10 @@ export {RootPathRefsDecorator} from "./jcad/decorators/RootPathRefsDecorator";
 export {TRACEDecorator} from "./jcad/decorators/TRACEDecorator";
 //--> com/onsoft/sandcat/jcad
 export {JarsContextManager} from "./jcad/JarsContextManager";
+//--> com/onsoft/sandcat/jslet
+export {ResourceJsletProxy} from "./jslet/ResourceJsletProxy";
+export {SandcatResourceJsletProxy} from "./jslet/SandcatResourceJsletProxy";
+//--> com/onsoft/sandcat/logging
+export {SandcatLoggerProxy} from "./logging/SandcatLoggerProxy";
 //--> com/onsoft/sandcat
 export {Sandcat} from "./Sandcat";
