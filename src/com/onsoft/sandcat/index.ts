@@ -68,5 +68,14 @@ export {ParameterInjector} from "./reflect/ParameterInjector";
 export {ResourceDescriptor} from "./reflect/ResourceDescriptor";
 export {RootPathDescriptor} from "./reflect/RootPathDescriptor";
 export {RouteDescriptor} from "./reflect/RouteDescriptor";
+//--> com/onsoft/sandcat/utils
+export {HttpHeadersValidator} from "./utils/HttpHeadersValidator";
+export {ParametersMapUtil} from "./utils/ParametersMapUtil";
+export {RequestProperties} from "./utils/RequestProperties";
+export {ResourceDescriptorUtil} from "./utils/ResourceDescriptorUtil";
+export {ResourcePathSolver} from "./utils/ResourcePathSolver";
+export {RootPathDescriptorUtil} from "./utils/RootPathDescriptorUtil";
+export {RootPathSolver} from "./utils/RootPathSolver";
+export {RouteDescriptorUtil} from "./utils/RouteDescriptorUtil";
 //--> com/onsoft/sandcat
 export {Sandcat} from "./Sandcat";

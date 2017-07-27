@@ -8,5 +8,10 @@
 declare module "jec-sandcat" {
 
 import * as UrlPattern from "url-pattern";
+import { HttpRequest, HttpResponse, Jslet, HttpJslet } from "jec-exchange";
+import { HttpMethodParams, RoutePathParams, RootPathVersion } from "jec-jars";
+import { DomainContainer, DomainConnector } from "jec-glasscat-core";
+import { FileProperties, FilePreProcessor, Decorator, AbstractLoggerProxy,
+         AbstractDecoratorConnector, LoggerProxy } from "jec-commons";
 
 /*PLACEHOLDER*/}

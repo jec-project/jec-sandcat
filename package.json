@@ -1,6 +1,6 @@
 {
   "name": "jec-sandcat",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "JEC Sandcat - The default RESTful web services framework for GlassCat applications.",
   "main": "lib/com/onsoft/sandcat/index",
   "types": "types/jec-sandcat.d.ts",
