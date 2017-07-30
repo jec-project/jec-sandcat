@@ -47,7 +47,7 @@ export const buildResponse:Function = function():HttpResponse {
   );
   return response;
 };
-export const buildRestource:Function = function():any {
+export const buildResource:Function = function():any {
   let descriptor:ResourceDescriptor = new ResourceDescriptor();
   let resource:any = {
     getResourceDescriptor: function():ResourceDescriptor {

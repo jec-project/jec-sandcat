@@ -61,11 +61,3 @@ test/**/*.js
 
 # Ignore JavaScript files in utils folder
 utils/**/*.js
-
-
-#####################################
-# temp
-#####################################
-src/com/onsoft/sandcat/core
-
-lib

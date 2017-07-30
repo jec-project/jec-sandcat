@@ -23,6 +23,12 @@ export {ResponseHandlerBuilder} from "./builders/ResponseHandlerBuilder";
 export {SandcatBuilder} from "./builders/SandcatBuilder";
 export {UrlPatternMapperBuilder} from "./builders/UrlPatternMapperBuilder";
 //--> com/onsoft/sandcat/core
+export {DefaultSandcatContainer} from "./core/DefaultSandcatContainer";
+export {ResourceProxyJsletFactory} from "./core/ResourceProxyJsletFactory";
+export {RootPathDescriptorFactory} from "./core/RootPathDescriptorFactory";
+export {SandcatAutowireProcessor} from "./core/SandcatAutowireProcessor";
+export {UrlPatternMapper} from "./core/UrlPatternMapper";
+export {UrlPatternMatcher} from "./core/UrlPatternMatcher";
 //--> com/onsoft/sandcat/exceptions
 export {SandcatError} from "./exceptions/SandcatError";
 //--> com/onsoft/sandcat/jcad/connectors

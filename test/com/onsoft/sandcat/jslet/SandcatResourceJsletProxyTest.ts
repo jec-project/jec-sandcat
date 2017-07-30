@@ -60,7 +60,7 @@ export class SandcatResourceJsletProxyTest {
     description: "should set the specified resource object to the proxy"
   })
   public setResourceTest():void {
-    let resource:any = utils.buildRestource();
+    let resource:any = utils.buildResource();
     this.proxy.setResource(resource);
     expect(this.proxy.getResource()).to.equal(resource);
   }
@@ -84,7 +84,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public initMethodTest():void {
     let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.init();
     expect(spy).to.have.been.called.with(JsletMethod.INIT);
   }
@@ -94,7 +94,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public destroyMethodTest():void {
     let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.destroy();
     expect(spy).to.have.been.called.with(JsletMethod.DESTROY);
   }
@@ -104,7 +104,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public beforeMethodTest():void {
     let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.before();
     expect(spy).to.have.been.called.with(JsletMethod.BEFORE);
   }
@@ -114,7 +114,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public afterMethodTest():void {
     let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.after();
     expect(spy).to.have.been.called.with(JsletMethod.AFTER);
   }
@@ -126,7 +126,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doDeleteTest():void {
     let spy:any = chai.spy.on(this.proxy, "processOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doDelete(
       utils.buildRequest(HttpMethod.DELETE),
       utils.buildResponse(),
@@ -140,7 +140,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doDeleteExitTest():void {
     let spy:any = chai.spy.on(this, "exitCallback");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doDelete(
       utils.buildRequest(HttpMethod.DELETE),
       utils.buildResponse(),
@@ -154,7 +154,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doGetTest():void {
     let spy:any = chai.spy.on(this.proxy, "processOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doGet(
       utils.buildRequest(HttpMethod.GET),
       utils.buildResponse(),
@@ -168,7 +168,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doGetExitTest():void {
     let spy:any = chai.spy.on(this, "exitCallback");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doGet(
       utils.buildRequest(HttpMethod.GET),
       utils.buildResponse(),
@@ -182,7 +182,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doOptionsTest():void {
     let spy:any = chai.spy.on(this.proxy, "processOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doOptions(
       utils.buildRequest(HttpMethod.OPTIONS),
       utils.buildResponse(),
@@ -196,7 +196,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doOptionsExitTest():void {
     let spy:any = chai.spy.on(this, "exitCallback");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doOptions(
       utils.buildRequest(HttpMethod.OPTIONS),
       utils.buildResponse(),
@@ -210,7 +210,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doTraceTest():void {
     let spy:any = chai.spy.on(this.proxy, "processOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doTrace(
       utils.buildRequest(HttpMethod.TRACE),
       utils.buildResponse(),
@@ -224,7 +224,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doTraceExitTest():void {
     let spy:any = chai.spy.on(this, "exitCallback");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doTrace(
       utils.buildRequest(HttpMethod.TRACE),
       utils.buildResponse(),
@@ -238,7 +238,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doHeadTest():void {
     let spy:any = chai.spy.on(this.proxy, "processOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doHead(
       utils.buildRequest(HttpMethod.HEAD),
       utils.buildResponse(),
@@ -252,7 +252,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doHeadExitTest():void {
     let spy:any = chai.spy.on(this, "exitCallback");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doHead(
       utils.buildRequest(HttpMethod.HEAD),
       utils.buildResponse(),
@@ -266,7 +266,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doConnectTest():void {
     let spy:any = chai.spy.on(this.proxy, "processOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doConnect(
       utils.buildRequest(HttpMethod.CONNECT),
       utils.buildResponse(),
@@ -280,7 +280,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doConnectExitTest():void {
     let spy:any = chai.spy.on(this, "exitCallback");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doConnect(
       utils.buildRequest(HttpMethod.CONNECT),
       utils.buildResponse(),
@@ -294,7 +294,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doPutTest():void {
     let spy:any = chai.spy.on(this.proxy, "processOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doPut(
       utils.buildRequest(HttpMethod.PUT),
       utils.buildResponse(),
@@ -308,7 +308,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doPutExitTest():void {
     let spy:any = chai.spy.on(this, "exitCallback");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doPut(
       utils.buildRequest(HttpMethod.PUT),
       utils.buildResponse(),
@@ -322,7 +322,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doPostTest():void {
     let spy:any = chai.spy.on(this.proxy, "processOperation");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doPost(
       utils.buildRequest(HttpMethod.POST),
       utils.buildResponse(),
@@ -336,7 +336,7 @@ export class SandcatResourceJsletProxyTest {
   })
   public doPostExitTest():void {
     let spy:any = chai.spy.on(this, "exitCallback");
-    this.proxy.setResource(utils.buildRestource());
+    this.proxy.setResource(utils.buildResource());
     this.proxy.doPost(
       utils.buildRequest(HttpMethod.POST),
       utils.buildResponse(),
