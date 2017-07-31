@@ -20,6 +20,7 @@ import {DomainContainer} from "jec-glasscat-core";
 import {LogLevel} from "jec-commons";
 import {SandcatAutowireProcessor} from "./SandcatAutowireProcessor";
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
+import {SandcatError} from "../exceptions/SandcatError";
 
 /**
  * The default implementation of the <code>Sandcat</code> interface.
@@ -105,27 +106,28 @@ export class DefaultSandcatContainer implements Sandcat {
   /**
    * @inheritDoc
    */
-  public process(callback:(err:any)=>void):void {
+  public process(callback:(err:SandcatError)=>void):void {
     let message:string = "Sandcat process start";
     let processor:SandcatAutowireProcessor = null;
+    let error:SandcatError = null;
     this.sendMessage(message);
     if(this._domainContainer === null) {
       message = "Sandcat error: DomainContainer must not be null";
       this.sendMessage(message);
+      error = new SandcatError(message);
     } else {
       processor = new SandcatAutowireProcessor();
       processor.setSandcatContainer(this);
       this._domainContainer.getSourceFileInspector().addProcessor(processor);
       this.sendMessage("Sandcat process complete");
     }
-    callback(null);
+    callback(error);
   }
 
   /**
    * @inheritDoc
    */
   public addRootPath(rootPath:RootPathDescriptor):void {
-    //console.log(rootPath)
     this._rootPathList.set(rootPath.ref, rootPath);
   }
   

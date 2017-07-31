@@ -195,7 +195,6 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
           );
         }
       }
-      
     }
   }
 

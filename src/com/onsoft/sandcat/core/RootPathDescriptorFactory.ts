@@ -14,7 +14,6 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import {SandcatLoggerProxy} from "../logging/SandcatLoggerProxy";
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
 import {RootPathDescriptorRegistry} from "../metadata/RootPathDescriptorRegistry";
 import {JecStringsEnum, UrlStringsEnum, ClassLoader, FileProperties} from "jec-commons";
@@ -33,9 +32,7 @@ export class RootPathDescriptorFactory {
   /**
    * Creates a new <code>RootPathDescriptorFactory</code> instance.
    */
-  constructor() {
-    this.initObj();
-  }
+  constructor() { }
 
   //////////////////////////////////////////////////////////////////////////////
   // Private methods
@@ -44,22 +41,7 @@ export class RootPathDescriptorFactory {
   /**
    * Initializes this object.
    */
-  private initObj():void {
-    SandcatLoggerProxy.getInstance();
-  }
-
-  /**
-   * The wrapper function used to send decorated messages to the output stream.
-   * 
-   * @param {string} message the message to decorate and to send to the output
-   *                         stream.
-   * @param {number} logLevel the log level of the message sent to the output
-   *                          stream. Valid values are the constants of the
-   *                          <code>LogLevel</code> class.
-   */
-  private sendMessage(message:string, logLevel?:number):void {
-    SandcatLoggerProxy.getInstance().log(message, logLevel);
-  }
+  private initObj():void {}
 
   //////////////////////////////////////////////////////////////////////////////
   // Public methods

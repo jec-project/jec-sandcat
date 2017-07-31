@@ -15,7 +15,6 @@
 //   limitations under the License.
 
 import {Sandcat} from "../Sandcat";
-import {SandcatLoggerProxy} from "../logging/SandcatLoggerProxy";
 import {DomainContainer} from "jec-glasscat-core";
 import {SandcatAutowireProcessor} from "./SandcatAutowireProcessor";
 import {ResourceJsletProxy} from "../jslet/ResourceJsletProxy";
@@ -38,33 +37,7 @@ export class ResourceProxyJsletFactory {
   /**
    * Creates a new <code>ResourceProxyJsletFactory</code> instance.
    */
-  constructor() {
-    this.initObj();
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // Private methods
-  //////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * Initializes this object.
-   */
-  private initObj():void {
-    SandcatLoggerProxy.getInstance();
-  }
-
-  /**
-   * The wrapper function used to send decorated messages to the output stream.
-   * 
-   * @param {string} message the message to decorate and to send to the output
-   *                         stream.
-   * @param {number} logLevel the log level of the message sent to the output
-   *                          stream. Valid values are the constants of the
-   *                          <code>LogLevel</code> class.
-   */
-  private sendMessage(message:string, logLevel?:number):void {
-    SandcatLoggerProxy.getInstance().log(message, logLevel);
-  }
+  constructor() {}
 
   //////////////////////////////////////////////////////////////////////////////
   // Public methods
