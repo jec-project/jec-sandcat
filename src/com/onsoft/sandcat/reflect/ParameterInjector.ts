@@ -48,7 +48,7 @@ export class ParameterInjector {
    * @param {UrlPatternMatcher} matcher an object that contains information
    *                                    about the REST sub-route associated with
    *                                    the current HTTP transaction.
-   * @param {Function} calbackHandler the reference to the <code>exit</code> 
+   * @param {Function} callbackHandler the reference to the <code>exit</code> 
    *                                  method associated with the current HTTP
    *                                  transaction.
    * @param {MethodDescriptor} methodDescriptor the method descriptor for the 
@@ -58,7 +58,7 @@ export class ParameterInjector {
    * 
    * @return {any} an array that contains the parameter for a HTTP method call.
    */
-  public buildParameters(matcher:UrlPatternMatcher, calbackHandler:Function,
+  public buildParameters(matcher:UrlPatternMatcher, callbackHandler:Function,
                          methodDescriptor:MethodDescriptor,
                          req:HttpRequest):any[]{
     let map:Map<string, ParameterDescriptor> = methodDescriptor.parametersMap;
@@ -70,7 +70,7 @@ export class ParameterInjector {
       annotationType = value.annotationType;
       index = value.index;
       if(annotationType === AnnotationType.EXIT) {
-        parameters[index] = calbackHandler;
+        parameters[index] = callbackHandler;
       } else if(annotationType === AnnotationType.PATH_PARAM) {
         parameters[index] = matcher.properties[value.key];
       } else if(annotationType === AnnotationType.HTTP_REQUEST) {

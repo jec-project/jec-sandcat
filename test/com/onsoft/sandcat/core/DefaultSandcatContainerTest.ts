@@ -22,7 +22,6 @@ import { RootPathDescriptor } from "../../../../../src/com/onsoft/sandcat/reflec
 import { SandcatLoggerProxy } from "../../../../../src/com/onsoft/sandcat/logging/SandcatLoggerProxy";
 import { SandcatError } from "../../../../../src/com/onsoft/sandcat/exceptions/SandcatError";
 
-
 // Utilities:
 import * as utils from "../../../../../utils/test-utils/utilities/DefaultSandcatContainerTestUtils";
 
