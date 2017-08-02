@@ -23,7 +23,7 @@ import {AnnotationType} from "../../../../../src/com/onsoft/sandcat/reflect/Anno
 import * as utils from "../../../../../utils/test-utils/utilities/ParameterInjectorTestUtils";
 
 @TestSuite({
-  description: "TODO: create all tests for the ParameterInjector class"
+  description: "Test the ParameterInjectorTest class methods"
 })
 export class ParameterInjectorTest {
 
