@@ -38,11 +38,13 @@ export class SandcatAutowireProcessorTest {
 
   public processor:SandcatAutowireProcessor = null;
   public sandcat:Sandcat = null;
+  public processCompleteHandler:Function = null;
 
   @BeforeAll()
   public initTest():void {
     this.processor = new SandcatAutowireProcessor();
     this.sandcat = ({ } as Sandcat);
+    this.processCompleteHandler = function():void {};
   }
 
   @Test({
@@ -70,8 +72,48 @@ export class SandcatAutowireProcessorTest {
   }
 
   @Test({
-    description: "should have no effect",
+    description: "should have a 'processCompleteHandler' property set to 'null'",
     order: 3
+  })
+  public processCompleteHandlerTest():void {
+    expect(this.processor).to.have.property("processCompleteHandler", null);
+  }
+
+  @Test({
+    description: "should throw an error when 'processCompleteHandler' is 'null'",
+    order: 4
+  })
+  public processStartNoHandlerTest():void {
+    let processor:SandcatAutowireProcessor = this.processor;
+    let doProcessStart:Function = function():void {
+      processor.processStart(null, null);
+    };
+    expect(doProcessStart).to.throw(Error);
+  }
+
+  @Test({
+    description: "should throw an error when 'processCompleteHandler' is 'null'",
+    order: 5
+  })
+  public processCompleteNoHandlerTest():void {
+    let processor:SandcatAutowireProcessor = this.processor;
+    let doProcessComplete:Function = function():void {
+      processor.processComplete(utils.buildDomainConnector(), null);
+    };
+    expect(doProcessComplete).to.throw(Error);
+  }
+
+  @Test({
+    description: "should set the 'processCompleteHandler' property",
+    order: 6
+  })
+  public setProcessCompleteHandlerTest():void {
+    this.processor.processCompleteHandler = this.processCompleteHandler;
+  }
+
+  @Test({
+    description: "should have no effect",
+    order: 7
   })
   public processStartTest():void {
     expect(this.processor.processStart(null, null)).to.be.OK;
@@ -79,7 +121,7 @@ export class SandcatAutowireProcessorTest {
 
   @Test({
     description: "should find one resource class and log resource information",
-    order: 4
+    order: 8
   })
   public processTest():void {
     let loggerSpy:any = chai.spy.on(SandcatLoggerProxy.getInstance(), "log");
@@ -91,7 +133,7 @@ export class SandcatAutowireProcessorTest {
 
   @Test({
     description: "should throw a JCAD error when trying to create simultaneous instances of the SandcatAutowireProcessor class",
-    order: 5
+    order: 9
   })
   public multipleInstancesErrorTest():void {
     let newInstance:Function = function():SandcatAutowireProcessor {
@@ -102,7 +144,7 @@ export class SandcatAutowireProcessorTest {
 
   @Test({
     description: "should finish the process with no error",
-    order: 6
+    order: 10
   })
   public processCompleteTest():void {
     expect(

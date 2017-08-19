@@ -115,13 +115,17 @@ export class DefaultSandcatContainer implements Sandcat {
       message = "Sandcat error: DomainContainer must not be null";
       this.sendMessage(message);
       error = new SandcatError(message);
+      callback(error);
     } else {
       processor = new SandcatAutowireProcessor();
       processor.setSandcatContainer(this);
+      processor.processCompleteHandler = (err:any)=> {
+        callback(err);
+        this.sendMessage("Sandcat process complete");
+        processor.processCompleteHandler = null;
+      };
       this._domainContainer.getSourceFileInspector().addProcessor(processor);
-      this.sendMessage("Sandcat process complete");
     }
-    callback(error);
   }
 
   /**

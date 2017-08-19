@@ -24,6 +24,7 @@ import {SandcatLoggerProxy} from "../logging/SandcatLoggerProxy";
 import {LoggerProxy, FilePreProcessor, FileProperties, DecoratorProperties} from "jec-commons";
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
 import {JarsContextManager} from "../jcad/JarsContextManager";
+import {SandcatError} from "../exceptions/SandCatError";
 
 /**
  * The <code>SandcatAutowireProcessor</code> class allows to find all Sandcat  
@@ -138,6 +139,30 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
     this._rootPathFiles.splice(0);
   }
 
+  /**
+   * Throws a <code>SandcatError</code> exception whether the
+   * <code>processCompleteHandler</code> property is <code>null</code>.
+   */
+  private validateCallbackHandler():void {
+    if(!this.processCompleteHandler) {
+      throw new SandcatError(
+        "SandcatAutowireProcessor: 'processCompleteHandler' property must not be null."
+      );
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // Public methods
+  ////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * A callback method called when the <code>processComplete()</code> method is
+   * invoked. This property must not be <code>null</code> when the
+   * <code>processStart()</code> and <code>processComplete()</code> method are
+   * invoked.
+   */
+  public processCompleteHandler:Function = null;
+
   ////////////////////////////////////////////////////////////////////////////
   // Public methods
   ////////////////////////////////////////////////////////////////////////////
@@ -165,7 +190,9 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
   /**
    * @inheritDoc
    */
-  public processStart(watcher:any, sourcePath:string):void { }
+  public processStart(watcher:any, sourcePath:string):void {
+    this.validateCallbackHandler();
+  }
 
   /**
    * @inheritDoc
@@ -202,8 +229,10 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
    * @inheritDoc
    */
   public processComplete(connector:DomainConnector, sourcePath:string) {
+    this.validateCallbackHandler();
     this.transformRootPathFiles();
     this.transformResourceFiles(connector);
     this._contextManager.deleteContext();
+    this.processCompleteHandler();
   }
 }

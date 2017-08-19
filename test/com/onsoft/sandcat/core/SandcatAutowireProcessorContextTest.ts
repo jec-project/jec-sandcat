@@ -29,6 +29,12 @@ import * as utils from "../../../../../utils/test-utils/utilities/SandcatAutowir
 export class SandcatAutowireProcessorContextTest {
 
   public processor:SandcatAutowireProcessor = null;
+  public processCompleteHandler:Function = null;
+
+  @BeforeAll()
+  public initTest():void {
+    this.processCompleteHandler = function():void {};
+  }
 
   @AfterAll()
   public resetTest():void {
@@ -42,6 +48,7 @@ export class SandcatAutowireProcessorContextTest {
   public initProcessorTest():void {
     let buildProcessor:Function = function():void {
       this.processor = new SandcatAutowireProcessor();
+      this.processor.processCompleteHandler = this.processCompleteHandler;
     };
     expect(buildProcessor.bind(this)()).to.be.OK;
   }
