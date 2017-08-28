@@ -4,7 +4,7 @@ const ResourceProxyJsletFactory_1 = require("./ResourceProxyJsletFactory");
 const RootPathDescriptorFactory_1 = require("./RootPathDescriptorFactory");
 const SandcatLoggerProxy_1 = require("../logging/SandcatLoggerProxy");
 const JarsContextManager_1 = require("../jcad/JarsContextManager");
-const SandCatError_1 = require("../exceptions/SandCatError");
+const SandcatError_1 = require("../exceptions/SandcatError");
 class SandcatAutowireProcessor {
     constructor() {
         this._resourceFiles = null;
@@ -46,7 +46,7 @@ class SandcatAutowireProcessor {
     }
     validateCallbackHandler() {
         if (!this.processCompleteHandler) {
-            throw new SandCatError_1.SandcatError("SandcatAutowireProcessor: 'processCompleteHandler' property must not be null.");
+            throw new SandcatError_1.SandcatError("SandcatAutowireProcessor: 'processCompleteHandler' property must not be null.");
         }
     }
     setSandcatContainer(container) {

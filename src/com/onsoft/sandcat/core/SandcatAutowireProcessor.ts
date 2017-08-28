@@ -24,7 +24,7 @@ import {SandcatLoggerProxy} from "../logging/SandcatLoggerProxy";
 import {LoggerProxy, FilePreProcessor, FileProperties, DecoratorProperties} from "jec-commons";
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
 import {JarsContextManager} from "../jcad/JarsContextManager";
-import {SandcatError} from "../exceptions/SandCatError";
+import {SandcatError} from "../exceptions/SandcatError";
 
 /**
  * The <code>SandcatAutowireProcessor</code> class allows to find all Sandcat  

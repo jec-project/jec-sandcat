@@ -1,5 +1,14 @@
 # JEC Sandcat Project: Update Release Notes
 
+<a name="jec-sandcat-1.0.4"></a>
+## **1.0.4** (2017-08-28)
+
+### Bug Fixes
+
+- **SandcatError import**: fixing the `SandcatError` class import in the `SandcatAutowireProcessor`; `SandCatError` is not valid in linux environment.
+
+### Features
+
 <a name="jec-sandcat-1.0.3"></a>
 ## **1.0.3** (2017-08-20)
 
