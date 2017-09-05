@@ -49,6 +49,7 @@ class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
         let patternMatcher = this._urlPatternMapper.matchRequest(requestProperties);
         let parameters = null;
         let operationStatus = -1;
+        let responseMime = null;
         if (patternMatcher) {
             operation =
                 this._resource.getResourceDescriptor()
@@ -62,6 +63,10 @@ class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
                 responseHandler = this._handlerBuilder.build(req, res, exit);
                 parameters = this._paramInjector.buildParameters(patternMatcher, responseHandler, operation, req);
                 action = operation.action;
+                responseMime = operation.produces;
+                if (responseMime) {
+                    res.setHeader(jec_commons_1.HttpHeader.CONTENT_TYPE, responseMime);
+                }
                 action.apply(this._resource, parameters);
             }
             else {

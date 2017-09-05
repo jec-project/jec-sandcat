@@ -1,11 +1,22 @@
 # JEC Sandcat Project: Update Release Notes
 
+<a name="jec-sandcat-1.0.5"></a>
+## **1.0.5** (2017-09-05)
+
+### Bug Fixes
+
+- **produces**: adding MIME type to response header when `MethodDescriptor.produces` property is not `null`
+
+### Features
+
+- **ResponseHandlerBuilder**: adding automatic error process to the HTTP response handler function
+
 <a name="jec-sandcat-1.0.4"></a>
 ## **1.0.4** (2017-08-28)
 
 ### Bug Fixes
 
-- **SandcatError import**: fixing the `SandcatError` class import in the `SandcatAutowireProcessor`; `SandCatError` is not valid in linux environment.
+- **SandcatError import**: fixing the `SandcatError` class import in the `SandcatAutowireProcessor`; `SandCatError` is not valid in linux environment
 
 ### Features
 

@@ -9,13 +9,15 @@ class ResponseHandlerBuilder {
     }
     build(req, res, exit) {
         let handler = (data, err, status) => {
-            if (status)
-                res.status(status);
             if (err) {
                 this.sendMessage("Sandcat error: " + err, jec_commons_1.LogLevel.ERROR);
+                exit(req, res.sendStatus(status || jec_commons_1.HttpStatusCode.INTERNAL_SERVER_ERROR), null);
             }
             else {
-                exit(req, res.send(data), null);
+                if (status)
+                    res.status(status);
+                res.send(data);
+                exit(req, res, null);
             }
         };
         return handler;

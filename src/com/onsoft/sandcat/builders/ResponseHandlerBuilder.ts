@@ -15,7 +15,7 @@
 //   limitations under the License.
 
 import {HttpRequest, HttpResponse} from "jec-exchange";
-import {LogLevel} from "jec-commons";
+import {LogLevel, HttpStatusCode} from "jec-commons";
 import {SandcatLoggerProxy} from "../logging/SandcatLoggerProxy";
 
 /**
@@ -68,13 +68,19 @@ export class ResponseHandlerBuilder {
   public build(req:HttpRequest, res:HttpResponse,
           exit:(req:HttpRequest, res:HttpResponse, data:any) => void):Function {
     let handler:Function = (data?:any, err?:any, status?:number)=>{
-        if(status) res.status(status);
         if(err) {
           //TODO: build a better error process:
           this.sendMessage("Sandcat error: " + err, LogLevel.ERROR);
+          exit(
+            req,
+            res.sendStatus(status || HttpStatusCode.INTERNAL_SERVER_ERROR),
+            null
+          );
         } else {
+          if(status) res.status(status);
           //console.log(data)
-          exit(req, res.send(data), null);
+          res.send(data)
+          exit(req, res, null);
         }
       };
     return handler;

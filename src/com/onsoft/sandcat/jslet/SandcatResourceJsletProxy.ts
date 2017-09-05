@@ -15,7 +15,7 @@
 //   limitations under the License.
 
 import {HttpRequest, HttpResponse, HttpJslet, JsletContext} from "jec-exchange";
-import {HttpStatusCode, HttpMethod} from "jec-commons";
+import {HttpStatusCode, HttpMethod, HttpHeader} from "jec-commons";
 import {ResourceJsletProxy} from "./ResourceJsletProxy";
 import {ResourceDescriptor} from "../reflect/ResourceDescriptor";
 import {MethodDescriptor} from "../reflect/MethodDescriptor";
@@ -169,6 +169,7 @@ export class SandcatResourceJsletProxy extends HttpJslet
                          this._urlPatternMapper.matchRequest(requestProperties);
     let parameters:any[] = null;
     let operationStatus:number = -1;
+    let responseMime:string = null;
     if(patternMatcher) {
       operation =
         this._resource.getResourceDescriptor()
@@ -181,9 +182,13 @@ export class SandcatResourceJsletProxy extends HttpJslet
       if(operationStatus === HttpStatusCode.OK) {
         responseHandler = this._handlerBuilder.build(req, res, exit);
         parameters = this._paramInjector.buildParameters(
-            patternMatcher, responseHandler, operation, req
-          );
+          patternMatcher, responseHandler, operation, req
+        );
         action = operation.action;
+        responseMime = operation.produces;
+        if(responseMime) {
+          res.setHeader(HttpHeader.CONTENT_TYPE, responseMime);
+        }
         action.apply(this._resource, parameters);
       } else {
         exit(req, res.sendStatus(operationStatus), null);
