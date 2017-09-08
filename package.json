@@ -32,8 +32,8 @@
     "@types/node": "^8.0.13",
     "chai": "^3.5.0",
     "chai-spies": "^0.7.1",
-    "jec-juta": "^1.1.5",
-    "jec-tiger": "^1.1.6",
+    "jec-juta": "^1.1.6",
+    "jec-tiger": "^1.1.7",
     "mocha": "^3.4.2",
     "typedoc": "^0.8.0",
     "grunt": "^1.0.1",
@@ -46,8 +46,8 @@
   },
   "dependencies": {
     "function-arguments": "^1.0.8",
-    "jec-commons": "^1.1.6",
-    "jec-jars": "^1.0.6",
+    "jec-commons": "^1.1.7",
+    "jec-jars": "^1.0.7",
     "qs": "^6.4.0",
     "url-pattern": "^1.0.3"
   }

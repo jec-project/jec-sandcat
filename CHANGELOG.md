@@ -10,6 +10,7 @@
 ### Features
 
 - **ResponseHandlerBuilder**: adding automatic error process to the HTTP response handler function
+- Dependencies upgrade
 
 <a name="jec-sandcat-1.0.4"></a>
 ## **1.0.4** (2017-08-28)
