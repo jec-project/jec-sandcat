@@ -55,13 +55,13 @@ export class PUTDecoratorTest {
   }
 
   @Test({
-    description: "should return the reference to the target instance"
+    description: "should return the reference to the PropertyDescriptor instance"
   })
   public decorateTargetTest():void {
     let target:any = this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    expect(target).to.equal(utils.TARGET);
+    expect(target).to.equal(utils.DESCRIPTOR);
   }
   
   @Test({

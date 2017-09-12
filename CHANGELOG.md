@@ -6,6 +6,8 @@
 ### Bug Fixes
 
 - **produces**: adding MIME type to response header when `MethodDescriptor.produces` property is not `null`
+- **crossDomainPolicy**: adding support for the `HttpMethodParams.crossDomainPolicy` property
+- **PropertyDescriptor**: fixing the correct value of the returned element in method decorators: using `descriptor` instead of `target`
 
 ### Features
 

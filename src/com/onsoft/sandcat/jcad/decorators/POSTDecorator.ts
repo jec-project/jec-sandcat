@@ -52,6 +52,6 @@ export class POSTDecorator implements Decorator {
       HttpMethod.POST, key, descriptor, params
     );
     resourceDesc.addMethod(methodDescriptor);
-    return target;
+    return descriptor;
   }
 }

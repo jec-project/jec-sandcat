@@ -61,6 +61,7 @@ export class MethodDescriptorBuilder {
       methodDesc.route = params.route || null;
       methodDesc.produces = params.produces || null;
       methodDesc.consumes = params.consumes || null;
+      methodDesc.crossDomainPolicy = params.crossDomainPolicy || null;
     }
     return methodDesc;
   }

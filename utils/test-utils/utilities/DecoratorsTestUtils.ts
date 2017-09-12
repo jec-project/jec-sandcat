@@ -27,11 +27,13 @@ import {HttpMethodParams} from "jec-jars";
 export const ROUTE:string = "/route";
 export const CONSUMES:string = "application/json";
 export const PRODUCES:string = "application/json";
+export const CROSS_DOMAIN_POLICY:string = "*";
 const buildHttpMethodParams:Function = function():HttpMethodParams {
   let params:HttpMethodParams = ({
     route: ROUTE,
     consumes: CONSUMES,
-    produces: PRODUCES
+    produces: PRODUCES,
+    crossDomainPolicy: CROSS_DOMAIN_POLICY
   } as HttpMethodParams);
   return params;
 };

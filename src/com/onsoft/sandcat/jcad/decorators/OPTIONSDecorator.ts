@@ -52,6 +52,6 @@ export class OPTIONSDecorator implements Decorator {
       HttpMethod.OPTIONS, key, descriptor, params
     );
     resourceDesc.addMethod(methodDescriptor);
-    return target;
+    return descriptor;
   }
 }

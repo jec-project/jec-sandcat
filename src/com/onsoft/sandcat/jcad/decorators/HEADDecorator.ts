@@ -52,6 +52,6 @@ export class HEADDecorator implements Decorator {
       HttpMethod.HEAD, key, descriptor, params
     );
     resourceDesc.addMethod(methodDescriptor);
-    return target;
+    return descriptor;
   }
 }

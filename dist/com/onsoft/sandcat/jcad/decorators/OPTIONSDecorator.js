@@ -10,7 +10,7 @@ class OPTIONSDecorator {
         let builder = new MethodDescriptorBuilder_1.MethodDescriptorBuilder();
         let methodDescriptor = builder.build(jec_commons_1.HttpMethod.OPTIONS, key, descriptor, params);
         resourceDesc.addMethod(methodDescriptor);
-        return target;
+        return descriptor;
     }
 }
 exports.OPTIONSDecorator = OPTIONSDecorator;

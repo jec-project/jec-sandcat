@@ -52,6 +52,6 @@ export class InitDecorator implements Decorator {
       JsletMethod.INIT, key, descriptor
     );
     resourceDesc.addJsletMethod(methodDescriptor);
-    return target;
+    return descriptor;
   }
 }

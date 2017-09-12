@@ -40,7 +40,8 @@ export class MethodDescriptorBuilderTest {
     this.httpParams = {
       route: "foo/bar",
       consumes: "application/json",
-      produces: "application/json"
+      produces: "application/json",
+      crossDomainPolicy: "*"
     };
   }
   
@@ -99,6 +100,15 @@ export class MethodDescriptorBuilderTest {
   }
   
   @Test({
+    description: "should return a MethodDescriptor instance with the 'crossDomainPolicy' property set to 'null'"
+  })
+  public crossDomainPolicyNullTest():void {
+    let desc:MethodDescriptor = 
+      this.builder.build(HttpMethod.GET, this.key, this.propertyDescriptor);
+    expect(desc.crossDomainPolicy).to.be.null;
+  }
+  
+  @Test({
     description: "should return a MethodDescriptor instance with the 'consumes' property set to 'null'"
   })
   public consumesNullTest():void {
@@ -135,5 +145,15 @@ export class MethodDescriptorBuilderTest {
       HttpMethod.GET, this.key, this.propertyDescriptor, this.httpParams
     );
     expect(desc.produces).to.equal(this.httpParams.produces);
+  }
+  
+  @Test({
+    description: "should return a MethodDescriptor instance with the correct 'crossDomainPolicy' property value"
+  })
+  public crossDomainPolicyTest():void {
+    let desc:MethodDescriptor = this.builder.build(
+      HttpMethod.GET, this.key, this.propertyDescriptor, this.httpParams
+    );
+    expect(desc.crossDomainPolicy).to.equal(this.httpParams.crossDomainPolicy);
   }
 }

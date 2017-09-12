@@ -89,6 +89,12 @@ export class MethodDescriptor {
   public produces:string = null;
 
   /**
+   * Specifies the cross domain access policy for the HTTP method mapped whih
+   * the resource function can respond to.
+   */
+  public crossDomainPolicy:string = null;
+
+  /**
    * The list of URl patterns for the HTTP method mapped whih the resource
    * function.
    */

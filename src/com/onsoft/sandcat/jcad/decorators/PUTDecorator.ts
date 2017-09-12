@@ -52,6 +52,6 @@ export class PUTDecorator implements Decorator {
       HttpMethod.PUT, key, descriptor, params
     );
     resourceDesc.addMethod(methodDescriptor);
-    return target;
+    return descriptor;
   }
 }

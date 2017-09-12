@@ -10,7 +10,7 @@ class InitDecorator {
         let builder = new JsletMethodDescriptorBuilder_1.JsletMethodDescriptorBuilder();
         let methodDescriptor = builder.build(JsletMethod_1.JsletMethod.INIT, key, descriptor);
         resourceDesc.addJsletMethod(methodDescriptor);
-        return target;
+        return descriptor;
     }
 }
 exports.InitDecorator = InitDecorator;

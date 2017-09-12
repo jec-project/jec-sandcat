@@ -52,6 +52,6 @@ export class TRACEDecorator implements Decorator {
       HttpMethod.TRACE, key, descriptor, params
     );
     resourceDesc.addMethod(methodDescriptor);
-    return target;
+    return descriptor;
   }
 }

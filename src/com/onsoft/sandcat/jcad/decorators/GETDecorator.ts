@@ -52,6 +52,6 @@ export class GETDecorator implements Decorator {
       HttpMethod.GET, key, descriptor, params
     );
     resourceDesc.addMethod(methodDescriptor);
-    return target;
+    return descriptor;
   }
 }

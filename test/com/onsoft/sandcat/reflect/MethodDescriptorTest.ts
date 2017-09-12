@@ -73,6 +73,13 @@ export class MethodDescriptorTest {
   }
   
   @Test({
+    description: "should have an 'crossDomainPolicy' property set to 'null'"
+  })
+  public crossDomainPolicyTest():void {
+    expect(this.descriptor).to.have.property("crossDomainPolicy", null);
+  }
+  
+  @Test({
     description: "should have an 'produces' property set to 'null'"
   })
   public producesTest():void {

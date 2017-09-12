@@ -10,7 +10,7 @@ class DestroyDecorator {
         let builder = new JsletMethodDescriptorBuilder_1.JsletMethodDescriptorBuilder();
         let methodDescriptor = builder.build(JsletMethod_1.JsletMethod.DESTROY, key, descriptor);
         resourceDesc.addJsletMethod(methodDescriptor);
-        return target;
+        return descriptor;
     }
 }
 exports.DestroyDecorator = DestroyDecorator;

@@ -55,13 +55,13 @@ export class POSTDecoratorTest {
   }
 
   @Test({
-    description: "should return the reference to the target instance"
+    description: "should return the reference to the PropertyDescriptor instance"
   })
   public decorateTargetTest():void {
     let target:any = this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    expect(target).to.equal(utils.TARGET);
+    expect(target).to.equal(utils.DESCRIPTOR);
   }
   
   @Test({
@@ -167,13 +167,13 @@ export class POSTDecoratorTest {
   }
   
   @Test({
-    description: "should create an MethodDescriptor instance with the specified 'produces' value"
+    description: "should create an MethodDescriptor instance with the specified 'crossDomainPolicy' value"
   })
-  public producesTest():void {
+  public crossDomainPolicyTest():void {
     this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
     let desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
-    expect(desc.produces).to.equal(utils.PRODUCES);
+    expect(desc.crossDomainPolicy).to.equal(utils.CROSS_DOMAIN_POLICY);
   }
 }

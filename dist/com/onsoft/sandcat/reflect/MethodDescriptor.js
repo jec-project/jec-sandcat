@@ -9,6 +9,7 @@ class MethodDescriptor {
         this.route = null;
         this.consumes = null;
         this.produces = null;
+        this.crossDomainPolicy = null;
         this.urlPatterns = null;
         this.parametersMap = null;
         this.initObj();

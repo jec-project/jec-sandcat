@@ -169,7 +169,7 @@ export class SandcatResourceJsletProxy extends HttpJslet
                          this._urlPatternMapper.matchRequest(requestProperties);
     let parameters:any[] = null;
     let operationStatus:number = -1;
-    let responseMime:string = null;
+    let header:string = null;
     if(patternMatcher) {
       operation =
         this._resource.getResourceDescriptor()
@@ -185,9 +185,13 @@ export class SandcatResourceJsletProxy extends HttpJslet
           patternMatcher, responseHandler, operation, req
         );
         action = operation.action;
-        responseMime = operation.produces;
-        if(responseMime) {
-          res.setHeader(HttpHeader.CONTENT_TYPE, responseMime);
+        header = operation.produces;
+        if(header) {
+          res.setHeader(HttpHeader.CONTENT_TYPE, header);
+        }
+        header = operation.crossDomainPolicy;
+        if(header) {
+          res.setHeader(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, header);
         }
         action.apply(this._resource, parameters);
       } else {
