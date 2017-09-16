@@ -83,19 +83,7 @@ export class RootPathSolver {
     let fixedPath:string = path.indexOf(UrlStringsEnum.SLASH) === 0 ?
                            path : UrlStringsEnum.SLASH + path;
     descriptor.fullPath = fixedPath;
-    /*let len:number = fixedPath.length;
-    let markId:number = fixedPath.lastIndexOf(UrlStringsEnum.PERM_MARK);*/
     let versionPath:string = this.buildVersionPath(params.version);
-    /*if(markId !== len) {
-      markId = fixedPath.lastIndexOf(UrlStringsEnum.SLASH);
-      if(markId === len) {
-        descriptor.fullPath = fixedPath.substr(0, len - 1);
-      } else {
-        descriptor.fullPath = fixedPath;
-      }
-    } else {
-      descriptor.fullPath = fixedPath.substr(0, len - 2);
-    }*/
     descriptor.fullPath += UrlStringsEnum.SLASH + versionPath;
   }
 };

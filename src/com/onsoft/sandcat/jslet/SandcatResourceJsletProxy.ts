@@ -110,6 +110,7 @@ export class SandcatResourceJsletProxy extends HttpJslet
     this._requestPropertiesBuilder = new RequestPropertiesBuilder();
     this._httpHeadersValidator = new HttpHeadersValidator();
   }
+
   /**
    * Compute operations for sending correct parameters to the right resource
    * method, depending on the HTTP metho and the UIR sub-route.
@@ -163,6 +164,7 @@ export class SandcatResourceJsletProxy extends HttpJslet
     let action:Function = null;
     let responseHandler:Function = null;
     let operation:MethodDescriptor = null;
+    let descriptor:ResourceDescriptor = this._resource.getResourceDescriptor();
     let requestProperties:RequestProperties =
                           this._requestPropertiesBuilder.build(httpMethod, req);
     let patternMatcher:UrlPatternMatcher =
@@ -171,12 +173,22 @@ export class SandcatResourceJsletProxy extends HttpJslet
     let operationStatus:number = -1;
     let header:string = null;
     if(patternMatcher) {
-      operation =
-        this._resource.getResourceDescriptor()
-                      .methodsMap
-                      .get(patternMatcher.descriptor.getMappedMethod());
+      operation = descriptor.methodsMap
+                              .get(patternMatcher.descriptor.getMappedMethod());
     }
     if(operation) {
+      header = descriptor.produces;
+      if(header) {
+        res.setHeader(HttpHeader.CONTENT_TYPE, header);
+      }
+      header = descriptor.crossDomainPolicy;
+      if(header) {
+        res.setHeader(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, header);
+      }
+      //TODO: add descriptor.consumes support
+      //TODO: implement a singleton helper to factorize such actions :
+      //      header = descriptor.produces;
+      //      res.setHeader(HttpHeader.CONTENT_TYPE, header);
       operationStatus =
               this._httpHeadersValidator.validate(operation, requestProperties);
       if(operationStatus === HttpStatusCode.OK) {

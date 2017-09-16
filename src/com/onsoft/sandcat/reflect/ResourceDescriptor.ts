@@ -86,6 +86,24 @@ export class ResourceDescriptor {
    */
   public rootPathRefs:string[] = null;
 
+  /**
+   * Specifies the MIME media types of representations all resources can respond
+   * associated with this <code>ResourceDescriptor</code> instance.
+   */
+  public consumes:string = null;
+  
+  /**
+   * Specifies the MIME media types of representations all resources can produce
+   * associated with this <code>ResourceDescriptor</code> instance.
+   */
+  public produces:string = null;
+
+  /**
+   * Specifies the cross domain access policy associated with this 
+   * <code>ResourceDescriptor</code> instance.
+   */
+  public crossDomainPolicy:string = null;
+
   ////////////////////////////////////////////////////////////////////////////
   // Public methods
   ////////////////////////////////////////////////////////////////////////////

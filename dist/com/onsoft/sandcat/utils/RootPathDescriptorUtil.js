@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class RootPathDescriptorUtil {
-    constructor(resource, descriptor) {
+    constructor(rootPath, descriptor) {
         this._rootPath = null;
         this._descriptor = null;
-        this.initObj(resource, descriptor);
+        this.initObj(rootPath, descriptor);
     }
     initObj(rootPath, descriptor) {
         this._rootPath = rootPath;

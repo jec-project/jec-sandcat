@@ -20,6 +20,8 @@ import {ResourceDescriptorRegistry} from "../../metadata/ResourceDescriptorRegis
 import {ResourceDescriptor} from "../../reflect/ResourceDescriptor";
 import {ResourcePathSolver} from "../../utils/ResourcePathSolver";
 
+const STRING_TYPE:string = "string";
+
 /**
  * The <code>ResourcePathDecorator</code> class defines the 
  * <code>Decorator</code> implementation for the JARS <code>@ResourcePath</code>
@@ -43,16 +45,33 @@ export class ResourcePathDecorator implements Decorator {
   /**
    * @inheritDoc
    */
-  public decorate(target:any, path:string):any {
-    if(!path) {
+  public decorate(target:any, params:any):any {
+    let descriptor:ResourceDescriptor =
+                           ResourceDescriptorRegistry.getRegisteredDescriptor();
+    let solver:ResourcePathSolver = new ResourcePathSolver();
+    let path:string = null;
+    // Validation process:
+    if(!params) {
       throw new JarsError(
         "ResourcePath error: 'path' parameter is missing for resource " +
         target
       );
+    } else {
+      if(typeof params === STRING_TYPE) path = String(params);
+      else {
+        if(!params.path) {
+          throw new JarsError(
+            "ResourcePath error: 'path' parameter is missing for resource " +
+            target
+          );
+        } else {
+          path = params.path;
+          descriptor.produces = params.produces || null;
+          descriptor.consumes = params.consumes || null;
+          descriptor.crossDomainPolicy = params.crossDomainPolicy || null;
+        }
+      }
     }
-    let descriptor:ResourceDescriptor =
-                           ResourceDescriptorRegistry.getRegisteredDescriptor();
-    let solver:ResourcePathSolver = new ResourcePathSolver();
     solver.resolvePath(path, descriptor);
     return target;
   }

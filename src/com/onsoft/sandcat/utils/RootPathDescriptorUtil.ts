@@ -34,8 +34,8 @@ export class RootPathDescriptorUtil {
    *                                        associated with the specified
    *                                        root path object to decorate.
    */
-  constructor(resource:any, descriptor:RootPathDescriptor) {
-    this.initObj(resource, descriptor);
+  constructor(rootPath:any, descriptor:RootPathDescriptor) {
+    this.initObj(rootPath, descriptor);
   }
 
   //////////////////////////////////////////////////////////////////////////////

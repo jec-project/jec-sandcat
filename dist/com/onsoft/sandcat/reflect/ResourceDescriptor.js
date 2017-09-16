@@ -8,6 +8,9 @@ class ResourceDescriptor {
         this.methodsMap = null;
         this.jsletMethodsMap = null;
         this.rootPathRefs = null;
+        this.consumes = null;
+        this.produces = null;
+        this.crossDomainPolicy = null;
         this.initObj();
     }
     initObj() {

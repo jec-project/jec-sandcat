@@ -76,6 +76,27 @@ export class ResourceDescriptorTest {
   }
   
   @Test({
+    description: "should have a 'crossDomainPolicy' property set to 'null'"
+  })
+  public crossDomainPolicyTest():void {
+    expect(this.descriptor).to.have.property("crossDomainPolicy", null);
+  }
+  
+  @Test({
+    description: "should have an 'consumes' property set to 'null'"
+  })
+  public consumesTest():void {
+    expect(this.descriptor).to.have.property("consumes", null);
+  }
+
+  @Test({
+    description: "should have an 'produces' property set to 'null'"
+  })
+  public producesTest():void {
+    expect(this.descriptor).to.have.property("produces", null);
+  }
+  
+  @Test({
     description: "should add the specified MethodDescriptor isnatnce to the 'methodsMap' object"
   })
   public addMethodTest():void {

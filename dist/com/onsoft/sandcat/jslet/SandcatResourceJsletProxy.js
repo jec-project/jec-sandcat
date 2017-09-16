@@ -45,18 +45,25 @@ class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
         let action = null;
         let responseHandler = null;
         let operation = null;
+        let descriptor = this._resource.getResourceDescriptor();
         let requestProperties = this._requestPropertiesBuilder.build(httpMethod, req);
         let patternMatcher = this._urlPatternMapper.matchRequest(requestProperties);
         let parameters = null;
         let operationStatus = -1;
         let header = null;
         if (patternMatcher) {
-            operation =
-                this._resource.getResourceDescriptor()
-                    .methodsMap
-                    .get(patternMatcher.descriptor.getMappedMethod());
+            operation = descriptor.methodsMap
+                .get(patternMatcher.descriptor.getMappedMethod());
         }
         if (operation) {
+            header = descriptor.produces;
+            if (header) {
+                res.setHeader(jec_commons_1.HttpHeader.CONTENT_TYPE, header);
+            }
+            header = descriptor.crossDomainPolicy;
+            if (header) {
+                res.setHeader(jec_commons_1.HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN, header);
+            }
             operationStatus =
                 this._httpHeadersValidator.validate(operation, requestProperties);
             if (operationStatus === jec_commons_1.HttpStatusCode.OK) {
