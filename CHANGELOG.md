@@ -5,13 +5,13 @@
 
 ### Bug Fixes
 
-- **ResourcePathDecorator**: adding support for the `ResourcePathParams` interface
 - **produces**: adding MIME type to response header when `MethodDescriptor.produces` property is not `null`
 - **crossDomainPolicy**: adding support for the `HttpMethodParams.crossDomainPolicy` property
 - **PropertyDescriptor**: fixing the correct value of the returned element in method decorators: using `descriptor` instead of `target`
 
 ### Features
 
+- **ResourcePathDecorator**: adding support for the `ResourcePathParams` interface new members
 - **RoutePathParams**: adding implementiion for the new `consumes`, `produces` and `crossDomainPolicy` members defined by the `RoutePathParams` interface
 - **ResponseHandlerBuilder**: adding automatic error process to the HTTP response handler function
 - Dependencies upgrade
