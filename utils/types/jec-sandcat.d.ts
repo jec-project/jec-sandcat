@@ -12,6 +12,7 @@ import { HttpRequest, HttpResponse, Jslet, HttpJslet } from "jec-exchange";
 import { HttpMethodParams, RoutePathParams, RootPathVersion } from "jec-jars";
 import { DomainContainer, DomainConnector } from "jec-glasscat-core";
 import { FileProperties, FilePreProcessor, Decorator, AbstractLoggerProxy,
-         AbstractDecoratorConnector, LoggerProxy } from "jec-commons";
+         AbstractDecoratorConnector, LoggerProxy, DelegatedContainerBuilder,
+         DelegatedContainer } from "jec-commons";
 
 /*PLACEHOLDER*/}

@@ -14,6 +14,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+import {DelegatedContainer} from "jec-commons";
 import {DomainContainer} from "jec-glasscat-core";
 import {RootPathDescriptor} from "./reflect/RootPathDescriptor";
 import {SandcatError} from "./exceptions/SandcatError";
@@ -22,29 +23,19 @@ import {SandcatError} from "./exceptions/SandcatError";
  * The main Sandcat execution entry point, which will execute a full Sandcat
  * execution session.
  */
-export interface Sandcat {
+export interface Sandcat extends DelegatedContainer {
 
   //////////////////////////////////////////////////////////////////////////////
   // Public methods
   //////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Sets the domain contained associated with this <code>Sandcat</code>
-   * object.
-   * 
-   * @param {DomainContainer} container the domain associated with this
-   *                                    <code>Sandcat</code> object.
+   * @inheritDoc
    */
   setDomainContainer(container:DomainContainer):void;
 
   /**
-   * Starts the Sandcat main process.
-   * 
-   * @param {Function} callback the callback method called an the end of the
-   *                            process. This function takes a
-   *                            <code>SandcatError</code> object as parameter
-   *                            which represents an error message if the
-   *                            process failed.
+   * @inheritDoc
    */
   process(callback:(err:SandcatError)=>void):void;
 

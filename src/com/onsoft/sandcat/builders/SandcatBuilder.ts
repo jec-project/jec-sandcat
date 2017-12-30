@@ -16,12 +16,13 @@
 
 import {Sandcat} from "../Sandcat";
 import {DefaultSandcatContainer} from "../core/DefaultSandcatContainer";
+import {DelegatedContainerBuilder, DelegatedContainer} from "jec-commons";
 import {DomainContainer} from "jec-glasscat-core";
 
 /**
  * A helper class that creates new <code>Sandcat</code> instances.
  */
-export class SandcatBuilder {
+export class SandcatBuilder implements DelegatedContainerBuilder {
 
   //////////////////////////////////////////////////////////////////////////////
   // Constructor function
@@ -37,13 +38,9 @@ export class SandcatBuilder {
   //////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Creates and returns new <code>Sandcat</code> instance.
-   * 
-   * @param {DomainContainer} container the domain associated with the new
-   *                                    <code>Sandcat</code> instance.
-   * @return {Sandcat} a new <code>Sandcat</code> instance.
+   * @inheritDoc
    */
-  public build(container:DomainContainer):Sandcat {
+  public build(container:DomainContainer):DelegatedContainer {
     let sandcat:Sandcat = new DefaultSandcatContainer();
     sandcat.setDomainContainer(container);
     return sandcat;

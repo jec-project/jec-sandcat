@@ -1,5 +1,15 @@
 # JEC Sandcat Project: Update Release Notes
 
+<a name="jec-sandcat-1.0.6"></a>
+## **1.0.6** (2017-12-26)
+
+### Bug Fixes
+
+### Features
+
+- Dependencies upgrade
+- Adding implementation for the JEC container delegation API
+
 <a name="jec-sandcat-1.0.5"></a>
 ## **1.0.5** (2017-09-05)
 

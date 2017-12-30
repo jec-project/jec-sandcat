@@ -112,7 +112,8 @@ module.exports = function(grunt) {
         out: "docs/api-reference",
         readme: "README.md",
         name: "JEC Sandcat Project",
-        exclude: "**/*Test*.ts"
+        exclude: "**/*Test*.ts",
+        includes: "utils/doc-includes"
       }
     }
   });

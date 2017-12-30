@@ -70,7 +70,7 @@ export class JarsContextManager {
   /**
    * Initializes the context for the specified reference.
    * 
-   * @param {string} jcadReference the reference of the context to initialize.
+   * @param {string} jcadReference the reference to the context to initialize.
    * @param {Class} decoratorClass the reference to the decorator class
    *                               associated whith the context to initialize.
    */
