@@ -49,7 +49,7 @@ export class InitApp implements BootstrapScript {
 Sandcat is compatible with the JEC container delegation API. So, you can use the `@ContainersConfig` decorator in order to initialize Sandcat with other JEC frameworks:
 
 ```javascript
-import {Bootstrap, BootstrapScript, JecContainer} from "jec-commons";
+import {Bootstrap, BootstrapScript, JecContainer, ContainersConfig} from "jec-commons";
 import {SokokeBuilder} from "jec-sokoke";
 import {SandcatBuilder} from "jec-sandcat";
 
