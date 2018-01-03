@@ -32,7 +32,7 @@ export class SandcatConnector extends AbstractDecoratorConnector {
    * 
    * @param {string} jcadReference the JCAD reference associated with this
    *                               connector. Valid values are the constants of
-   *                               the <code>JutaConnectorRefs</code> class.
+   *                               the <code>JarsConnectorRefs</code> class.
    * @param {Decorator} decorator the decorator associated with the specified
    *                              JCAD reference.
    */

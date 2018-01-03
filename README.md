@@ -50,15 +50,15 @@ Sandcat is compatible with the JEC container delegation API. So, you can use the
 
 ```javascript
 import {Bootstrap, BootstrapScript, JecContainer, ContainersConfig} from "jec-commons";
-import {SokokeBuilder} from "jec-sokoke";
 import {SandcatBuilder} from "jec-sandcat";
+import {MyFrameworkBuilder} from "my-framework";
 
 @Bootstrap()
 export class InitApp implements BootstrapScript {
 
   @ContainersConfig([
-    { builder: SokokeBuilder },
-    { builder: SandcatBuilder }
+    { builder: SandcatBuilder },
+    { builder: MyFrameworkBuilder }
   ])
   public run(container:JecContainer):void {}
 }

@@ -81,7 +81,7 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
   private _sandcatContainer:Sandcat = null;
 
   /**
-   * The reference to the <code>JutaContextManager</code> that is used to manage 
+   * The reference to the <code>JarsContextManager</code> that is used to manage 
    * JCAD context objects for this processor.
    */
   private _contextManager:JarsContextManager = null;
@@ -152,7 +152,7 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
   }
 
   ////////////////////////////////////////////////////////////////////////////
-  // Public methods
+  // Public properties
   ////////////////////////////////////////////////////////////////////////////
 
   /**

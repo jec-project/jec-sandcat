@@ -14,7 +14,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import { FileProperties, ConsoleLogger, Logger } from "jec-commons";
+import { FileProperties, ConsoleLogger, Logger, DelegatedContainer } from "jec-commons";
 import { FilePropertiesBuilder } from "jec-commons-node";
 import { Jslet, JsletContext } from "jec-exchange";
 import { Sandcat } from "../../../src/com/onsoft/sandcat/Sandcat";
@@ -41,7 +41,8 @@ const CONTAINER:any = {
 };
 const buildSandcat:Function = function ():Sandcat {
   let builder:SandcatBuilder = new SandcatBuilder();
-  return builder.build((CONTAINER  as DomainContainer));
+  let result:DelegatedContainer = builder.build((CONTAINER  as DomainContainer));
+  return (result as Sandcat);
 };
 const FILE_PATH:string = process.cwd() + "/utils/test-utils/classes/ResourceTestClass.js";
 const FILE_NAME:string = "ResourceTestClass.js";

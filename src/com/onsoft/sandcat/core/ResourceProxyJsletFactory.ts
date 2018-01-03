@@ -19,7 +19,8 @@ import {DomainContainer} from "jec-glasscat-core";
 import {SandcatAutowireProcessor} from "./SandcatAutowireProcessor";
 import {ResourceJsletProxy} from "../jslet/ResourceJsletProxy";
 import {SandcatResourceJsletProxy} from "../jslet/SandcatResourceJsletProxy";
-import {JecStringsEnum, UrlStringsEnum, ClassLoader, FileProperties} from "jec-commons";
+import {JecStringsEnum, UrlStringsEnum, ClassLoader, FileProperties,
+        DefaultClassLoader} from "jec-commons";
 import {ResourceDescriptorRegistry} from "../metadata/ResourceDescriptorRegistry";
 import {ResourceDescriptor} from "../reflect/ResourceDescriptor";
 import {ResourceDescriptorUtil} from "../utils/ResourceDescriptorUtil";
@@ -65,7 +66,7 @@ export class ResourceProxyJsletFactory {
     ResourceDescriptorRegistry.registerDescriptor(descriptor);
     descriptor.contextRoot = contextRoot;
     let jslet:ResourceJsletProxy = new SandcatResourceJsletProxy();
-    let loader:ClassLoader = new ClassLoader();
+    let loader:ClassLoader = new DefaultClassLoader();
     let filePath:string = 
        file.path + file.name + UrlStringsEnum.DOT + JecStringsEnum.JS_EXTENSION;
     let ConstObj:any = loader.loadClass(filePath);

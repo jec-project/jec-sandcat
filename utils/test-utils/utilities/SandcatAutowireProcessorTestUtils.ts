@@ -17,7 +17,7 @@
 import { Sandcat } from "../../../src/com/onsoft/sandcat/Sandcat";
 import { SandcatBuilder } from "../../../src/com/onsoft/sandcat/builders/SandcatBuilder";
 import { DomainContainer, DomainConnector } from "jec-glasscat-core";
-import { FileProperties, JcadContextManager, Logger, ConsoleLogger } from "jec-commons";
+import { FileProperties, JcadContextManager, Logger, ConsoleLogger, DelegatedContainer } from "jec-commons";
 import { JsletContext, Jslet } from "jec-exchange";
 import { FilePropertiesBuilder } from "jec-commons-node";
 
@@ -41,7 +41,8 @@ const CONTAINER:any = {
 };
 const buildSandcat:Function = function ():Sandcat {
   let builder:SandcatBuilder = new SandcatBuilder();
-  return builder.build((CONTAINER  as DomainContainer));
+  let result:DelegatedContainer = builder.build((CONTAINER as DomainContainer));
+  return (result as Sandcat);
 };
 const FILE_PATH:string = process.cwd() + "/utils/test-utils/classes/ResourceTestClass.js";
 const FILE_NAME:string = "ResourceTestClass.js";

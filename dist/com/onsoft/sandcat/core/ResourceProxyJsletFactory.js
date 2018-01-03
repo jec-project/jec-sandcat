@@ -12,7 +12,7 @@ class ResourceProxyJsletFactory {
         ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.registerDescriptor(descriptor);
         descriptor.contextRoot = contextRoot;
         let jslet = new SandcatResourceJsletProxy_1.SandcatResourceJsletProxy();
-        let loader = new jec_commons_1.ClassLoader();
+        let loader = new jec_commons_1.DefaultClassLoader();
         let filePath = file.path + file.name + jec_commons_1.UrlStringsEnum.DOT + jec_commons_1.JecStringsEnum.JS_EXTENSION;
         let ConstObj = loader.loadClass(filePath);
         let resourceObj = new ConstObj();

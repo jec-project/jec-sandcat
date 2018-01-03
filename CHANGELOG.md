@@ -9,6 +9,7 @@
 
 - Dependencies upgrade
 - Adding implementation for the JEC container delegation API
+- Fixing `jec-commons` module break changes
 
 <a name="jec-sandcat-1.0.5"></a>
 ## **1.0.5** (2017-09-05)

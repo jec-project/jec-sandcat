@@ -10,7 +10,7 @@ class RootPathDescriptorFactory {
     create(file) {
         let pathDesc = new RootPathDescriptor_1.RootPathDescriptor();
         RootPathDescriptorRegistry_1.RootPathDescriptorRegistry.registerDescriptor(pathDesc);
-        let loader = new jec_commons_1.ClassLoader();
+        let loader = new jec_commons_1.DefaultClassLoader();
         let filePath = file.path + file.name + jec_commons_1.UrlStringsEnum.DOT + jec_commons_1.JecStringsEnum.JS_EXTENSION;
         let ConstObj = loader.loadClass(filePath);
         let rootPathObj = new ConstObj();
