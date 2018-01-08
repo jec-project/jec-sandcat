@@ -37,7 +37,7 @@ export class ResourceDescriptorUtil {
   /**
    * Creates a new <code>RequestProperties</code> instance.
    * 
-   * @param {Object} resource the resource object to decorate.
+   * @param {any} resource the resource object to decorate.
    * @param {ResourceDescriptor} descriptor the <code>ResourceDescriptor</code>
    *                                        object associated with the specified
    *                                        resource object to decorate.
@@ -79,7 +79,7 @@ export class ResourceDescriptorUtil {
   /**
    * Initializes this object.
    * 
-   * @param {Object} resource the resource object to decorate.
+   * @param {any} resource the resource object to decorate.
    * @param {ResourceDescriptor} descriptor the <code>ResourceDescriptor</code>
    *                                        object associated with the specified
    *                                        resource object to decorate.
