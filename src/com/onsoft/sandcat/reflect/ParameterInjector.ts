@@ -20,6 +20,8 @@ import {AnnotationType} from "./AnnotationType";
 import {HttpRequest} from "jec-exchange";
 import {UrlPatternMatcher} from "../core/UrlPatternMatcher";
 import {SandcatError} from "../exceptions/SandcatError";
+import {SandcatLocaleManager} from "../i18n/SandcatLocaleManager";
+import {AnnotationTypeUtil} from "../utils/AnnotationTypeUtil";
 
 /**
  * The <code>ParameterInjector</code> class provides functionalities for 
@@ -65,6 +67,8 @@ export class ParameterInjector {
     let parameters:any[] = new Array<any>(map.size);
     let annotationType:number = -1;
     let index:number = -1;
+    let annotationTypeString:string = null;
+    let util:AnnotationTypeUtil = null;
     map.forEach((value:ParameterDescriptor, key:string,
                                         map:Map<string, ParameterDescriptor>)=>{
       annotationType = value.annotationType;
@@ -82,8 +86,11 @@ export class ParameterInjector {
       } else if(annotationType === AnnotationType.COOKIE_PARAM) {
         parameters[index] = req.getCookies()[value.key];
       } else {
+        util = new AnnotationTypeUtil();
+        annotationTypeString = util.getParamStringRef(annotationType);
         throw new SandcatError(
-          `Invalid annotation type: ${annotationType} while an AnnotationType value is expected`
+          SandcatLocaleManager.getInstance()
+                              .get("errors.paramInjector", annotationTypeString)
         )
       }
     });

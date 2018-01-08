@@ -25,6 +25,8 @@ import {LoggerProxy, FilePreProcessor, FileProperties, DecoratorProperties} from
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
 import {JarsContextManager} from "../jcad/JarsContextManager";
 import {SandcatError} from "../exceptions/SandcatError";
+import {SandcatLocaleManager} from "../i18n/SandcatLocaleManager";
+import {LocaleManager} from "jec-commons-node";
 
 /**
  * The <code>SandcatAutowireProcessor</code> class allows to find all Sandcat  
@@ -146,7 +148,7 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
   private validateCallbackHandler():void {
     if(!this.processCompleteHandler) {
       throw new SandcatError(
-        "SandcatAutowireProcessor: 'processCompleteHandler' property must not be null."
+        SandcatLocaleManager.getInstance().get("errors.processor")
       );
     }
   }
@@ -205,6 +207,7 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
     let decoratorName:string = null;
     let logger:LoggerProxy = SandcatLoggerProxy.getInstance();
     let fileName:string = file.name;
+    let i18n:LocaleManager = SandcatLocaleManager.getInstance();
     while(len--) {
       decorator = decorators[len];
       classPath = decorator.classPath;
@@ -212,14 +215,10 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
       if(classPath === SandcatAutowireProcessor.JARS_MASK) {
         if(decoratorName === SandcatAutowireProcessor.RESOURCE_MASK) {
           this._resourceFiles.push(file);
-          logger.log(
-            "autowired resource detected: source file='" + fileName + "'"
-          );
+          logger.log(i18n.get("autowire.resource", fileName));
         } else if(decoratorName === SandcatAutowireProcessor.API_MASK) {
           this._rootPathFiles.push(file);
-          logger.log(
-            "autowired REST API detected: source file='" + fileName + "'"
-          );
+          logger.log(i18n.get("autowire.version", fileName));
         }
       }
     }

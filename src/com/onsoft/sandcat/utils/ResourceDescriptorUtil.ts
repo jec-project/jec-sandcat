@@ -22,6 +22,7 @@ import {ParametersMapUtil} from "../utils/ParametersMapUtil";
 import {Sandcat} from "../Sandcat";
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
 import {SandcatLoggerProxy} from "../logging/SandcatLoggerProxy";
+import {SandcatLocaleManager} from "../i18n/SandcatLocaleManager";
 
 /**
  * A helper class that decorates a jslet by adding it
@@ -147,8 +148,9 @@ export class ResourceDescriptorUtil {
     len = this._urlPatterns.length;
     if(len === 0) {
       SandcatLoggerProxy.getInstance().log(
-        "missing resource URL mapping: resource path="
-           + this._descriptor.resourcePath,
+        SandcatLocaleManager.getInstance().get(
+          "mapping.missing", this._descriptor.resourcePath
+        ),
         LogLevel.WARN
       );
     } else {

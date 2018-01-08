@@ -1,0 +1,26 @@
+{
+	"process": {
+		"start": "Sandcat framework initialization",
+		"init": "Sandcat framework initialization complete",
+		"complete": "annotated beans detection complete",
+		"domain": "domain container initialized"
+	},
+	"autowire": {
+		"resource": "autowired resource detected: source file='%s'",
+		"version": "autowired REST API detected: source file='%s'"
+	},
+	"errors": {
+		"sandcat": "Sandcat error: %s",
+		"singleton": "You cannot create a %s instance; use getInstance() instead.",
+		"domain": "Sandcat error: DomainContainer must not be null",
+		"processor": "SandcatAutowireProcessor: 'processCompleteHandler' property must not be null.",
+		"path": "ResourcePath error: 'path' parameter is missing for resource %s",
+		"params": "RootPath error: 'params' parameter is missing for resource API %s",
+		"pathRefs": "RootPathRefs error: 'pathRefs' parameter is missing for resource %s",
+		"descriptor": "No ResourceDescriptor is defined for the specified resource: %s",
+		"paramInjector": "Invalid annotation type: %s while an AnnotationType value is expected"
+	},
+	"mapping": {
+		"missing": "missing resource URL mapping: resource path= %s"
+	}
+}

@@ -19,6 +19,8 @@ import {RootPathDescriptorRegistry} from "../../metadata/RootPathDescriptorRegis
 import {JarsError, RoutePathParams} from "jec-jars";
 import {RootPathSolver} from "../../utils/RootPathSolver";
 import {RootPathDescriptor} from "../../reflect/RootPathDescriptor";
+import {LocaleManager} from "jec-commons-node";
+import {SandcatLocaleManager} from "../../i18n/SandcatLocaleManager";
 
 /**
  * The <code>RootPathDecorator</code> class defines the <code>Decorator</code>  
@@ -43,18 +45,17 @@ export class RootPathDecorator implements Decorator {
    * @inheritDoc
    */
   public decorate(target:any, params:RoutePathParams):any {
+    let descriptor:RootPathDescriptor = null;
+    let solver:RootPathSolver = null;
+    let i18n:LocaleManager = SandcatLocaleManager.getInstance();
     if(!params) {
-      throw new JarsError(
-        "RootPath error: 'params' parameter is missing for resource API " +
-        target
-      );
+      throw new JarsError(i18n.get("errors.params", target));
     }
-    let descriptor:RootPathDescriptor =
-                           RootPathDescriptorRegistry.getRegisteredDescriptor();
+    descriptor = RootPathDescriptorRegistry.getRegisteredDescriptor();
     descriptor.path = params.path;
     descriptor.ref = params.ref;
     descriptor.version = params.version;
-    let solver:RootPathSolver = new RootPathSolver();
+    solver = new RootPathSolver();
     solver.resolvePath(params, descriptor);
     return target;
   }

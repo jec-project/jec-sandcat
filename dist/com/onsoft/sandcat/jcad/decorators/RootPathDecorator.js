@@ -3,18 +3,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const RootPathDescriptorRegistry_1 = require("../../metadata/RootPathDescriptorRegistry");
 const jec_jars_1 = require("jec-jars");
 const RootPathSolver_1 = require("../../utils/RootPathSolver");
+const SandcatLocaleManager_1 = require("../../i18n/SandcatLocaleManager");
 class RootPathDecorator {
     constructor() { }
     decorate(target, params) {
+        let descriptor = null;
+        let solver = null;
+        let i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
         if (!params) {
-            throw new jec_jars_1.JarsError("RootPath error: 'params' parameter is missing for resource API " +
-                target);
+            throw new jec_jars_1.JarsError(i18n.get("errors.params", target));
         }
-        let descriptor = RootPathDescriptorRegistry_1.RootPathDescriptorRegistry.getRegisteredDescriptor();
+        descriptor = RootPathDescriptorRegistry_1.RootPathDescriptorRegistry.getRegisteredDescriptor();
         descriptor.path = params.path;
         descriptor.ref = params.ref;
         descriptor.version = params.version;
-        let solver = new RootPathSolver_1.RootPathSolver();
+        solver = new RootPathSolver_1.RootPathSolver();
         solver.resolvePath(params, descriptor);
         return target;
     }

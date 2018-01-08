@@ -18,6 +18,8 @@ import {Decorator} from "jec-commons";
 import {ResourceDescriptorRegistry} from "../../metadata/ResourceDescriptorRegistry";
 import {ResourceDescriptor} from "../../reflect/ResourceDescriptor";
 import {JarsError} from "jec-jars";
+import {SandcatLocaleManager} from "../../i18n/SandcatLocaleManager";
+import {LocaleManager} from "jec-commons-node";
 
 /**
  * The <code>RootPathRefsDecorator</code> class defines the 
@@ -43,14 +45,12 @@ export class RootPathRefsDecorator implements Decorator {
    * @inheritDoc
    */
   public decorate(target:any, pathRefs:string[]):any {
+    let descriptor:ResourceDescriptor = null;
+    let i18n:LocaleManager = SandcatLocaleManager.getInstance();
     if(!pathRefs) {
-      throw new JarsError(
-        "RootPathRefs error: 'pathRefs' parameter is missing for resource " +
-        target
-      );
+      throw new JarsError(i18n.get("errors.pathRefs", target));
     }
-    let descriptor:ResourceDescriptor =
-                           ResourceDescriptorRegistry.getRegisteredDescriptor();
+    descriptor = ResourceDescriptorRegistry.getRegisteredDescriptor();
     descriptor.rootPathRefs = pathRefs;
     return target;
   }

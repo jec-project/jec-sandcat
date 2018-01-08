@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const AnnotationType_1 = require("./AnnotationType");
 const SandcatError_1 = require("../exceptions/SandcatError");
+const SandcatLocaleManager_1 = require("../i18n/SandcatLocaleManager");
+const AnnotationTypeUtil_1 = require("../utils/AnnotationTypeUtil");
 class ParameterInjector {
     constructor() { }
     buildParameters(matcher, callbackHandler, methodDescriptor, req) {
@@ -9,6 +11,8 @@ class ParameterInjector {
         let parameters = new Array(map.size);
         let annotationType = -1;
         let index = -1;
+        let annotationTypeString = null;
+        let util = null;
         map.forEach((value, key, map) => {
             annotationType = value.annotationType;
             index = value.index;
@@ -31,7 +35,10 @@ class ParameterInjector {
                 parameters[index] = req.getCookies()[value.key];
             }
             else {
-                throw new SandcatError_1.SandcatError(`Invalid annotation type: ${annotationType} while an AnnotationType value is expected`);
+                util = new AnnotationTypeUtil_1.AnnotationTypeUtil();
+                annotationTypeString = util.getParamStringRef(annotationType);
+                throw new SandcatError_1.SandcatError(SandcatLocaleManager_1.SandcatLocaleManager.getInstance()
+                    .get("errors.paramInjector", annotationTypeString));
             }
         });
         return parameters;

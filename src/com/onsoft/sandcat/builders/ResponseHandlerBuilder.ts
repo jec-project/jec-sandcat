@@ -17,6 +17,7 @@
 import {HttpRequest, HttpResponse} from "jec-exchange";
 import {LogLevel, HttpStatusCode} from "jec-commons";
 import {SandcatLoggerProxy} from "../logging/SandcatLoggerProxy";
+import {SandcatLocaleManager} from "../i18n/SandcatLocaleManager";
 
 /**
  * A helper class that creates and returns a function used as callback handler
@@ -70,7 +71,10 @@ export class ResponseHandlerBuilder {
     let handler:Function = (data?:any, err?:any, status?:number)=>{
         if(err) {
           //TODO: build a better error process:
-          this.sendMessage("Sandcat error: " + err, LogLevel.ERROR);
+          this.sendMessage(
+            SandcatLocaleManager.getInstance().get("errors.sandcat", err),
+            LogLevel.ERROR
+          );
           exit(
             req,
             res.sendStatus(status || HttpStatusCode.INTERNAL_SERVER_ERROR),

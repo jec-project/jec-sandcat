@@ -21,11 +21,12 @@ class RootPathSolver {
         return versionPath;
     }
     resolvePath(params, descriptor) {
+        let versionPath = null;
         let path = descriptor.path;
         let fixedPath = path.indexOf(jec_commons_1.UrlStringsEnum.SLASH) === 0 ?
             path : jec_commons_1.UrlStringsEnum.SLASH + path;
         descriptor.fullPath = fixedPath;
-        let versionPath = this.buildVersionPath(params.version);
+        versionPath = this.buildVersionPath(params.version);
         descriptor.fullPath += jec_commons_1.UrlStringsEnum.SLASH + versionPath;
     }
 }

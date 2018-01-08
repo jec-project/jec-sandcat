@@ -5,6 +5,7 @@ const RootPathDescriptorFactory_1 = require("./RootPathDescriptorFactory");
 const SandcatLoggerProxy_1 = require("../logging/SandcatLoggerProxy");
 const JarsContextManager_1 = require("../jcad/JarsContextManager");
 const SandcatError_1 = require("../exceptions/SandcatError");
+const SandcatLocaleManager_1 = require("../i18n/SandcatLocaleManager");
 class SandcatAutowireProcessor {
     constructor() {
         this._resourceFiles = null;
@@ -46,7 +47,7 @@ class SandcatAutowireProcessor {
     }
     validateCallbackHandler() {
         if (!this.processCompleteHandler) {
-            throw new SandcatError_1.SandcatError("SandcatAutowireProcessor: 'processCompleteHandler' property must not be null.");
+            throw new SandcatError_1.SandcatError(SandcatLocaleManager_1.SandcatLocaleManager.getInstance().get("errors.processor"));
         }
     }
     setSandcatContainer(container) {
@@ -66,6 +67,7 @@ class SandcatAutowireProcessor {
         let decoratorName = null;
         let logger = SandcatLoggerProxy_1.SandcatLoggerProxy.getInstance();
         let fileName = file.name;
+        let i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
         while (len--) {
             decorator = decorators[len];
             classPath = decorator.classPath;
@@ -73,11 +75,11 @@ class SandcatAutowireProcessor {
             if (classPath === SandcatAutowireProcessor.JARS_MASK) {
                 if (decoratorName === SandcatAutowireProcessor.RESOURCE_MASK) {
                     this._resourceFiles.push(file);
-                    logger.log("autowired resource detected: source file='" + fileName + "'");
+                    logger.log(i18n.get("autowire.resource", fileName));
                 }
                 else if (decoratorName === SandcatAutowireProcessor.API_MASK) {
                     this._rootPathFiles.push(file);
-                    logger.log("autowired REST API detected: source file='" + fileName + "'");
+                    logger.log(i18n.get("autowire.version", fileName));
                 }
             }
         }

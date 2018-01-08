@@ -75,6 +75,7 @@ export {ResourceDescriptor} from "./sandcat/reflect/ResourceDescriptor";
 export {RootPathDescriptor} from "./sandcat/reflect/RootPathDescriptor";
 export {RouteDescriptor} from "./sandcat/reflect/RouteDescriptor";
 //--> com/onsoft/sandcat/utils
+export {AnnotationTypeUtil} from "./sandcat/utils/AnnotationTypeUtil";
 export {HttpHeadersValidator} from "./sandcat/utils/HttpHeadersValidator";
 export {ParametersMapUtil} from "./sandcat/utils/ParametersMapUtil";
 export {RequestProperties} from "./sandcat/utils/RequestProperties";

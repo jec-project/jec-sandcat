@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jec_jars_1 = require("jec-jars");
 const ResourceDescriptorRegistry_1 = require("../../metadata/ResourceDescriptorRegistry");
 const ResourcePathSolver_1 = require("../../utils/ResourcePathSolver");
+const SandcatLocaleManager_1 = require("../../i18n/SandcatLocaleManager");
 const STRING_TYPE = "string";
 class ResourcePathDecorator {
     constructor() { }
@@ -10,17 +11,16 @@ class ResourcePathDecorator {
         let descriptor = ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.getRegisteredDescriptor();
         let solver = new ResourcePathSolver_1.ResourcePathSolver();
         let path = null;
+        let i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
         if (!params) {
-            throw new jec_jars_1.JarsError("ResourcePath error: 'path' parameter is missing for resource " +
-                target);
+            throw new jec_jars_1.JarsError(i18n.get("errors.path", target));
         }
         else {
             if (typeof params === STRING_TYPE)
                 path = String(params);
             else {
                 if (!params.path) {
-                    throw new jec_jars_1.JarsError("ResourcePath error: 'path' parameter is missing for resource " +
-                        target);
+                    throw new jec_jars_1.JarsError(i18n.get("errors.path", target));
                 }
                 else {
                     path = params.path;

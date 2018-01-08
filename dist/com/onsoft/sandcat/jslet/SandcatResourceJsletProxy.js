@@ -9,6 +9,8 @@ const SandcatError_1 = require("../exceptions/SandcatError");
 const JsletMethod_1 = require("../reflect/JsletMethod");
 const RequestPropertiesBuilder_1 = require("../builders/RequestPropertiesBuilder");
 const HttpHeadersValidator_1 = require("../utils/HttpHeadersValidator");
+const SandcatLocaleManager_1 = require("../i18n/SandcatLocaleManager");
+const SandcatLoggerProxy_1 = require("../logging/SandcatLoggerProxy");
 class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
     constructor() {
         super();
@@ -95,9 +97,12 @@ class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
         let mapperBuilder = new UrlPatternMapperBuilder_1.UrlPatternMapperBuilder();
         let descriptor = resource.getResourceDescriptor();
         let resourceName = resource.constructor.name;
+        let message = null;
         if (!descriptor) {
-            throw new SandcatError_1.SandcatError("No ResourceDescriptor is defined for the specified resource:" +
-                resourceName);
+            message = SandcatLocaleManager_1.SandcatLocaleManager.getInstance()
+                .get("errors.descriptor", resourceName);
+            SandcatLoggerProxy_1.SandcatLoggerProxy.getInstance().log(message);
+            throw new SandcatError_1.SandcatError(message);
         }
         this._resource = resource;
         this._name = resourceName;

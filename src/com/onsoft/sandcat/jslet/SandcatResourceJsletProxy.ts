@@ -31,6 +31,8 @@ import {Sandcat} from "../Sandcat";
 import {RequestPropertiesBuilder} from "../builders/RequestPropertiesBuilder";
 import {RequestProperties} from "../utils/RequestProperties";
 import {HttpHeadersValidator} from "../utils/HttpHeadersValidator";
+import {SandcatLocaleManager} from "../i18n/SandcatLocaleManager";
+import {SandcatLoggerProxy} from "../logging/SandcatLoggerProxy";
 
 /**
  * The <code>SandcatResourceJsletProxy</code> class is te default implementation 
@@ -232,14 +234,13 @@ export class SandcatResourceJsletProxy extends HttpJslet
     let mapperBuilder:UrlPatternMapperBuilder = new UrlPatternMapperBuilder();
     let descriptor:ResourceDescriptor = resource.getResourceDescriptor();
     let resourceName:string = resource.constructor.name;
+    let message:string = null;
     if(!descriptor){
-      //TODO: log this error
-      throw new SandcatError(
-        "No ResourceDescriptor is defined for the specified resource:" +
-        resourceName
-      );
+      message = SandcatLocaleManager.getInstance()
+                                    .get("errors.descriptor", resourceName);
+      SandcatLoggerProxy.getInstance().log(message);
+      throw new SandcatError(message);
     }
-    //console.log("-------------------------->\n", descriptor);
     this._resource = resource;
     this._name = resourceName;
     this._urlPatterns = descriptor.urlPatterns;

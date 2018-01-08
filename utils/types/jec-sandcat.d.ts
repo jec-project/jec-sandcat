@@ -14,5 +14,6 @@ import { DomainContainer, DomainConnector } from "jec-glasscat-core";
 import { FileProperties, FilePreProcessor, Decorator, AbstractLoggerProxy,
          AbstractDecoratorConnector, LoggerProxy, DelegatedContainerBuilder,
          DelegatedContainer } from "jec-commons";
+import { LocaleManager } from "jec-commons-node";
 
 /*PLACEHOLDER*/}

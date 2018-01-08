@@ -17,10 +17,13 @@
 import {Sandcat} from "../Sandcat";
 import {SandcatLoggerProxy} from "../logging/SandcatLoggerProxy";
 import {DomainContainer} from "jec-glasscat-core";
+import {LocaleManager} from "jec-commons-node";
 import {LogLevel} from "jec-commons";
 import {SandcatAutowireProcessor} from "./SandcatAutowireProcessor";
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
 import {SandcatError} from "../exceptions/SandcatError";
+import {SandcatLocaleManager} from "../i18n/SandcatLocaleManager";
+import * as path  from "path";
 
 /**
  * The default implementation of the <code>Sandcat</code> interface.
@@ -78,6 +81,24 @@ export class DefaultSandcatContainer implements Sandcat {
     SandcatLoggerProxy.getInstance().log(message, logLevel);
   }
 
+  private initLocaleManager(container:DomainContainer):void {
+    let localeString:string = null;
+    let localesPath:string = null;
+    let cfg:any = { directory: "" };
+    if(container !== null &&
+       container.getLocale !== undefined // !Determines test cases!
+      ) {
+      localeString = container.getLocale().toString();
+      localesPath = path.join(
+        process.cwd(), "node_modules/jec-sandcat/public/locales/"
+      );
+    } else {
+      localeString = "en-US";
+    }
+    cfg.directory = localesPath;
+    SandcatLocaleManager.getInstance().init(localeString, cfg);
+  }
+
   //////////////////////////////////////////////////////////////////////////////
   // Public methods
   //////////////////////////////////////////////////////////////////////////////
@@ -97,31 +118,31 @@ export class DefaultSandcatContainer implements Sandcat {
    * @inheritDoc
    */
   public setDomainContainer(container:DomainContainer):void {
-    let message:string = "domain container initialized:";
+    this.initLocaleManager(container);
     this._domainContainer = container;
     SandcatLoggerProxy.getInstance().setLogger(container.getLogger());
-    this.sendMessage(message);
+    this.sendMessage(SandcatLocaleManager.getInstance().get("process.domain"));
   }
 
   /**
    * @inheritDoc
    */
   public process(callback:(err:SandcatError)=>void):void {
-    let message:string = "Sandcat process start";
+    let i18n:LocaleManager = SandcatLocaleManager.getInstance();
     let processor:SandcatAutowireProcessor = null;
     let error:SandcatError = null;
-    this.sendMessage(message);
     if(this._domainContainer === null) {
-      message = "Sandcat error: DomainContainer must not be null";
-      this.sendMessage(message);
-      error = new SandcatError(message);
+      this.initLocaleManager(null);
+      error = new SandcatError(i18n.get("errors.domain"));
       callback(error);
     } else {
+      this.sendMessage(i18n.get("process.start"));
       processor = new SandcatAutowireProcessor();
       processor.setSandcatContainer(this);
+      this.sendMessage(i18n.get("process.init"));
       processor.processCompleteHandler = (err:any)=> {
         callback(err);
-        this.sendMessage("Sandcat process complete");
+        this.sendMessage(i18n.get("process.complete"));
         processor.processCompleteHandler = null;
       };
       this._domainContainer.getSourceFileInspector().addProcessor(processor);

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jec_commons_1 = require("jec-commons");
 const ParametersMapUtil_1 = require("../utils/ParametersMapUtil");
 const SandcatLoggerProxy_1 = require("../logging/SandcatLoggerProxy");
+const SandcatLocaleManager_1 = require("../i18n/SandcatLocaleManager");
 class ResourceDescriptorUtil {
     constructor(resource, descriptor, sandcatContainer) {
         this._resource = null;
@@ -50,8 +51,7 @@ class ResourceDescriptorUtil {
         }
         len = this._urlPatterns.length;
         if (len === 0) {
-            SandcatLoggerProxy_1.SandcatLoggerProxy.getInstance().log("missing resource URL mapping: resource path="
-                + this._descriptor.resourcePath, jec_commons_1.LogLevel.WARN);
+            SandcatLoggerProxy_1.SandcatLoggerProxy.getInstance().log(SandcatLocaleManager_1.SandcatLocaleManager.getInstance().get("mapping.missing", this._descriptor.resourcePath), jec_commons_1.LogLevel.WARN);
         }
         else {
             while (len--) {

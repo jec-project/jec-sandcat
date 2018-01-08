@@ -15,10 +15,12 @@
 //   limitations under the License.
 
 import {Decorator} from "jec-commons";
+import {LocaleManager} from "jec-commons-node";
 import {JarsError} from "jec-jars";
 import {ResourceDescriptorRegistry} from "../../metadata/ResourceDescriptorRegistry";
 import {ResourceDescriptor} from "../../reflect/ResourceDescriptor";
 import {ResourcePathSolver} from "../../utils/ResourcePathSolver";
+import {SandcatLocaleManager} from "../../i18n/SandcatLocaleManager";
 
 const STRING_TYPE:string = "string";
 
@@ -50,20 +52,15 @@ export class ResourcePathDecorator implements Decorator {
                            ResourceDescriptorRegistry.getRegisteredDescriptor();
     let solver:ResourcePathSolver = new ResourcePathSolver();
     let path:string = null;
+    let i18n:LocaleManager = SandcatLocaleManager.getInstance();
     // Validation process:
     if(!params) {
-      throw new JarsError(
-        "ResourcePath error: 'path' parameter is missing for resource " +
-        target
-      );
+      throw new JarsError(i18n.get("errors.path", target));
     } else {
       if(typeof params === STRING_TYPE) path = String(params);
       else {
         if(!params.path) {
-          throw new JarsError(
-            "ResourcePath error: 'path' parameter is missing for resource " +
-            target
-          );
+          throw new JarsError(i18n.get("errors.path", target));
         } else {
           path = params.path;
           descriptor.produces = params.produces || null;

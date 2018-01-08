@@ -79,11 +79,12 @@ export class RootPathSolver {
    */
   public resolvePath(params:RoutePathParams,
                                            descriptor:RootPathDescriptor):void {
+    let versionPath:string = null;
     let path:string = descriptor.path;
     let fixedPath:string = path.indexOf(UrlStringsEnum.SLASH) === 0 ?
                            path : UrlStringsEnum.SLASH + path;
     descriptor.fullPath = fixedPath;
-    let versionPath:string = this.buildVersionPath(params.version);
+    versionPath = this.buildVersionPath(params.version);
     descriptor.fullPath += UrlStringsEnum.SLASH + versionPath;
   }
 };
