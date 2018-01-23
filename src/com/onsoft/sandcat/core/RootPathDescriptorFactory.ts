@@ -16,8 +16,8 @@
 
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
 import {RootPathDescriptorRegistry} from "../metadata/RootPathDescriptorRegistry";
-import {JecStringsEnum, UrlStringsEnum, ClassLoader, FileProperties,
-        DefaultClassLoader} from "jec-commons";
+import {JecStringsEnum, UrlStringsEnum, FileProperties, GlobalClassLoader
+        } from "jec-commons";
 import {RootPathDescriptorUtil} from "../utils/RootPathDescriptorUtil";
 
 /**
@@ -61,10 +61,9 @@ export class RootPathDescriptorFactory {
   public create(file:FileProperties):RootPathDescriptor {
     let pathDesc:RootPathDescriptor = new RootPathDescriptor();
     RootPathDescriptorRegistry.registerDescriptor(pathDesc);
-    let loader:ClassLoader = new DefaultClassLoader();
     let filePath:string = 
        file.path + file.name + UrlStringsEnum.DOT + JecStringsEnum.JS_EXTENSION;
-    let ConstObj:any = loader.loadClass(filePath);
+    let ConstObj:any = GlobalClassLoader.getInstance().loadClass(filePath);
     let rootPathObj:any = new ConstObj();
     let descriptorUtil:RootPathDescriptorUtil =
                               new RootPathDescriptorUtil(rootPathObj, pathDesc);
