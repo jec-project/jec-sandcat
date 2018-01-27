@@ -5,6 +5,7 @@ const jec_commons_1 = require("jec-commons");
 const ResourceDescriptorRegistry_1 = require("../metadata/ResourceDescriptorRegistry");
 const ResourceDescriptor_1 = require("../reflect/ResourceDescriptor");
 const ResourceDescriptorUtil_1 = require("../utils/ResourceDescriptorUtil");
+const path = require("path");
 class ResourceProxyJsletFactory {
     constructor() { }
     create(file, contextRoot, sandcatContainer) {
@@ -12,7 +13,7 @@ class ResourceProxyJsletFactory {
         ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.registerDescriptor(descriptor);
         descriptor.contextRoot = contextRoot;
         let jslet = new SandcatResourceJsletProxy_1.SandcatResourceJsletProxy();
-        let filePath = file.path + file.name + jec_commons_1.UrlStringsEnum.DOT + jec_commons_1.JecStringsEnum.JS_EXTENSION;
+        let filePath = path.join(file.path, file.name + jec_commons_1.UrlStringsEnum.DOT + jec_commons_1.JecStringsEnum.JS_EXTENSION);
         let ConstObj = jec_commons_1.GlobalClassLoader.getInstance().loadClass(filePath);
         let resourceObj = new ConstObj();
         let descriptorUtil = new ResourceDescriptorUtil_1.ResourceDescriptorUtil(resourceObj, descriptor, sandcatContainer);
