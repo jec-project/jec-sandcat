@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ResourceProxyJsletFactory_1 = require("./ResourceProxyJsletFactory");
 const RootPathDescriptorFactory_1 = require("./RootPathDescriptorFactory");
 const SandcatLoggerProxy_1 = require("../logging/SandcatLoggerProxy");
+const jec_commons_1 = require("jec-commons");
 const JarsContextManager_1 = require("../jcad/JarsContextManager");
 const SandcatError_1 = require("../exceptions/SandcatError");
 const SandcatLocaleManager_1 = require("../i18n/SandcatLocaleManager");
@@ -75,11 +76,11 @@ class SandcatAutowireProcessor {
             if (classPath === SandcatAutowireProcessor.JARS_MASK) {
                 if (decoratorName === SandcatAutowireProcessor.RESOURCE_MASK) {
                     this._resourceFiles.push(file);
-                    logger.log(i18n.get("autowire.resource", fileName));
+                    logger.log(i18n.get("autowire.resource", fileName), jec_commons_1.LogLevel.DEBUG);
                 }
                 else if (decoratorName === SandcatAutowireProcessor.API_MASK) {
                     this._rootPathFiles.push(file);
-                    logger.log(i18n.get("autowire.version", fileName));
+                    logger.log(i18n.get("autowire.version", fileName), jec_commons_1.LogLevel.DEBUG);
                 }
             }
         }

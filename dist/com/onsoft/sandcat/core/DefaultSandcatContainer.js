@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const SandcatLoggerProxy_1 = require("../logging/SandcatLoggerProxy");
+const jec_commons_1 = require("jec-commons");
 const SandcatAutowireProcessor_1 = require("./SandcatAutowireProcessor");
 const SandcatError_1 = require("../exceptions/SandcatError");
 const SandcatLocaleManager_1 = require("../i18n/SandcatLocaleManager");
@@ -40,7 +41,7 @@ class DefaultSandcatContainer {
         this.initLocaleManager(container);
         this._domainContainer = container;
         SandcatLoggerProxy_1.SandcatLoggerProxy.getInstance().setLogger(container.getLogger());
-        this.sendMessage(SandcatLocaleManager_1.SandcatLocaleManager.getInstance().get("process.domain"));
+        this.sendMessage(SandcatLocaleManager_1.SandcatLocaleManager.getInstance().get("process.domain"), jec_commons_1.LogLevel.DEBUG);
     }
     process(callback) {
         let i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
@@ -52,13 +53,13 @@ class DefaultSandcatContainer {
             callback(error);
         }
         else {
-            this.sendMessage(i18n.get("process.start"));
+            this.sendMessage(i18n.get("process.start"), jec_commons_1.LogLevel.DEBUG);
             processor = new SandcatAutowireProcessor_1.SandcatAutowireProcessor();
             processor.setSandcatContainer(this);
-            this.sendMessage(i18n.get("process.init"));
+            this.sendMessage(i18n.get("process.init"), jec_commons_1.LogLevel.DEBUG);
             processor.processCompleteHandler = (err) => {
                 callback(err);
-                this.sendMessage(i18n.get("process.complete"));
+                this.sendMessage(i18n.get("process.complete"), jec_commons_1.LogLevel.DEBUG);
                 processor.processCompleteHandler = null;
             };
             this._domainContainer.getSourceFileInspector().addProcessor(processor);

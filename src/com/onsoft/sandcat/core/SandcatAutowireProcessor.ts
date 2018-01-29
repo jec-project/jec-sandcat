@@ -21,7 +21,7 @@ import {RootPathDescriptorFactory} from "./RootPathDescriptorFactory";
 import {ResourceJsletProxy} from "../jslet/ResourceJsletProxy";
 import {Sandcat} from "../Sandcat";
 import {SandcatLoggerProxy} from "../logging/SandcatLoggerProxy";
-import {LoggerProxy, FilePreProcessor, FileProperties, DecoratorProperties} from "jec-commons";
+import {LoggerProxy, FilePreProcessor, FileProperties, DecoratorProperties, LogLevel} from "jec-commons";
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
 import {JarsContextManager} from "../jcad/JarsContextManager";
 import {SandcatError} from "../exceptions/SandcatError";
@@ -215,10 +215,10 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
       if(classPath === SandcatAutowireProcessor.JARS_MASK) {
         if(decoratorName === SandcatAutowireProcessor.RESOURCE_MASK) {
           this._resourceFiles.push(file);
-          logger.log(i18n.get("autowire.resource", fileName));
+          logger.log(i18n.get("autowire.resource", fileName), LogLevel.DEBUG);
         } else if(decoratorName === SandcatAutowireProcessor.API_MASK) {
           this._rootPathFiles.push(file);
-          logger.log(i18n.get("autowire.version", fileName));
+          logger.log(i18n.get("autowire.version", fileName), LogLevel.DEBUG);
         }
       }
     }

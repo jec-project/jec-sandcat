@@ -121,7 +121,10 @@ export class DefaultSandcatContainer implements Sandcat {
     this.initLocaleManager(container);
     this._domainContainer = container;
     SandcatLoggerProxy.getInstance().setLogger(container.getLogger());
-    this.sendMessage(SandcatLocaleManager.getInstance().get("process.domain"));
+    this.sendMessage(
+      SandcatLocaleManager.getInstance().get("process.domain"),
+      LogLevel.DEBUG
+    );
   }
 
   /**
@@ -136,13 +139,13 @@ export class DefaultSandcatContainer implements Sandcat {
       error = new SandcatError(i18n.get("errors.domain"));
       callback(error);
     } else {
-      this.sendMessage(i18n.get("process.start"));
+      this.sendMessage(i18n.get("process.start"), LogLevel.DEBUG);
       processor = new SandcatAutowireProcessor();
       processor.setSandcatContainer(this);
-      this.sendMessage(i18n.get("process.init"));
+      this.sendMessage(i18n.get("process.init"), LogLevel.DEBUG);
       processor.processCompleteHandler = (err:any)=> {
         callback(err);
-        this.sendMessage(i18n.get("process.complete"));
+        this.sendMessage(i18n.get("process.complete"), LogLevel.DEBUG);
         processor.processCompleteHandler = null;
       };
       this._domainContainer.getSourceFileInspector().addProcessor(processor);
