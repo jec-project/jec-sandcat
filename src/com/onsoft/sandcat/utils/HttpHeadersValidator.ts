@@ -48,10 +48,9 @@ export class HttpHeadersValidator {
   //////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Checks whether the current HTTP header parameters are valid for the
-   * method associated whith the target resource. Returns the result of the
-   * validation operation as a constant of the <code>HttpStatusCode</code>
-   * class.
+   * Checks whether the current HTTP header parameters are valid for the method
+   * associated whith the target resource. Returns the result of the validation
+   *  operation as a member of the <code>HttpStatusCode</code> class.
    * 
    * @param {MethodDescriptor} methodDesc the <code>MethodDescriptor</code> 
    *                                      instance for the current HTTP
@@ -59,13 +58,14 @@ export class HttpHeadersValidator {
    * @param {RequestProperties} requestProps the <code>RequestProperties</code> 
    *                                         instance that describes the current 
    *                                         HTTP transaction.
-   * @return {number} <code>HttpStatusCode.OK</code> whether the current HTTP  
-   *    header parameters are valid; <code>HttpStatusCode.NOT_ACCEPTABLE</code>,  
-   *    or <code>HttpStatusCode.UNSUPPORTED_MEDIA_TYPE</code> otherwise.
+   * @return {HttpStatusCode} <code>HttpStatusCode.OK</code> whether the current
+   *                          HTTP header parameters are valid; or
+   *                          <code>HttpStatusCode.NOT_ACCEPTABLE</code>,  
+   *               <code>HttpStatusCode.UNSUPPORTED_MEDIA_TYPE</code> otherwise.
    */
   public validate(methodDesc:MethodDescriptor, 
-                                        requestProps:RequestProperties):number {
-    let result:number = HttpStatusCode.OK;
+                                requestProps:RequestProperties):HttpStatusCode {
+    let result:HttpStatusCode = HttpStatusCode.OK;
     let methodProp:string = methodDesc.consumes;
     let requestProp:string = requestProps.contentType;
     if(methodProp && requestProp.indexOf(methodProp) === -1) {

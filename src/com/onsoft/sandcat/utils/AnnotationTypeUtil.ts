@@ -16,7 +16,6 @@
 
 import {MethodDescriptor} from "../reflect/MethodDescriptor";
 import {RequestProperties} from "../utils/RequestProperties";
-import {HttpStatusCode} from "jec-commons";
 import {AnnotationType} from "../reflect/AnnotationType";
 
 /**
