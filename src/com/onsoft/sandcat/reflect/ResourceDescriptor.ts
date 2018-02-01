@@ -16,6 +16,7 @@
 
 import {MethodDescriptor} from "./MethodDescriptor";
 import {JsletMethodDescriptor} from "./JsletMethodDescriptor";
+import {JsletMethod} from "./JsletMethod";
 
 /**
  * The <code>ResourceDescriptor</code> class contains information about a REST 
@@ -43,7 +44,7 @@ export class ResourceDescriptor {
    */
   private initObj():void {
     this.methodsMap = new Map<string, MethodDescriptor>();
-    this.jsletMethodsMap = new Map<number, JsletMethodDescriptor>();
+    this.jsletMethodsMap = new Map<JsletMethod, JsletMethodDescriptor>();
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -78,7 +79,7 @@ export class ResourceDescriptor {
    * The map which is used to store the jslet methods exposed by the associated
    * resource. This object is initialized whithin the constructor function.
    */
-  public jsletMethodsMap:Map<number, JsletMethodDescriptor> = null;
+  public jsletMethodsMap:Map<JsletMethod, JsletMethodDescriptor> = null;
 
   /**
    * The references of the root path objects associated with this 

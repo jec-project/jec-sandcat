@@ -9,7 +9,7 @@ class ParameterInjector {
     buildParameters(matcher, callbackHandler, methodDescriptor, req) {
         let map = methodDescriptor.parametersMap;
         let parameters = new Array(map.size);
-        let annotationType = -1;
+        let annotationType = null;
         let index = -1;
         let annotationTypeString = null;
         let util = null;

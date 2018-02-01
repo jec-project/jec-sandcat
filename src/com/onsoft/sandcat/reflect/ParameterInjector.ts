@@ -65,7 +65,7 @@ export class ParameterInjector {
                          req:HttpRequest):any[]{
     let map:Map<string, ParameterDescriptor> = methodDescriptor.parametersMap;
     let parameters:any[] = new Array<any>(map.size);
-    let annotationType:number = -1;
+    let annotationType:AnnotationType = null;
     let index:number = -1;
     let annotationTypeString:string = null;
     let util:AnnotationTypeUtil = null;

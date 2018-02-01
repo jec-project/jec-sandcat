@@ -14,7 +14,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import {UrlStringsEnum} from "jec-commons";
+import {UrlStringsEnum, HttpMethod} from "jec-commons";
 import {RouteDescriptor} from "../reflect/RouteDescriptor";
 import {UrlPatternMatcher} from "./UrlPatternMatcher";
 import * as QueryString from "qs";
@@ -90,7 +90,7 @@ export class UrlPatternMapper {
    *                                          instance.
    */
   public addRouteDescriptor(routeDescriptor:RouteDescriptor):void {
-    let methodName:string = routeDescriptor.getHttpMethod();
+    let methodName:HttpMethod = routeDescriptor.getHttpMethod();
     let coll:RouteDescriptor[] = null;
     if(this._routeDescMap.has(methodName)) {
       coll = this._routeDescMap.get(methodName);
@@ -122,7 +122,7 @@ export class UrlPatternMapper {
    *                            contains information about the request to check.
    */
   public matchRequest(requestProperties:RequestProperties):UrlPatternMatcher {
-    let htppMethod:string = requestProperties.httpMethod;
+    let htppMethod:HttpMethod = requestProperties.httpMethod;
     let subRoute:string = requestProperties.subRoute;
     let matcher:UrlPatternMatcher = null;
     let properties:any = null;

@@ -17,6 +17,7 @@
 import {MethodDescriptor} from "../reflect/MethodDescriptor";
 import {HttpMethodParams} from "jec-jars";
 import * as fnArgs from "function-arguments";
+import {HttpMethod} from "jec-commons";
 
 /**
  * A helper class that creates <code>MethodDescriptor</code> instances.
@@ -39,15 +40,14 @@ export class MethodDescriptorBuilder {
   /**
    * Creates and returns new <code>MethodDescriptor</code> instance.
    * 
-   * @param {string} httpMethod the HTTP method associated with the decorated
-   *                            method. Valid values are the constants of the 
-   *                            <code>HttpMethod</code> class.
+   * @param {HttpMethod} httpMethod the HTTP method associated with the 
+   *                                decorated method.
    * @param {string} key the name of the decorated method.
    * @param {PropertyDescriptor} descriptor the property descriptor associated
    *                                        with the decorated method.
    * @return {MethodDescriptor} a new <code>MethodDescriptor</code> instance.
    */
-  public build(httpMethod:string, key:string,
+  public build(httpMethod:HttpMethod, key:string,
                                   descriptor:PropertyDescriptor,
                                   params?:HttpMethodParams):MethodDescriptor {
     let methodDesc:MethodDescriptor = new MethodDescriptor();

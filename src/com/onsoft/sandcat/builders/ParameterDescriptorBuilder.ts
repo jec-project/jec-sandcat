@@ -15,6 +15,7 @@
 //   limitations under the License.
 
 import {ParameterDescriptor} from "../reflect/ParameterDescriptor";
+import {AnnotationType} from "../reflect/AnnotationType";
 
 /**
  * A helper class that creates <code>ParameterDescriptor</code> instances.
@@ -39,16 +40,14 @@ export class ParameterDescriptorBuilder {
    * 
    * @param {string} methodName the name of the method for which to create this
    *                            parameter descriptor.
-   * @param {number} annotationType the decoration type of method. Valid values
-   *                                are the constants of the
-   *                                <code>AnnotationType</code> class.
+   * @param {AnnotationType} annotationType the decoration type of method.
    * @param {number} parameterIndex the index of the parameter in the method
    *                                signature.
    * @return {ParameterDescriptor} a new <code>ParameterDescriptor</code>
    *                               instance.
    */
   public build(methodName:string, annotationType:number, 
-                                    parameterIndex:number):ParameterDescriptor {
+                            parameterIndex:AnnotationType):ParameterDescriptor {
     let paramDesc:ParameterDescriptor = new ParameterDescriptor();
     paramDesc.annotationType = annotationType;
     paramDesc.index = parameterIndex;

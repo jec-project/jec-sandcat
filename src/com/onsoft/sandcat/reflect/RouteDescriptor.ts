@@ -15,6 +15,7 @@
 //   limitations under the License.
 
 import * as UrlPattern from "url-pattern";
+import {HttpMethod} from "jec-commons";
 
 /**
  * The <code>RouteDescriptor</code> class contains information about url
@@ -33,12 +34,10 @@ export class RouteDescriptor {
    *                         <code>RouteDescriptor</code> instance.
    * @param {string} mappedMethod the resource method associated with this 
    *                              <code>RouteDescriptor</code> instance.
-   * @param {string} httpMethod the HTTP method reference associated with this 
-   *                            <code>RouteDescriptor</code> instance. Valid
-   *                            values are constants of the
-   *                            <code>HttpMethod</code> class.
+   * @param {HttpMethod} httpMethod the HTTP method reference associated with  
+   *                                this <code>RouteDescriptor</code> instance.
    */
-  constructor(pattern:string, mappedMethod:string, httpMethod:string) {
+  constructor(pattern:string, mappedMethod:string, httpMethod:HttpMethod) {
     this.initObj(pattern, mappedMethod, httpMethod);
   }
 
@@ -58,9 +57,9 @@ export class RouteDescriptor {
 
   /**
    * The HTTP method reference associated with this <code>RouteDescriptor</code>
-   * instance. Valid values are constants of the <code>HttpMethod</code> class.
+   * instance.
    */
-  private _httpMethod:string = null;
+  private _httpMethod:HttpMethod = null;
   
   /**
    * The mapped method associated with this <code>RouteDescriptor</code>
@@ -79,12 +78,11 @@ export class RouteDescriptor {
    *                         <code>RouteDescriptor</code> instance.
    * @param {string} mappedMethod the resource method associated with this 
    *                              <code>RouteDescriptor</code> instance.
-   * @param {string} httpMethod the HTTP method reference associated with this 
-   *                            <code>RouteDescriptor</code> instance. Valid
-   *                            values are constants of the
-   *                            <code>HttpMethod</code> class.
+   * @param {HttpMethod} httpMethod the HTTP method reference associated with  
+   *                                this <code>RouteDescriptor</code> instance.
    */
-  private initObj(pattern:string, mappedMethod:string, httpMethod:string):void {
+  private initObj(pattern:string, mappedMethod:string,
+                                                   httpMethod:HttpMethod):void {
     this._pattern = new UrlPattern(pattern);
     this._rawPatternString = pattern;
     this._mappedMethod = mappedMethod;
@@ -108,9 +106,9 @@ export class RouteDescriptor {
    * Returns HTTP method reference associated with this
    * <code>RouteDescriptor</code> instance.
    *
-   * @return {string} a <code>HttpMethod</code> constant.
+   * @return {HttpMethod} a <code>HttpMethod</code> member.
    */
-  public getHttpMethod():string {
+  public getHttpMethod():HttpMethod {
     return this._httpMethod;
   }
 

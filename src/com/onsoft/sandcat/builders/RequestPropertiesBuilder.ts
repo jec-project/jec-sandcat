@@ -16,7 +16,7 @@
 
 import {RequestProperties} from "../utils/RequestProperties";
 import {HttpRequest} from "jec-exchange";
-import {HttpHeader} from "jec-commons";
+import {HttpHeader, HttpMethod} from "jec-commons";
 
 /**
  * A helper class that creates new <code>RequestProperties</code> instances.
@@ -39,14 +39,12 @@ export class RequestPropertiesBuilder {
   /**
    * Creates and returns new <code>RequestProperties</code> instance.
    * 
-   * @param {string} httpMethod the current HTTP transaction. Valid values are
-   *                            the constants of the <code>HttpMethod</code>
-   *                            class.
+   * @param {HttpMethod} httpMethod the current HTTP transaction.
    * @param {HttpRequest} req the original HTTP request for which to create the
    *                          new <code>RequestProperties</code> instance.
    * @return {RequestProperties} a new <code>RequestProperties</code> instance.
    */
-  public build(httpMethod:string, req:HttpRequest):RequestProperties {
+  public build(httpMethod:HttpMethod, req:HttpRequest):RequestProperties {
     let props:RequestProperties = new RequestProperties();
     props.httpMethod = httpMethod;
     props.subRoute = req.getOriginalUrl();

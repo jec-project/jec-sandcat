@@ -117,11 +117,9 @@ export class SandcatResourceJsletProxy extends HttpJslet
    * Compute operations for sending correct parameters to the right resource
    * method, depending on the HTTP metho and the UIR sub-route.
    *
-   * @param {number} jsletMethod the current HTTP transaction. Valid values are
-   *                            the constants of the <code>HttpMethod</code>
-   *                            class.
+   * @param {JsletMethod} jsletMethod the current HTTP transaction.
    */
-  private processJsletOperation(jsletMethod:number):void {
+  private processJsletOperation(jsletMethod:JsletMethod):void {
     let action:Function = null;
     let operation:JsletMethodDescriptor = this._resource.getResourceDescriptor()
                                                         .jsletMethodsMap
@@ -152,16 +150,15 @@ export class SandcatResourceJsletProxy extends HttpJslet
    * Compute operations for sending correct parameters to the right resource
    * method, depending on the HTTP metho and the UIR sub-route.
    *
-   * @param {string} httpMethod the current HTTP transaction. Valid values are
-   *                            the constants of the <code>HttpMethod</code>
-   *                            class.
-   * @param {HttpRequest} req the HTTP request for the current HTTP transaction.
+   * @param {HttpMethod} httpMethod the current HTTP transaction.TP transaction.
    * @param {HttpResponse} res the HTTP response for the current HTTP
    *                           transaction.
    * @param {Function} exit the function used by the container to handle
    *                        asynchronous answers for this jslet.
    */
-  private processOperation(httpMethod:string, req:HttpRequest, res:HttpResponse, 
+  private processOperation(httpMethod:HttpMethod,
+                           req:HttpRequest,
+                           res:HttpResponse, 
               exit:(req:HttpRequest, res:HttpResponse, data:any) => void):void {
     let action:Function = null;
     let responseHandler:Function = null;

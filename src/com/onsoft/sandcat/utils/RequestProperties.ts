@@ -14,6 +14,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+import {HttpMethod} from "jec-commons";
+
 /**
  * A helper class that allows to share request properties between sandcat
  * validation routines.
@@ -34,10 +36,9 @@ export class RequestProperties {
   //////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Represents the associated HTTP transaction. Valid values are the constants
-   * of the <code>HttpMethod</code> class.
+   * Represents the associated HTTP transaction.
    */
-  public httpMethod:string = null;
+  public httpMethod:HttpMethod = null;
   
   /**
    * Represents the value of the <code>Accept</code> header field of the 

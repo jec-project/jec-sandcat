@@ -15,6 +15,7 @@
 //   limitations under the License.
 
 import {ParameterDescriptor} from "./ParameterDescriptor";
+import {HttpMethod} from "jec-commons";
 
 /**
  * The <code>MethodDescriptor</code> class contains information about a function 
@@ -52,7 +53,7 @@ export class MethodDescriptor {
    * The reference to the HTTP method mapped whih the resource function. Valid
    * values are the constants of the <code>HttpMethod</code> class.
    */
-  public httpMethod:string = null;
+  public httpMethod:HttpMethod = null;
 
   /**
    * The name of the mapped resource function.

@@ -14,6 +14,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+import {JsletMethod} from "./JsletMethod";
+
 /**
  * The <code>JsletMethodDescriptor</code> class contains information about a  
  * function mapped to a jslet method in the Sandcat framework.
@@ -34,10 +36,10 @@ export class JsletMethodDescriptor {
   ////////////////////////////////////////////////////////////////////////////
   
   /**
-   * The reference to the jslet method mapped whih the resource function. Valid
-   * values are the constants of the <code>JsletMethod</code> class.
+   * The reference to the type of jslet method mapped whih the resource
+   * function.
    */
-  public jsletMethod:number = null;
+  public jsletMethod:JsletMethod = null;
 
   /**
    * The name of the mapped resource function.

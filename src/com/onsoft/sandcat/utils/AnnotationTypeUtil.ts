@@ -42,12 +42,12 @@ export class AnnotationTypeUtil {
    * Retuns a string that represents the name of the specified
    * <code>annotationType</code> parameter.
    * 
-   * @param {number} annotationType a value of the <code>AnnotationType</code>
-   *                                Enum.
+   * @param {AnnotationType} annotationType a value of the
+   *                                        <code>AnnotationType</code> Enum.
    * @return {string} a string that represents the name of the specified
    *                  <code>annotationType</code> parameter.
    */
-  public getParamStringRef(annotationType:number):string {
+  public getParamStringRef(annotationType:AnnotationType):string {
     let result:string = null;
     if(annotationType === AnnotationType.EXIT) {
       result = "AnnotationType.EXIT";
@@ -65,17 +65,16 @@ export class AnnotationTypeUtil {
     return result;
   }
 
-  
   /**
    * Retuns a string that represents the name of the specified
-   * <code>annotationType</code> method.
+   * <code>annotationType</code> parameter.
    * 
-   * @param {number} annotationType a value of the <code>AnnotationType</code>
-   *                                Enum.
+   * @param {AnnotationType} annotationType a value of the
+   *                                        <code>AnnotationType</code> Enum.
    * @return {string} a string that represents the name of the specified
    *                  <code>annotationType</code> method.
    */
-  public getMethodStringRef(annotationType:number):string {
+  public getMethodStringRef(annotationType:AnnotationType):string {
     let result:string = null;
     if(annotationType === AnnotationType.GET) {
       result = "AnnotationType.GET";

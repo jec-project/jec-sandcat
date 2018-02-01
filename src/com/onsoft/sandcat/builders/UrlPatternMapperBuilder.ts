@@ -18,6 +18,7 @@ import {UrlPatternMapper} from "../core/UrlPatternMapper";
 import {ResourceDescriptor} from "../reflect/ResourceDescriptor";
 import {MethodDescriptor} from "../reflect/MethodDescriptor";
 import {RouteDescriptor} from "../reflect/RouteDescriptor";
+import {HttpMethod} from "jec-commons";
 
 /**
  * A helper class that creates <code>UrlPatternMapper</code> objects.
@@ -55,7 +56,7 @@ export class UrlPatternMapperBuilder {
      let len:number = urlPatterns.length;
      let routeDesc:RouteDescriptor = null;
      let name:string = desc.name;
-     let httpMethod:string = desc.httpMethod;
+     let httpMethod:HttpMethod = desc.httpMethod;
      while(len--) {
        routeDesc = new RouteDescriptor(urlPatterns[len], name, httpMethod);
        mapper.addRouteDescriptor(routeDesc);

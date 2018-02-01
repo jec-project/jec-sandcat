@@ -15,6 +15,7 @@
 //   limitations under the License.
 
 import {JsletMethodDescriptor} from "../reflect/JsletMethodDescriptor";
+import {JsletMethod} from "../reflect/JsletMethod";
 
 /**
  * A helper class that creates new <code>JsletMethodDescriptor</code> instances.
@@ -37,16 +38,15 @@ export class JsletMethodDescriptorBuilder {
   /**
    * Creates and returns a new <code>JsletMethodDescriptor</code> instance.
    * 
-   * @param {number} jsletMethod the jslet method associated with the decorated
-   *                             method. Valid values are the constants of the 
-   *                             <code>JsletMethod</code> class.
+   * @param {JsletMethod} jsletMethod the jslet method associated with the
+   *                                  decorated  method.
    * @param {string} key the name of the decorated method.
    * @param {PropertyDescriptor} descriptor the property descriptor associated
    *                                        with the decorated method.
    * @return {JsletMethodDescriptor} a new <code>JsletMethodDescriptor</code>
    *                                 instance.
    */
-  public build(jsletMethod:number, key:string,
+  public build(jsletMethod:JsletMethod, key:string,
                           descriptor:PropertyDescriptor):JsletMethodDescriptor {
     let methodDesc:JsletMethodDescriptor = new JsletMethodDescriptor();
     methodDesc.jsletMethod = jsletMethod;

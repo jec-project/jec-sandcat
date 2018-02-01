@@ -14,6 +14,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+import {AnnotationType} from "./AnnotationType";
+
 /**
  * The <code>ParameterDescriptor</code> class contains information about a  
  * parameter passed in the signature of a Sandcat resource method.
@@ -54,8 +56,7 @@ export class ParameterDescriptor {
   public value:any = null;
 
   /**
-   * The type of the annotation associated with this parameter. Valid values are
-   * constants of the <code>AnnotationType</code> class.
+   * The type of the annotation associated with this parameter.
    */
-  public annotationType:number = null;
+  public annotationType:AnnotationType = null;
 }

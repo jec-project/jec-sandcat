@@ -17,6 +17,7 @@
 import {ParameterDescriptor} from "../reflect/ParameterDescriptor";
 import {ParametersMapUtil} from "../utils/ParametersMapUtil";
 import {ParameterDescriptorBuilder} from "../builders/ParameterDescriptorBuilder";
+import {AnnotationType} from "../reflect/AnnotationType";
 
 /**
  * A utility class for registering Sandcat parameters.
@@ -42,12 +43,11 @@ export class AnnotationParamFactory {
    * 
    * @param {string|symbol} propertyKey the name of the property parameter.
    * @param {number} parameterIndex the index of the property parameter.
-   * @param {number} annotationType the type of annotation for the property
-   *                                parameter. Valid values are the constants of
-   *                                the <code>AnnotationType</code> class.
+   * @param {AnnotationType} annotationType the type of annotation for the
+   *                                        property parameter.
    */
   public registerParam(propertyKey:string|symbol, parameterIndex:number,
-                       annotationType:number):void {
+                       annotationType:AnnotationType):void {
     let methodName:string = propertyKey.toString();
     let builder:ParameterDescriptorBuilder = new ParameterDescriptorBuilder();
     let paramDesc:ParameterDescriptor =
