@@ -89,11 +89,6 @@ export class SandcatResourceJsletProxy extends HttpJslet
   private _paramInjector:ParameterInjector = null;
 
   /**
-   * The helper object that creates new <code>RequestProperties</code> instances.
-   */
-  private _requestPropertiesBuilder:RequestPropertiesBuilder = null;
-
-  /**
    * The helper object that validates HTTP header parameters for the current
    * transaction.
    */
@@ -109,7 +104,6 @@ export class SandcatResourceJsletProxy extends HttpJslet
   private initObj():void {
     this._handlerBuilder = new ResponseHandlerBuilder();
     this._paramInjector = new ParameterInjector();
-    this._requestPropertiesBuilder = new RequestPropertiesBuilder();
     this._httpHeadersValidator = new HttpHeadersValidator();
   }
 
@@ -165,7 +159,7 @@ export class SandcatResourceJsletProxy extends HttpJslet
     let operation:MethodDescriptor = null;
     let descriptor:ResourceDescriptor = this._resource.getResourceDescriptor();
     let requestProperties:RequestProperties =
-                          this._requestPropertiesBuilder.build(httpMethod, req);
+                  RequestPropertiesBuilder.getInstance().build(httpMethod, req);
     let patternMatcher:UrlPatternMatcher =
                          this._urlPatternMapper.matchRequest(requestProperties);
     let parameters:any[] = null;
@@ -228,7 +222,8 @@ export class SandcatResourceJsletProxy extends HttpJslet
    * @inheritDoc
    */
   public setResource(resource:any):void {
-    let mapperBuilder:UrlPatternMapperBuilder = new UrlPatternMapperBuilder();
+    let mapperBuilder:UrlPatternMapperBuilder =
+                                          UrlPatternMapperBuilder.getInstance();
     let descriptor:ResourceDescriptor = resource.getResourceDescriptor();
     let resourceName:string = resource.constructor.name;
     let message:string = null;

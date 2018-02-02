@@ -2,8 +2,21 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const RequestProperties_1 = require("../utils/RequestProperties");
 const jec_commons_1 = require("jec-commons");
+const SingletonErrorFactory_1 = require("../utils/SingletonErrorFactory");
 class RequestPropertiesBuilder {
-    constructor() { }
+    constructor() {
+        if (RequestPropertiesBuilder._locked || RequestPropertiesBuilder.INSTANCE) {
+            new SingletonErrorFactory_1.SingletonErrorFactory().throw(RequestPropertiesBuilder);
+        }
+        RequestPropertiesBuilder._locked = true;
+    }
+    static getInstance() {
+        if (RequestPropertiesBuilder.INSTANCE === null) {
+            RequestPropertiesBuilder._locked = false;
+            RequestPropertiesBuilder.INSTANCE = new RequestPropertiesBuilder();
+        }
+        return RequestPropertiesBuilder.INSTANCE;
+    }
     build(httpMethod, req) {
         let props = new RequestProperties_1.RequestProperties();
         props.httpMethod = httpMethod;
@@ -13,5 +26,7 @@ class RequestPropertiesBuilder {
         return props;
     }
 }
+RequestPropertiesBuilder._locked = true;
+RequestPropertiesBuilder.INSTANCE = null;
 exports.RequestPropertiesBuilder = RequestPropertiesBuilder;
 ;

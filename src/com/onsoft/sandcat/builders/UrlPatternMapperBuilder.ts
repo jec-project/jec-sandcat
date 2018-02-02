@@ -19,6 +19,7 @@ import {ResourceDescriptor} from "../reflect/ResourceDescriptor";
 import {MethodDescriptor} from "../reflect/MethodDescriptor";
 import {RouteDescriptor} from "../reflect/RouteDescriptor";
 import {HttpMethod} from "jec-commons";
+import {SingletonErrorFactory} from "../utils/SingletonErrorFactory";
 
 /**
  * A helper class that creates <code>UrlPatternMapper</code> objects.
@@ -32,7 +33,41 @@ export class UrlPatternMapperBuilder {
   /**
    * Creates a new <code>UrlPatternMapperBuilder</code> instance.
    */
-  constructor() {}
+  constructor() {
+    if(UrlPatternMapperBuilder._locked || UrlPatternMapperBuilder.INSTANCE) {
+      new SingletonErrorFactory().throw(UrlPatternMapperBuilder);
+    }
+    UrlPatternMapperBuilder._locked = true;
+  }
+  
+  //////////////////////////////////////////////////////////////////////////////
+  // Singleton managment
+  //////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * Prevents <code>UrlPatternMapperBuilder</code> illegal instanciations.
+   */
+  private static _locked:boolean = true;
+
+  /**
+   * The <code>UrlPatternMapperBuilder</code> singleton instance reference.
+   */
+  private static INSTANCE:UrlPatternMapperBuilder = null;
+
+  /**
+   * Returns a reference to the <code>UrlPatternMapperBuilder</code>
+   * singleton.
+   *
+   * @return {UrlPatternMapperBuilder} a reference to the
+   *                             <code>UrlPatternMapperBuilder</code> singleton.
+   */
+  public static getInstance():UrlPatternMapperBuilder {
+    if(UrlPatternMapperBuilder.INSTANCE === null) {
+      UrlPatternMapperBuilder._locked = false;
+      UrlPatternMapperBuilder.INSTANCE = new UrlPatternMapperBuilder();
+    }
+    return UrlPatternMapperBuilder.INSTANCE;
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // Private methods

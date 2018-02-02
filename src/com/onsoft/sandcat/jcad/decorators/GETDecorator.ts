@@ -47,10 +47,10 @@ export class GETDecorator implements Decorator {
                                           params?:HttpMethodParams):any {
     let resourceDesc:ResourceDescriptor =
                            ResourceDescriptorRegistry.getRegisteredDescriptor();
-    let builder:MethodDescriptorBuilder = new MethodDescriptorBuilder();
-    let methodDescriptor:MethodDescriptor = builder.build(
-      HttpMethod.GET, key, descriptor, params
-    );
+    let methodDescriptor:MethodDescriptor =
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.GET, key, descriptor, params
+      );
     resourceDesc.addMethod(methodDescriptor);
     return descriptor;
   }

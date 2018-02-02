@@ -35,22 +35,6 @@ export class ResponseHandlerBuilder {
   constructor() {}
 
   //////////////////////////////////////////////////////////////////////////////
-  // Private methods
-  //////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * The wrapper function used to send decorated messages to the output stream.
-   * 
-   * @param {string} message the message to decorate and to send to the output
-   *                         stream.
-   * @param {LogLevel} logLevel the log level of the message sent to the output
-   *                          stream. 
-   */
-  private sendMessage(message:string, logLevel?:LogLevel):void {
-    SandcatLoggerProxy.getInstance().log(message, logLevel);
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
   // Public methods
   //////////////////////////////////////////////////////////////////////////////
 
@@ -70,7 +54,7 @@ export class ResponseHandlerBuilder {
     let handler:Function = (data?:any, err?:any, status?:HttpStatusCode)=>{
         if(err) {
           //TODO: build a better error process:
-          this.sendMessage(
+          SandcatLoggerProxy.getInstance().log(
             SandcatLocaleManager.getInstance().get("errors.sandcat", err),
             LogLevel.ERROR
           );

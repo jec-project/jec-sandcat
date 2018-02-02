@@ -20,14 +20,12 @@ class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
         this._handlerBuilder = null;
         this._urlPatternMapper = null;
         this._paramInjector = null;
-        this._requestPropertiesBuilder = null;
         this._httpHeadersValidator = null;
         this.initObj();
     }
     initObj() {
         this._handlerBuilder = new ResponseHandlerBuilder_1.ResponseHandlerBuilder();
         this._paramInjector = new ParameterInjector_1.ParameterInjector();
-        this._requestPropertiesBuilder = new RequestPropertiesBuilder_1.RequestPropertiesBuilder();
         this._httpHeadersValidator = new HttpHeadersValidator_1.HttpHeadersValidator();
     }
     processJsletOperation(jsletMethod) {
@@ -48,7 +46,7 @@ class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
         let responseHandler = null;
         let operation = null;
         let descriptor = this._resource.getResourceDescriptor();
-        let requestProperties = this._requestPropertiesBuilder.build(httpMethod, req);
+        let requestProperties = RequestPropertiesBuilder_1.RequestPropertiesBuilder.getInstance().build(httpMethod, req);
         let patternMatcher = this._urlPatternMapper.matchRequest(requestProperties);
         let parameters = null;
         let operationStatus = -1;
@@ -94,7 +92,7 @@ class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
         return this._resource;
     }
     setResource(resource) {
-        let mapperBuilder = new UrlPatternMapperBuilder_1.UrlPatternMapperBuilder();
+        let mapperBuilder = UrlPatternMapperBuilder_1.UrlPatternMapperBuilder.getInstance();
         let descriptor = resource.getResourceDescriptor();
         let resourceName = resource.constructor.name;
         let message = null;

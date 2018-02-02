@@ -1,6 +1,6 @@
 /*!
  * JEC Sandcat Node Module
- * Copyright(c) 2017 Pascal ECHEMANN
+ * Copyright(c) 2017-2018 Pascal ECHEMANN
  * Apache 2.0 Licensed
  * This is a part of the JEC Projects: <https://github.com/pechemann/JEC>
  */
@@ -13,7 +13,7 @@ import { HttpMethodParams, RoutePathParams, RootPathVersion } from "jec-jars";
 import { DomainContainer, DomainConnector } from "jec-glasscat-core";
 import { FileProperties, FilePreProcessor, Decorator, AbstractLoggerProxy,
          AbstractDecoratorConnector, LoggerProxy, DelegatedContainerBuilder,
-         DelegatedContainer, HttpMethod } from "jec-commons";
+         DelegatedContainer, HttpMethod, HttpStatusCode } from "jec-commons";
 import { LocaleManager } from "jec-commons-node";
 
 /*PLACEHOLDER*/}

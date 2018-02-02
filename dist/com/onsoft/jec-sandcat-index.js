@@ -118,3 +118,5 @@ var RootPathSolver_1 = require("./sandcat/utils/RootPathSolver");
 exports.RootPathSolver = RootPathSolver_1.RootPathSolver;
 var RouteDescriptorUtil_1 = require("./sandcat/utils/RouteDescriptorUtil");
 exports.RouteDescriptorUtil = RouteDescriptorUtil_1.RouteDescriptorUtil;
+var SingletonErrorFactory_1 = require("./sandcat/utils/SingletonErrorFactory");
+exports.SingletonErrorFactory = SingletonErrorFactory_1.SingletonErrorFactory;

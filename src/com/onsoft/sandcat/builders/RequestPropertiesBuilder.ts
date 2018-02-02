@@ -17,6 +17,7 @@
 import {RequestProperties} from "../utils/RequestProperties";
 import {HttpRequest} from "jec-exchange";
 import {HttpHeader, HttpMethod} from "jec-commons";
+import {SingletonErrorFactory} from "../utils/SingletonErrorFactory";
 
 /**
  * A helper class that creates new <code>RequestProperties</code> instances.
@@ -30,7 +31,41 @@ export class RequestPropertiesBuilder {
   /**
    * Creates a new <code>RequestPropertiesBuilder</code> instance.
    */
-  constructor() {}
+  constructor() {
+    if(RequestPropertiesBuilder._locked || RequestPropertiesBuilder.INSTANCE) {
+      new SingletonErrorFactory().throw(RequestPropertiesBuilder);
+    }
+    RequestPropertiesBuilder._locked = true;
+  }
+  
+  //////////////////////////////////////////////////////////////////////////////
+  // Singleton managment
+  //////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * Prevents <code>RequestPropertiesBuilder</code> illegal instanciations.
+   */
+  private static _locked:boolean = true;
+
+  /**
+   * The <code>RequestPropertiesBuilder</code> singleton instance reference.
+   */
+  private static INSTANCE:RequestPropertiesBuilder = null;
+
+  /**
+   * Returns a reference to the <code>RequestPropertiesBuilder</code>
+   * singleton.
+   *
+   * @return {RequestPropertiesBuilder} a reference to the
+   *                            <code>RequestPropertiesBuilder</code> singleton.
+   */
+  public static getInstance():RequestPropertiesBuilder {
+    if(RequestPropertiesBuilder.INSTANCE === null) {
+      RequestPropertiesBuilder._locked = false;
+      RequestPropertiesBuilder.INSTANCE = new RequestPropertiesBuilder();
+    }
+    return RequestPropertiesBuilder.INSTANCE;
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // Public methods

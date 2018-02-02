@@ -14,8 +14,7 @@ class RootPathDescriptorFactory {
         let filePath = path.join(file.path, file.name + jec_commons_1.UrlStringsEnum.DOT + jec_commons_1.JecStringsEnum.JS_EXTENSION);
         let ConstObj = jec_commons_1.GlobalClassLoader.getInstance().loadClass(filePath);
         let rootPathObj = new ConstObj();
-        let descriptorUtil = new RootPathDescriptorUtil_1.RootPathDescriptorUtil(rootPathObj, pathDesc);
-        descriptorUtil.decorate();
+        RootPathDescriptorUtil_1.RootPathDescriptorUtil.getInstance().decorate(rootPathObj, pathDesc);
         RootPathDescriptorRegistry_1.RootPathDescriptorRegistry.registerDescriptor(null);
         return pathDesc;
     }

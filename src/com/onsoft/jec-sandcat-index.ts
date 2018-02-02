@@ -1,6 +1,6 @@
 /*!
  * JEC Sandcat Node Module
- * Copyright(c) 2017 Pascal ECHEMANN
+ * Copyright(c) 2017-2018 Pascal ECHEMANN
  * Apache 2.0 Licensed
  * This is a part of the JEC Projects: <https://github.com/pechemann/JEC>
  */
@@ -84,5 +84,6 @@ export {ResourcePathSolver} from "./sandcat/utils/ResourcePathSolver";
 export {RootPathDescriptorUtil} from "./sandcat/utils/RootPathDescriptorUtil";
 export {RootPathSolver} from "./sandcat/utils/RootPathSolver";
 export {RouteDescriptorUtil} from "./sandcat/utils/RouteDescriptorUtil";
+export {SingletonErrorFactory} from "./sandcat/utils/SingletonErrorFactory";
 //--> com/onsoft/sandcat
 export {Sandcat} from "./sandcat/Sandcat";

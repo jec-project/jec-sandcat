@@ -1,23 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const SingletonErrorFactory_1 = require("./SingletonErrorFactory");
 class RootPathDescriptorUtil {
-    constructor(rootPath, descriptor) {
-        this._rootPath = null;
-        this._descriptor = null;
-        this.initObj(rootPath, descriptor);
+    constructor() {
+        if (RootPathDescriptorUtil._locked || RootPathDescriptorUtil.INSTANCE) {
+            new SingletonErrorFactory_1.SingletonErrorFactory().throw(RootPathDescriptorUtil);
+        }
+        RootPathDescriptorUtil._locked = true;
     }
-    initObj(rootPath, descriptor) {
-        this._rootPath = rootPath;
-        this._descriptor = descriptor;
+    static getInstance() {
+        if (RootPathDescriptorUtil.INSTANCE === null) {
+            RootPathDescriptorUtil._locked = false;
+            RootPathDescriptorUtil.INSTANCE = new RootPathDescriptorUtil();
+        }
+        return RootPathDescriptorUtil.INSTANCE;
     }
-    decorate() {
-        let rootPath = this._rootPath;
+    decorate(rootPath, descriptor) {
         Object.defineProperty(rootPath, "__sandcatRootPathDescriptor", {
             enumerable: false,
             configurable: false,
-            value: this._descriptor
+            value: descriptor
         });
-        Object.defineProperty(this._rootPath, "getRootPathDescriptor", {
+        Object.defineProperty(rootPath, "getRootPathDescriptor", {
             enumerable: false,
             configurable: false,
             writable: false,
@@ -27,5 +31,7 @@ class RootPathDescriptorUtil {
         });
     }
 }
+RootPathDescriptorUtil._locked = true;
+RootPathDescriptorUtil.INSTANCE = null;
 exports.RootPathDescriptorUtil = RootPathDescriptorUtil;
 ;

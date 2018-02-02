@@ -19,19 +19,17 @@ import { expect } from "chai";
 import { RequestPropertiesBuilder } from "../../../../../src/com/onsoft/sandcat/builders/RequestPropertiesBuilder";
 import { RequestProperties } from "../../../../../src/com/onsoft/sandcat/utils/RequestProperties";
 import { HttpRequest } from "jec-exchange";
-import { HttpMethod, HttpHeader } from "jec-commons";
+import { HttpMethod, HttpHeader, SingletonError } from "jec-commons";
 
 @TestSuite({
   description: "Test the RequestPropertiesBuilder class properties"
 })
 export class RequestPropertiesBuilderTest {
 
-  public builder:RequestPropertiesBuilder = null;
   public request:HttpRequest = null;
 
   @BeforeAll()
   public initTest():void {
-    this.builder = new RequestPropertiesBuilder();
     this.request = ( {
       getOriginalUrl: function():string { return "original/url"; },
       getHeader: function(type:string):string {
@@ -44,11 +42,43 @@ export class RequestPropertiesBuilderTest {
   }
   
   @Test({
+    description: "should throw a singleton error when calling the constructor function"
+  })
+  public newInstanceTest():void {
+    let buildInstance:Function = function():void {
+      new RequestPropertiesBuilder();
+    };
+    expect(buildInstance).to.throw(SingletonError);
+  }
+  
+  @Test({
+    description: "should return a GlobalGuidGenerator instance"
+  })
+  public getInstanceTest():void {
+    let builder:RequestPropertiesBuilder =
+                                         RequestPropertiesBuilder.getInstance();
+    expect(builder).to.be.an.instanceOf(RequestPropertiesBuilder);
+  }
+  
+  @Test({
+    description: "should return a singleton reference"
+  })
+  public singletonTest():void {
+    let builder1:RequestPropertiesBuilder =
+                                         RequestPropertiesBuilder.getInstance();
+    let builder2:RequestPropertiesBuilder =
+                                         RequestPropertiesBuilder.getInstance();
+    expect(builder1).to.equal(builder2);
+  }
+  
+  @Test({
     description: "should return an instance of the RequestProperties class"
   })
   public buildTest():void {
     expect(
-      this.builder.build(HttpMethod.DELETE, this.request)
+      RequestPropertiesBuilder.getInstance().build(
+        HttpMethod.DELETE, this.request
+      )
     ).to.be.an.instanceOf(RequestProperties);
   }
   
@@ -57,7 +87,9 @@ export class RequestPropertiesBuilderTest {
   })
   public httpMethodTest():void {
     let props:RequestProperties = 
-                           this.builder.build(HttpMethod.DELETE, this.request);
+      RequestPropertiesBuilder.getInstance().build(
+        HttpMethod.DELETE, this.request
+      );
     expect(props.httpMethod).to.equal(HttpMethod.DELETE);
   }
   
@@ -66,7 +98,9 @@ export class RequestPropertiesBuilderTest {
   })
   public subRouteTest():void {
     let props:RequestProperties =
-                           this.builder.build(HttpMethod.DELETE, this.request);
+      RequestPropertiesBuilder.getInstance().build(
+        HttpMethod.DELETE, this.request
+      );
     expect(props.subRoute).to.equal(this.request.getOriginalUrl());
   }
   
@@ -75,7 +109,9 @@ export class RequestPropertiesBuilderTest {
   })
   public accceptTest():void {
     let props:RequestProperties =
-                           this.builder.build(HttpMethod.DELETE, this.request);
+      RequestPropertiesBuilder.getInstance().build(
+        HttpMethod.DELETE, this.request
+      );
     expect(props.acccept).to.equal(this.request.getHeader(HttpHeader.ACCEPT));
   }
   
@@ -84,7 +120,9 @@ export class RequestPropertiesBuilderTest {
   })
   public contentTypeTest():void {
     let props:RequestProperties =
-                           this.builder.build(HttpMethod.DELETE, this.request);
+      RequestPropertiesBuilder.getInstance().build(
+        HttpMethod.DELETE, this.request
+      );
     expect(
       props.contentType
     ).to.equal(this.request.getHeader(HttpHeader.CONTENT_TYPE));

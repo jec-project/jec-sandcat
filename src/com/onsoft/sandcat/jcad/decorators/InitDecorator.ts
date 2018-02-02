@@ -46,11 +46,10 @@ export class InitDecorator implements Decorator {
   public decorate(target:any, key:string, descriptor:PropertyDescriptor):any {
     let resourceDesc:ResourceDescriptor =
                            ResourceDescriptorRegistry.getRegisteredDescriptor();
-    let builder:JsletMethodDescriptorBuilder =
-                                             new JsletMethodDescriptorBuilder();
-    let methodDescriptor:JsletMethodDescriptor = builder.build(
-      JsletMethod.INIT, key, descriptor
-    );
+    let methodDescriptor:JsletMethodDescriptor = 
+      JsletMethodDescriptorBuilder.getInstance().build(
+        JsletMethod.INIT, key, descriptor
+      );
     resourceDesc.addJsletMethod(methodDescriptor);
     return descriptor;
   }

@@ -49,9 +49,10 @@ export class AnnotationParamFactory {
   public registerParam(propertyKey:string|symbol, parameterIndex:number,
                        annotationType:AnnotationType):void {
     let methodName:string = propertyKey.toString();
-    let builder:ParameterDescriptorBuilder = new ParameterDescriptorBuilder();
-    let paramDesc:ParameterDescriptor =
-                      builder.build(methodName, annotationType, parameterIndex);
+    let paramDesc:ParameterDescriptor = 
+      ParameterDescriptorBuilder.getInstance().build(
+        methodName, annotationType, parameterIndex
+      );
     ParametersMapUtil.getParameterCollection(methodName).push(paramDesc);
   }
 }

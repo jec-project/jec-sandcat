@@ -6,8 +6,7 @@ class AnnotationParamFactory {
     constructor() { }
     registerParam(propertyKey, parameterIndex, annotationType) {
         let methodName = propertyKey.toString();
-        let builder = new ParameterDescriptorBuilder_1.ParameterDescriptorBuilder();
-        let paramDesc = builder.build(methodName, annotationType, parameterIndex);
+        let paramDesc = ParameterDescriptorBuilder_1.ParameterDescriptorBuilder.getInstance().build(methodName, annotationType, parameterIndex);
         ParametersMapUtil_1.ParametersMapUtil.getParameterCollection(methodName).push(paramDesc);
     }
 }

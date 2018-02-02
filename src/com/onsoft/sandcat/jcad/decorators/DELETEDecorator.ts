@@ -47,10 +47,10 @@ export class DELETEDecorator implements Decorator {
                                           params?:HttpMethodParams):any {
     let resourceDesc:ResourceDescriptor =
                            ResourceDescriptorRegistry.getRegisteredDescriptor();
-    let builder:MethodDescriptorBuilder = new MethodDescriptorBuilder();
-    let methodDescriptor:MethodDescriptor = builder.build(
-      HttpMethod.DELETE, key, descriptor, params
-    );
+    let methodDescriptor:MethodDescriptor = 
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.DELETE, key, descriptor, params
+      );
     resourceDesc.addMethod(methodDescriptor);
     return descriptor;
   }

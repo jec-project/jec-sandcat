@@ -2,8 +2,21 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const MethodDescriptor_1 = require("../reflect/MethodDescriptor");
 const fnArgs = require("function-arguments");
+const SingletonErrorFactory_1 = require("../utils/SingletonErrorFactory");
 class MethodDescriptorBuilder {
-    constructor() { }
+    constructor() {
+        if (MethodDescriptorBuilder._locked || MethodDescriptorBuilder.INSTANCE) {
+            new SingletonErrorFactory_1.SingletonErrorFactory().throw(MethodDescriptorBuilder);
+        }
+        MethodDescriptorBuilder._locked = true;
+    }
+    static getInstance() {
+        if (MethodDescriptorBuilder.INSTANCE === null) {
+            MethodDescriptorBuilder._locked = false;
+            MethodDescriptorBuilder.INSTANCE = new MethodDescriptorBuilder();
+        }
+        return MethodDescriptorBuilder.INSTANCE;
+    }
     build(httpMethod, key, descriptor, params) {
         let methodDesc = new MethodDescriptor_1.MethodDescriptor();
         let action = descriptor.value;
@@ -21,5 +34,7 @@ class MethodDescriptorBuilder {
         return methodDesc;
     }
 }
+MethodDescriptorBuilder._locked = true;
+MethodDescriptorBuilder.INSTANCE = null;
 exports.MethodDescriptorBuilder = MethodDescriptorBuilder;
 ;

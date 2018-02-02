@@ -18,14 +18,13 @@ import { TestSuite, Test, BeforeAll, AfterAll, Before, After } from "jec-juta";
 import { expect } from "chai";
 import { RootPathDescriptorUtil } from "../../../../../src/com/onsoft/sandcat/utils/RootPathDescriptorUtil";
 import { RootPathDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/RootPathDescriptor";
-
+import { SingletonError } from "jec-commons";
 
 @TestSuite({
   description: "Test the RootPathDescriptorUtil class properties"
 })
 export class RootPathDescriptorUtilTest {
 
-  public descriptorUtil:RootPathDescriptorUtil = null;
   public descriptor:RootPathDescriptor = null;
   public rootPath:any = null;
 
@@ -50,13 +49,38 @@ export class RootPathDescriptorUtilTest {
   }
 
   @Test({
+    description: "should throw a singleton error when calling the constructor function"
+  })
+  public newInstanceTest():void {
+    let buildInstance:Function = function():void {
+      new RootPathDescriptorUtil();
+    };
+    expect(buildInstance).to.throw(SingletonError);
+  }
+  
+  @Test({
+    description: "should return a GlobalGuidGenerator instance"
+  })
+  public getInstanceTest():void {
+    let util:RootPathDescriptorUtil = RootPathDescriptorUtil.getInstance();
+    expect(util).to.be.an.instanceOf(RootPathDescriptorUtil);
+  }
+  
+  @Test({
+    description: "should return a singleton reference"
+  })
+  public singletonTest():void {
+    let util1:RootPathDescriptorUtil = RootPathDescriptorUtil.getInstance();
+    let util2:RootPathDescriptorUtil = RootPathDescriptorUtil.getInstance();
+    expect(util1).to.equal(util2);
+  }
+  
+  @Test({
     description: "should create a protected '__sandcatRootPathDescriptor' property"
   })
   public decoratePropertyTest():void {
-    this.descriptorUtil = new RootPathDescriptorUtil(
-      this.rootPath, this.descriptor
-    );
-    this.descriptorUtil.decorate();
+    RootPathDescriptorUtil.getInstance()
+                          .decorate(this.rootPath, this.descriptor);
     expect(this.rootPath).to.have.property("__sandcatRootPathDescriptor");
   }
 
@@ -64,10 +88,8 @@ export class RootPathDescriptorUtilTest {
     description: "should create an immutable property"
   })
   public decorateImmutablePropertyTest():void {
-    this.descriptorUtil = new RootPathDescriptorUtil(
-      this.rootPath, this.descriptor
-    );
-    this.descriptorUtil.decorate();
+    RootPathDescriptorUtil.getInstance()
+                          .decorate(this.rootPath, this.descriptor);
     let doOverride:Function = function():void {
       this.rootPath.__sandcatRootPathDescriptor = {};
     };
@@ -78,10 +100,8 @@ export class RootPathDescriptorUtilTest {
     description: "should create a protected 'getRootPathDescriptor' method"
   })
   public decorateMethodTest():void {
-    this.descriptorUtil = new RootPathDescriptorUtil(
-      this.rootPath, this.descriptor
-    );
-    this.descriptorUtil.decorate();
+    RootPathDescriptorUtil.getInstance()
+                          .decorate(this.rootPath, this.descriptor);
     expect(this.rootPath.getRootPathDescriptor).to.not.be.undefined;
   }
   
@@ -89,10 +109,8 @@ export class RootPathDescriptorUtilTest {
     description: "should create an immutable method"
   })
   public decorateImmutableMethodTest():void {
-    this.descriptorUtil = new RootPathDescriptorUtil(
-      this.rootPath, this.descriptor
-    );
-    this.descriptorUtil.decorate();
+    RootPathDescriptorUtil.getInstance()
+                          .decorate(this.rootPath, this.descriptor);
     let doOverride:Function = function():void {
       this.rootPath.getRootPathDescriptor = function():void {};
     };

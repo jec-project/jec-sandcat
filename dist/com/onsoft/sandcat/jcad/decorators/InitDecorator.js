@@ -7,8 +7,7 @@ class InitDecorator {
     constructor() { }
     decorate(target, key, descriptor) {
         let resourceDesc = ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.getRegisteredDescriptor();
-        let builder = new JsletMethodDescriptorBuilder_1.JsletMethodDescriptorBuilder();
-        let methodDescriptor = builder.build(JsletMethod_1.JsletMethod.INIT, key, descriptor);
+        let methodDescriptor = JsletMethodDescriptorBuilder_1.JsletMethodDescriptorBuilder.getInstance().build(JsletMethod_1.JsletMethod.INIT, key, descriptor);
         resourceDesc.addJsletMethod(methodDescriptor);
         return descriptor;
     }

@@ -16,9 +16,11 @@
 
 import {JsletMethodDescriptor} from "../reflect/JsletMethodDescriptor";
 import {JsletMethod} from "../reflect/JsletMethod";
+import {SingletonErrorFactory} from "../utils/SingletonErrorFactory";
 
 /**
- * A helper class that creates new <code>JsletMethodDescriptor</code> instances.
+ * A helper singleton that creates new <code>JsletMethodDescriptor</code>
+ * instances.
  */
 export class JsletMethodDescriptorBuilder {
 
@@ -29,7 +31,43 @@ export class JsletMethodDescriptorBuilder {
   /**
    * Creates a new <code>JsletMethodDescriptorBuilder</code> instance.
    */
-  constructor() {}
+  constructor() {
+    if(JsletMethodDescriptorBuilder._locked ||
+                                        JsletMethodDescriptorBuilder.INSTANCE) {
+      new SingletonErrorFactory().throw(JsletMethodDescriptorBuilder);
+    }
+    JsletMethodDescriptorBuilder._locked = true;
+  }
+  
+  //////////////////////////////////////////////////////////////////////////////
+  // Singleton managment
+  //////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * Prevents <code>JsletMethodDescriptorBuilder</code> illegal instanciations.
+   */
+  private static _locked:boolean = true;
+
+  /**
+   * The <code>JsletMethodDescriptorBuilder</code> singleton instance reference.
+   */
+  private static INSTANCE:JsletMethodDescriptorBuilder = null;
+
+  /**
+   * Returns a reference to the <code>JsletMethodDescriptorBuilder</code>
+   * singleton.
+   *
+   * @return {JsletMethodDescriptorBuilder} a reference to the
+   *                        <code>JsletMethodDescriptorBuilder</code> singleton.
+   */
+  public static getInstance():JsletMethodDescriptorBuilder {
+    if(JsletMethodDescriptorBuilder.INSTANCE === null) {
+      JsletMethodDescriptorBuilder._locked = false;
+      JsletMethodDescriptorBuilder.INSTANCE = 
+                                             new JsletMethodDescriptorBuilder();
+    }
+    return JsletMethodDescriptorBuilder.INSTANCE;
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // Public methods

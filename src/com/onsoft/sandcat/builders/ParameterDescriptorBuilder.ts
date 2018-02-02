@@ -16,6 +16,7 @@
 
 import {ParameterDescriptor} from "../reflect/ParameterDescriptor";
 import {AnnotationType} from "../reflect/AnnotationType";
+import {SingletonErrorFactory} from "../utils/SingletonErrorFactory";
 
 /**
  * A helper class that creates <code>ParameterDescriptor</code> instances.
@@ -29,7 +30,42 @@ export class ParameterDescriptorBuilder {
   /**
    * Creates a new <code>ParameterDescriptorBuilder</code> instance.
    */
-  constructor() {}
+  constructor() {
+    if(ParameterDescriptorBuilder._locked ||
+                                          ParameterDescriptorBuilder.INSTANCE) {
+      new SingletonErrorFactory().throw(ParameterDescriptorBuilder);
+    }
+    ParameterDescriptorBuilder._locked = true;
+  }
+  
+  //////////////////////////////////////////////////////////////////////////////
+  // Singleton managment
+  //////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * Prevents <code>ParameterDescriptorBuilder</code> illegal instanciations.
+   */
+  private static _locked:boolean = true;
+
+  /**
+   * The <code>ParameterDescriptorBuilder</code> singleton instance reference.
+   */
+  private static INSTANCE:ParameterDescriptorBuilder = null;
+
+  /**
+   * Returns a reference to the <code>ParameterDescriptorBuilder</code>
+   * singleton.
+   *
+   * @return {ParameterDescriptorBuilder} a reference to the
+   *                          <code>ParameterDescriptorBuilder</code> singleton.
+   */
+  public static getInstance():ParameterDescriptorBuilder {
+    if(ParameterDescriptorBuilder.INSTANCE === null) {
+      ParameterDescriptorBuilder._locked = false;
+      ParameterDescriptorBuilder.INSTANCE = new ParameterDescriptorBuilder();
+    }
+    return ParameterDescriptorBuilder.INSTANCE;
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // Public methods

@@ -46,11 +46,10 @@ export class DestroyDecorator implements Decorator {
   public decorate(target:any, key:string, descriptor:PropertyDescriptor):any {
     let resourceDesc:ResourceDescriptor =
                            ResourceDescriptorRegistry.getRegisteredDescriptor();
-    let builder:JsletMethodDescriptorBuilder =
-                                             new JsletMethodDescriptorBuilder();
-    let methodDescriptor:JsletMethodDescriptor = builder.build(
-      JsletMethod.DESTROY, key, descriptor
-    );
+    let methodDescriptor:JsletMethodDescriptor =
+      JsletMethodDescriptorBuilder.getInstance().build(
+        JsletMethod.DESTROY, key, descriptor
+      );
     resourceDesc.addJsletMethod(methodDescriptor);
     return descriptor;
   }

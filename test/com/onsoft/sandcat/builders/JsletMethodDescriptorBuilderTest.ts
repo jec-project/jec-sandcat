@@ -19,21 +19,50 @@ import { expect } from "chai";
 import { JsletMethodDescriptorBuilder } from "../../../../../src/com/onsoft/sandcat/builders/JsletMethodDescriptorBuilder";
 import { JsletMethodDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/JsletMethodDescriptor";
 import { JsletMethod } from "../../../../../src/com/onsoft/sandcat/reflect/JsletMethod";
+import { SingletonError } from "jec-commons";
 
 @TestSuite({
   description: "Test the JsletMethodDescriptorBuilder class properties"
 })
 export class JsletMethodDescriptorBuilderTest {
 
-  public builder:JsletMethodDescriptorBuilder = null;
   public propertyDescriptor:PropertyDescriptor = null;
   public key:string = null;
 
   @BeforeAll()
   public initTest():void {
     this.propertyDescriptor = ( { value: "any" } as PropertyDescriptor );
-    this.builder = new JsletMethodDescriptorBuilder();
     this.key = "methodName";
+  }
+  
+  @Test({
+    description: "should throw a singleton error when calling the constructor function"
+  })
+  public newInstanceTest():void {
+    let buildInstance:Function = function():void {
+      new JsletMethodDescriptorBuilder();
+    };
+    expect(buildInstance).to.throw(SingletonError);
+  }
+  
+  @Test({
+    description: "should return a JsletMethodDescriptorBuilder instance"
+  })
+  public getInstanceTest():void {
+    let builder:JsletMethodDescriptorBuilder =
+                                     JsletMethodDescriptorBuilder.getInstance();
+    expect(builder).to.be.an.instanceOf(JsletMethodDescriptorBuilder);
+  }
+  
+  @Test({
+    description: "should return a singleton reference"
+  })
+  public singletonTest():void {
+    let builder1:JsletMethodDescriptorBuilder =
+                                     JsletMethodDescriptorBuilder.getInstance();
+    let builder2:JsletMethodDescriptorBuilder =
+                                     JsletMethodDescriptorBuilder.getInstance();
+    expect(builder1).to.equal(builder2);
   }
   
   @Test({
@@ -41,7 +70,9 @@ export class JsletMethodDescriptorBuilderTest {
   })
   public buildTest():void {
     expect(
-      this.builder.build(JsletMethod.AFTER, this.key, this.propertyDescriptor)
+      JsletMethodDescriptorBuilder.getInstance().build(
+        JsletMethod.AFTER, this.key, this.propertyDescriptor
+      )
     ).to.be.an.instanceOf(JsletMethodDescriptor);
   }
   
@@ -50,7 +81,9 @@ export class JsletMethodDescriptorBuilderTest {
   })
   public nameTest():void {
     let desc:JsletMethodDescriptor = 
-      this.builder.build(JsletMethod.AFTER, this.key, this.propertyDescriptor);
+      JsletMethodDescriptorBuilder.getInstance().build(
+        JsletMethod.AFTER, this.key, this.propertyDescriptor
+      );
     expect(desc.name).to.equal(this.key);
   }
   
@@ -59,7 +92,9 @@ export class JsletMethodDescriptorBuilderTest {
   })
   public actionTest():void {
     let desc:JsletMethodDescriptor = 
-      this.builder.build(JsletMethod.AFTER, this.key, this.propertyDescriptor);
+      JsletMethodDescriptorBuilder.getInstance().build(
+        JsletMethod.AFTER, this.key, this.propertyDescriptor
+      );
     expect(desc.action).to.equal(this.propertyDescriptor.value);
   }
   
@@ -68,7 +103,9 @@ export class JsletMethodDescriptorBuilderTest {
   })
   public jsletMethodTest():void {
     let desc:JsletMethodDescriptor = 
-      this.builder.build(JsletMethod.AFTER, this.key, this.propertyDescriptor);
+      JsletMethodDescriptorBuilder.getInstance().build(
+        JsletMethod.AFTER, this.key, this.propertyDescriptor
+      );
     expect(desc.jsletMethod).to.equal(JsletMethod.AFTER);
   }
 }

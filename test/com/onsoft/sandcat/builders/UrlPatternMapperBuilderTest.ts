@@ -19,6 +19,7 @@ import { expect } from "chai";
 import { UrlPatternMapperBuilder } from "../../../../../src/com/onsoft/sandcat/builders/UrlPatternMapperBuilder";
 import { ResourceDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/ResourceDescriptor";
 import { UrlPatternMapper } from "../../../../../src/com/onsoft/sandcat/core/UrlPatternMapper";
+import { SingletonError } from "jec-commons";
 
 @TestSuite({
   description: "Test the UrlPatternMapperBuilder class properties"
@@ -26,13 +27,42 @@ import { UrlPatternMapper } from "../../../../../src/com/onsoft/sandcat/core/Url
 export class UrlPatternMapperBuilderTest {
   
   @Test({
+    description: "should throw a singleton error when calling the constructor function"
+  })
+  public newInstanceTest():void {
+    let buildInstance:Function = function():void {
+      new UrlPatternMapperBuilder();
+    };
+    expect(buildInstance).to.throw(SingletonError);
+  }
+  
+  @Test({
+    description: "should return a GlobalGuidGenerator instance"
+  })
+  public getInstanceTest():void {
+    let builder:UrlPatternMapperBuilder =
+                                          UrlPatternMapperBuilder.getInstance();
+    expect(builder).to.be.an.instanceOf(UrlPatternMapperBuilder);
+  }
+  
+  @Test({
+    description: "should return a singleton reference"
+  })
+  public singletonTest():void {
+    let builder1:UrlPatternMapperBuilder =
+                                          UrlPatternMapperBuilder.getInstance();
+    let builder2:UrlPatternMapperBuilder =
+                                          UrlPatternMapperBuilder.getInstance();
+    expect(builder1).to.equal(builder2);
+  }
+  
+  @Test({
     description: "should return a new UrlPatternMapper object"
   })
   public buildTest():void {
-    let builder = new UrlPatternMapperBuilder();
     let descriptor:ResourceDescriptor = new ResourceDescriptor();
     expect(
-      builder.build(descriptor)
+      UrlPatternMapperBuilder.getInstance().build(descriptor)
     ).to.be.an.instanceOf(UrlPatternMapper);
   }
 }

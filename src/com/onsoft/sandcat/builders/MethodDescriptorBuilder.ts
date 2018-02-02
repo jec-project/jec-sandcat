@@ -18,6 +18,7 @@ import {MethodDescriptor} from "../reflect/MethodDescriptor";
 import {HttpMethodParams} from "jec-jars";
 import * as fnArgs from "function-arguments";
 import {HttpMethod} from "jec-commons";
+import {SingletonErrorFactory} from "../utils/SingletonErrorFactory";
 
 /**
  * A helper class that creates <code>MethodDescriptor</code> instances.
@@ -31,7 +32,41 @@ export class MethodDescriptorBuilder {
   /**
    * Creates a new <code>MethodDescriptorBuilder</code> instance.
    */
-  constructor() {}
+  constructor() {
+    if(MethodDescriptorBuilder._locked || MethodDescriptorBuilder.INSTANCE) {
+      new SingletonErrorFactory().throw(MethodDescriptorBuilder);
+    }
+    MethodDescriptorBuilder._locked = true;
+  }
+  
+  //////////////////////////////////////////////////////////////////////////////
+  // Singleton managment
+  //////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * Prevents <code>MethodDescriptorBuilder</code> illegal instanciations.
+   */
+  private static _locked:boolean = true;
+
+  /**
+   * The <code>MethodDescriptorBuilder</code> singleton instance reference.
+   */
+  private static INSTANCE:MethodDescriptorBuilder = null;
+
+  /**
+   * Returns a reference to the <code>MethodDescriptorBuilder</code>
+   * singleton.
+   *
+   * @return {MethodDescriptorBuilder} a reference to the
+   *                             <code>MethodDescriptorBuilder</code> singleton.
+   */
+  public static getInstance():MethodDescriptorBuilder {
+    if(MethodDescriptorBuilder.INSTANCE === null) {
+      MethodDescriptorBuilder._locked = false;
+      MethodDescriptorBuilder.INSTANCE = new MethodDescriptorBuilder();
+    }
+    return MethodDescriptorBuilder.INSTANCE;
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // Public methods

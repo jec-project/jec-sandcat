@@ -19,14 +19,13 @@ import { expect } from "chai";
 import { MethodDescriptorBuilder } from "../../../../../src/com/onsoft/sandcat/builders/MethodDescriptorBuilder";
 import { MethodDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/MethodDescriptor";
 import { HttpMethodParams } from "jec-jars";
-import { HttpMethod } from "jec-commons";
+import { HttpMethod, SingletonError } from "jec-commons";
 
 @TestSuite({
   description: "Test the MethodDescriptorBuilder class properties"
 })
 export class MethodDescriptorBuilderTest {
 
-  public builder:MethodDescriptorBuilder = null;
   public propertyDescriptor:PropertyDescriptor = null;
   public key:string = null;
   public httpParams:HttpMethodParams = null;
@@ -35,7 +34,6 @@ export class MethodDescriptorBuilderTest {
   public initTest():void {
     let func:Function = function(param1:string, param2:string):void {};
     this.propertyDescriptor = ( { value: func } as PropertyDescriptor );
-    this.builder = new MethodDescriptorBuilder();
     this.key = "methodName";
     this.httpParams = {
       route: "foo/bar",
@@ -46,11 +44,43 @@ export class MethodDescriptorBuilderTest {
   }
   
   @Test({
+    description: "should throw a singleton error when calling the constructor function"
+  })
+  public newInstanceTest():void {
+    let buildInstance:Function = function():void {
+      new MethodDescriptorBuilder();
+    };
+    expect(buildInstance).to.throw(SingletonError);
+  }
+  
+  @Test({
+    description: "should return a MethodDescriptorBuilder instance"
+  })
+  public getInstanceTest():void {
+    let builder:MethodDescriptorBuilder =
+                                          MethodDescriptorBuilder.getInstance();
+    expect(builder).to.be.an.instanceOf(MethodDescriptorBuilder);
+  }
+  
+  @Test({
+    description: "should return a singleton reference"
+  })
+  public singletonTest():void {
+    let builder1:MethodDescriptorBuilder =
+                                          MethodDescriptorBuilder.getInstance();
+    let builder2:MethodDescriptorBuilder =
+                                          MethodDescriptorBuilder.getInstance();
+    expect(builder1).to.equal(builder2);
+  }
+  
+  @Test({
     description: "should return an instance of the MethodDescriptor class"
   })
   public buildTest():void {
     expect(
-      this.builder.build(HttpMethod.GET, this.key, this.propertyDescriptor)
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.GET, this.key, this.propertyDescriptor
+      )
     ).to.be.an.instanceOf(MethodDescriptor);
   }
   
@@ -59,7 +89,9 @@ export class MethodDescriptorBuilderTest {
   })
   public nameTest():void {
     let desc:MethodDescriptor = 
-      this.builder.build(HttpMethod.GET, this.key, this.propertyDescriptor);
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.GET, this.key, this.propertyDescriptor
+      );
     expect(desc.name).to.equal(this.key);
   }
   
@@ -68,7 +100,9 @@ export class MethodDescriptorBuilderTest {
   })
   public httpMethodTest():void {
     let desc:MethodDescriptor = 
-      this.builder.build(HttpMethod.GET, this.key, this.propertyDescriptor);
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.GET, this.key, this.propertyDescriptor
+      );
     expect(desc.httpMethod).to.equal(HttpMethod.GET);
   }
   
@@ -77,7 +111,9 @@ export class MethodDescriptorBuilderTest {
   })
   public actionTest():void {
     let desc:MethodDescriptor = 
-      this.builder.build(HttpMethod.GET, this.key, this.propertyDescriptor);
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.GET, this.key, this.propertyDescriptor
+      );
     expect(desc.action).to.equal(this.propertyDescriptor.value);
   }
   
@@ -86,7 +122,9 @@ export class MethodDescriptorBuilderTest {
   })
   public routeNullTest():void {
     let desc:MethodDescriptor = 
-      this.builder.build(HttpMethod.GET, this.key, this.propertyDescriptor);
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.GET, this.key, this.propertyDescriptor
+      );
     expect(desc.route).to.be.null;
   }
   
@@ -95,7 +133,9 @@ export class MethodDescriptorBuilderTest {
   })
   public producesNullTest():void {
     let desc:MethodDescriptor = 
-      this.builder.build(HttpMethod.GET, this.key, this.propertyDescriptor);
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.GET, this.key, this.propertyDescriptor
+      );
     expect(desc.produces).to.be.null;
   }
   
@@ -104,7 +144,9 @@ export class MethodDescriptorBuilderTest {
   })
   public crossDomainPolicyNullTest():void {
     let desc:MethodDescriptor = 
-      this.builder.build(HttpMethod.GET, this.key, this.propertyDescriptor);
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.GET, this.key, this.propertyDescriptor
+      );
     expect(desc.crossDomainPolicy).to.be.null;
   }
   
@@ -113,7 +155,9 @@ export class MethodDescriptorBuilderTest {
   })
   public consumesNullTest():void {
     let desc:MethodDescriptor = 
-      this.builder.build(HttpMethod.GET, this.key, this.propertyDescriptor);
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.GET, this.key, this.propertyDescriptor
+      );
     expect(desc.consumes).to.be.null;
   }
 
@@ -121,7 +165,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'route' property value"
   })
   public routeTest():void {
-    let desc:MethodDescriptor = this.builder.build(
+    let desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
       HttpMethod.GET, this.key, this.propertyDescriptor, this.httpParams
     );
     expect(desc.route).to.equal(this.httpParams.route);
@@ -131,7 +175,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'consumes' property value"
   })
   public consumesTest():void {
-    let desc:MethodDescriptor = this.builder.build(
+    let desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
       HttpMethod.GET, this.key, this.propertyDescriptor, this.httpParams
     );
     expect(desc.consumes).to.equal(this.httpParams.consumes);
@@ -141,7 +185,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'produces' property value"
   })
   public producesTest():void {
-    let desc:MethodDescriptor = this.builder.build(
+    let desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
       HttpMethod.GET, this.key, this.propertyDescriptor, this.httpParams
     );
     expect(desc.produces).to.equal(this.httpParams.produces);
@@ -151,7 +195,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'crossDomainPolicy' property value"
   })
   public crossDomainPolicyTest():void {
-    let desc:MethodDescriptor = this.builder.build(
+    let desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
       HttpMethod.GET, this.key, this.propertyDescriptor, this.httpParams
     );
     expect(desc.crossDomainPolicy).to.equal(this.httpParams.crossDomainPolicy);

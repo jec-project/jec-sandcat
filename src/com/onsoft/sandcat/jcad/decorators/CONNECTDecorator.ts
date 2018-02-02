@@ -47,10 +47,10 @@ export class CONNECTDecorator implements Decorator {
                                           params?:HttpMethodParams):any {
     let resourceDesc:ResourceDescriptor =
                            ResourceDescriptorRegistry.getRegisteredDescriptor();
-    let builder:MethodDescriptorBuilder = new MethodDescriptorBuilder();
-    let methodDescriptor:MethodDescriptor = builder.build(
-      HttpMethod.CONNECT, key, descriptor, params
-    );
+    let methodDescriptor:MethodDescriptor = 
+      MethodDescriptorBuilder.getInstance().build(
+        HttpMethod.CONNECT, key, descriptor, params
+      );
     resourceDesc.addMethod(methodDescriptor);
     return descriptor;
   }

@@ -15,6 +15,7 @@
 //   limitations under the License.
 
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
+import {SingletonErrorFactory} from "./SingletonErrorFactory";
 
 /**
  * A helper class that decorates a jslet by adding 
@@ -28,46 +29,41 @@ export class RootPathDescriptorUtil {
 
   /**
    * Creates a new <code>RootPathDescriptorUtil</code> instance.
-   * 
-   * @param {any} rootPath the root path object to decorate.
-   * @param {RootPathDescriptor} descriptor the <code>RootPathDescriptor</code>
-   *                                        associated with the specified
-   *                                        root path object to decorate.
    */
-  constructor(rootPath:any, descriptor:RootPathDescriptor) {
-    this.initObj(rootPath, descriptor);
+  constructor() {
+    if(RootPathDescriptorUtil._locked || RootPathDescriptorUtil.INSTANCE) {
+      new SingletonErrorFactory().throw(RootPathDescriptorUtil);
+    }
+    RootPathDescriptorUtil._locked = true;
   }
-
+  
   //////////////////////////////////////////////////////////////////////////////
-  // Private properties
-  //////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * The root path object decorated by this utility class.
-   */
-  private _rootPath:any = null;
-
-  /**
-   * The <code>RootPathDescriptor</code> associated with the specified resource 
-   * object to decorate.
-   */
-  private _descriptor:RootPathDescriptor = null;
-
-  //////////////////////////////////////////////////////////////////////////////
-  // Private methods
+  // Singleton managment
   //////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Initializes this object.
-   * 
-   * @param {any} rootPath the root path object to decorate.
-   * @param {RootPathDescriptor} descriptor the <code>RootPathDescriptor</code>
-   *                                        associated with the specified
-   *                                        root path object to decorate.
+   * Prevents <code>RootPathDescriptorUtil</code> illegal instanciations.
    */
-  private initObj(rootPath:any, descriptor:RootPathDescriptor):void {
-    this._rootPath = rootPath;
-    this._descriptor = descriptor;
+  private static _locked:boolean = true;
+
+  /**
+   * The <code>RootPathDescriptorUtil</code> singleton instance reference.
+   */
+  private static INSTANCE:RootPathDescriptorUtil = null;
+
+  /**
+   * Returns a reference to the <code>RootPathDescriptorUtil</code>
+   * singleton.
+   *
+   * @return {RootPathDescriptorUtil} a reference to the
+   *                              <code>RootPathDescriptorUtil</code> singleton.
+   */
+  public static getInstance():RootPathDescriptorUtil {
+    if(RootPathDescriptorUtil.INSTANCE === null) {
+      RootPathDescriptorUtil._locked = false;
+      RootPathDescriptorUtil.INSTANCE = new RootPathDescriptorUtil();
+    }
+    return RootPathDescriptorUtil.INSTANCE;
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -77,20 +73,24 @@ export class RootPathDescriptorUtil {
   /**
    * Adds <code>RootPathDescriptor</code> capabilities to the specified root
    * path object.
+   * 
+   * @param {any} rootPath the root path object to decorate.
+   * @param {RootPathDescriptor} descriptor the <code>RootPathDescriptor</code>
+   *                                        associated with the specified
+   *                                        root path object to decorate.
    */
-  public decorate():void {
-    let rootPath:any = this._rootPath; 
+  public decorate(rootPath:any, descriptor:RootPathDescriptor):void {
     Object.defineProperty(
       rootPath,
       "__sandcatRootPathDescriptor",
       {
         enumerable: false,
         configurable: false,
-        value: this._descriptor
+        value: descriptor
       }
     );
     Object.defineProperty(
-      this._rootPath,
+      rootPath,
       "getRootPathDescriptor",
       {
         enumerable: false,

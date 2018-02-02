@@ -19,19 +19,48 @@ import { expect } from "chai";
 import { ParameterDescriptorBuilder } from "../../../../../src/com/onsoft/sandcat/builders/ParameterDescriptorBuilder";
 import { ParameterDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/ParameterDescriptor";
 import { AnnotationType } from "../../../../../src/com/onsoft/sandcat/reflect/AnnotationType";
+import { SingletonError } from "jec-commons";
 
 @TestSuite({
   description: "Test the ParameterDescriptorBuilder class properties"
 })
 export class ParameterDescriptorBuilderTest {
 
-  public builder:ParameterDescriptorBuilder = null;
   public methodName:string = null;
 
   @BeforeAll()
   public initTest():void {
-    this.builder = new ParameterDescriptorBuilder();
     this.methodName = "myMethodName";
+  }
+  
+  @Test({
+    description: "should throw a singleton error when calling the constructor function"
+  })
+  public newInstanceTest():void {
+    let buildInstance:Function = function():void {
+      new ParameterDescriptorBuilder();
+    };
+    expect(buildInstance).to.throw(SingletonError);
+  }
+  
+  @Test({
+    description: "should return a GlobalGuidGenerator instance"
+  })
+  public getInstanceTest():void {
+    let builder:ParameterDescriptorBuilder =
+                                       ParameterDescriptorBuilder.getInstance();
+    expect(builder).to.be.an.instanceOf(ParameterDescriptorBuilder);
+  }
+  
+  @Test({
+    description: "should return a singleton reference"
+  })
+  public singletonTest():void {
+    let builder1:ParameterDescriptorBuilder =
+                                       ParameterDescriptorBuilder.getInstance();
+    let builder2:ParameterDescriptorBuilder =
+                                       ParameterDescriptorBuilder.getInstance();
+    expect(builder1).to.equal(builder2);
   }
   
   @Test({
@@ -39,7 +68,9 @@ export class ParameterDescriptorBuilderTest {
   })
   public buildTest():void {
     expect(
-      this.builder.build(this.methodName, AnnotationType.GET, 2)
+      ParameterDescriptorBuilder.getInstance().build(
+        this.methodName, AnnotationType.GET, 2
+      )
     ).to.be.an.instanceOf(ParameterDescriptor);
   }
   
@@ -48,7 +79,9 @@ export class ParameterDescriptorBuilderTest {
   })
   public methodNameTest():void {
     let desc:ParameterDescriptor = 
-                     this.builder.build(this.methodName, AnnotationType.GET, 2);
+      ParameterDescriptorBuilder.getInstance().build(
+        this.methodName, AnnotationType.GET, 2
+      );
     expect(desc.methodName).to.equal(this.methodName);
   }
   
@@ -57,7 +90,9 @@ export class ParameterDescriptorBuilderTest {
   })
   public annotationTypeTest():void {
     let desc:ParameterDescriptor = 
-                     this.builder.build(this.methodName, AnnotationType.GET, 2);
+      ParameterDescriptorBuilder.getInstance().build(
+        this.methodName, AnnotationType.GET, 2
+      );
     expect(desc.annotationType).to.equal(AnnotationType.GET);
   }
   
@@ -66,7 +101,9 @@ export class ParameterDescriptorBuilderTest {
   })
   public indexTest():void {
     let desc:ParameterDescriptor = 
-                     this.builder.build(this.methodName, AnnotationType.GET, 2);
+      ParameterDescriptorBuilder.getInstance().build(
+        this.methodName, AnnotationType.GET, 2
+      );
     expect(desc.index).to.equal(2);
   }
 }

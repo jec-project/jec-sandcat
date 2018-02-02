@@ -7,8 +7,7 @@ class HEADDecorator {
     constructor() { }
     decorate(target, key, descriptor, params) {
         let resourceDesc = ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.getRegisteredDescriptor();
-        let builder = new MethodDescriptorBuilder_1.MethodDescriptorBuilder();
-        let methodDescriptor = builder.build(jec_commons_1.HttpMethod.HEAD, key, descriptor, params);
+        let methodDescriptor = MethodDescriptorBuilder_1.MethodDescriptorBuilder.getInstance().build(jec_commons_1.HttpMethod.HEAD, key, descriptor, params);
         resourceDesc.addMethod(methodDescriptor);
         return descriptor;
     }
