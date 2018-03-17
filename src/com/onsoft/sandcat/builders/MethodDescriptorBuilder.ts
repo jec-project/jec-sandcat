@@ -85,8 +85,8 @@ export class MethodDescriptorBuilder {
   public build(httpMethod:HttpMethod, key:string,
                                   descriptor:PropertyDescriptor,
                                   params?:HttpMethodParams):MethodDescriptor {
-    let methodDesc:MethodDescriptor = new MethodDescriptor();
-    let action:Function = descriptor.value;
+    const methodDesc:MethodDescriptor = new MethodDescriptor();
+    const action:Function = descriptor.value;
     let route:string = null;
     methodDesc.httpMethod = httpMethod;
     methodDesc.name = key;

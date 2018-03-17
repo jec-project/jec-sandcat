@@ -86,7 +86,7 @@ export class JsletMethodDescriptorBuilder {
    */
   public build(jsletMethod:JsletMethod, key:string,
                           descriptor:PropertyDescriptor):JsletMethodDescriptor {
-    let methodDesc:JsletMethodDescriptor = new JsletMethodDescriptor();
+    const methodDesc:JsletMethodDescriptor = new JsletMethodDescriptor();
     methodDesc.jsletMethod = jsletMethod;
     methodDesc.name = key;
     methodDesc.action = descriptor.value;

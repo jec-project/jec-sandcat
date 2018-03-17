@@ -29,10 +29,8 @@ class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
         this._httpHeadersValidator = new HttpHeadersValidator_1.HttpHeadersValidator();
     }
     processJsletOperation(jsletMethod) {
+        const operation = this._resource.getResourceDescriptor().jsletMethodsMap.get(jsletMethod);
         let action = null;
-        let operation = this._resource.getResourceDescriptor()
-            .jsletMethodsMap
-            .get(jsletMethod);
         if (operation) {
             action = operation.action;
             action.apply(this._resource);
@@ -42,12 +40,12 @@ class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
         exit(req, res.sendStatus(jec_commons_1.HttpStatusCode.NOT_FOUND), null);
     }
     processOperation(httpMethod, req, res, exit) {
+        const descriptor = this._resource.getResourceDescriptor();
+        const requestProperties = RequestPropertiesBuilder_1.RequestPropertiesBuilder.getInstance().build(httpMethod, req);
+        const patternMatcher = this._urlPatternMapper.matchRequest(requestProperties);
         let action = null;
         let responseHandler = null;
         let operation = null;
-        let descriptor = this._resource.getResourceDescriptor();
-        let requestProperties = RequestPropertiesBuilder_1.RequestPropertiesBuilder.getInstance().build(httpMethod, req);
-        let patternMatcher = this._urlPatternMapper.matchRequest(requestProperties);
         let parameters = null;
         let operationStatus = -1;
         let header = null;
@@ -92,9 +90,9 @@ class SandcatResourceJsletProxy extends jec_exchange_1.HttpJslet {
         return this._resource;
     }
     setResource(resource) {
-        let mapperBuilder = UrlPatternMapperBuilder_1.UrlPatternMapperBuilder.getInstance();
-        let descriptor = resource.getResourceDescriptor();
-        let resourceName = resource.constructor.name;
+        const mapperBuilder = UrlPatternMapperBuilder_1.UrlPatternMapperBuilder.getInstance();
+        const descriptor = resource.getResourceDescriptor();
+        const resourceName = resource.constructor.name;
         let message = null;
         if (!descriptor) {
             message = SandcatLocaleManager_1.SandcatLocaleManager.getInstance()

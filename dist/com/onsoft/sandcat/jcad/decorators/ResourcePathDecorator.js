@@ -8,10 +8,10 @@ const STRING_TYPE = "string";
 class ResourcePathDecorator {
     constructor() { }
     decorate(target, params) {
-        let descriptor = ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.getRegisteredDescriptor();
-        let solver = new ResourcePathSolver_1.ResourcePathSolver();
+        const descriptor = ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.getRegisteredDescriptor();
+        const solver = new ResourcePathSolver_1.ResourcePathSolver();
+        const i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
         let path = null;
-        let i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
         if (!params) {
             throw new jec_jars_1.JarsError(i18n.get("errors.path", target));
         }

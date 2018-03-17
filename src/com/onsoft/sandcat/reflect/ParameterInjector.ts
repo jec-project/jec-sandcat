@@ -63,8 +63,8 @@ export class ParameterInjector {
   public buildParameters(matcher:UrlPatternMatcher, callbackHandler:Function,
                          methodDescriptor:MethodDescriptor,
                          req:HttpRequest):any[]{
-    let map:Map<string, ParameterDescriptor> = methodDescriptor.parametersMap;
-    let parameters:any[] = new Array<any>(map.size);
+    const map:Map<string, ParameterDescriptor> = methodDescriptor.parametersMap;
+    const parameters:any[] = new Array<any>(map.size);
     let annotationType:AnnotationType = null;
     let index:number = -1;
     let annotationTypeString:string = null;

@@ -84,7 +84,7 @@ export class ParameterDescriptorBuilder {
    */
   public build(methodName:string, annotationType:number, 
                             parameterIndex:AnnotationType):ParameterDescriptor {
-    let paramDesc:ParameterDescriptor = new ParameterDescriptor();
+    const paramDesc:ParameterDescriptor = new ParameterDescriptor();
     paramDesc.annotationType = annotationType;
     paramDesc.index = parameterIndex;
     paramDesc.methodName = methodName;

@@ -45,8 +45,8 @@ export class RootPathRefsDecorator implements Decorator {
    * @inheritDoc
    */
   public decorate(target:any, pathRefs:string[]):any {
+    const i18n:LocaleManager = SandcatLocaleManager.getInstance();
     let descriptor:ResourceDescriptor = null;
-    let i18n:LocaleManager = SandcatLocaleManager.getInstance();
     if(!pathRefs) {
       throw new JarsError(i18n.get("errors.pathRefs", target));
     }

@@ -53,7 +53,7 @@ export class RouteDescriptorUtil {
    */
   public match(descriptor:RouteDescriptor, url:string,
                                success:(result:any)=>void, fail:()=>void):void {
-    let result:any = descriptor.getUrlPattern().match(url);
+    const result:any = descriptor.getUrlPattern().match(url);
     if(result) success(result);
     else fail();
   }

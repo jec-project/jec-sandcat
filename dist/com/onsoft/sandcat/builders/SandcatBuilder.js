@@ -4,7 +4,7 @@ const DefaultSandcatContainer_1 = require("../core/DefaultSandcatContainer");
 class SandcatBuilder {
     constructor() { }
     build(container) {
-        let sandcat = new DefaultSandcatContainer_1.DefaultSandcatContainer();
+        const sandcat = new DefaultSandcatContainer_1.DefaultSandcatContainer();
         sandcat.setDomainContainer(container);
         return sandcat;
     }

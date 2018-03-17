@@ -47,8 +47,8 @@ export class ResourcePathSolver {
    *                                        parameter.
    */
   public resolvePath(path:string, descriptor:ResourceDescriptor):void {
-    let fixedPath:string = path.indexOf(UrlStringsEnum.SLASH) === 0 ?
-                           path : UrlStringsEnum.SLASH + path;
+    const fixedPath:string = path.indexOf(UrlStringsEnum.SLASH) === 0 ?
+                             path : UrlStringsEnum.SLASH + path;
     descriptor.resourcePath = fixedPath;
   }
 };

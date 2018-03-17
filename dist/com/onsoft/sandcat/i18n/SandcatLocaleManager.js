@@ -4,8 +4,8 @@ const jec_commons_node_1 = require("jec-commons-node");
 const jec_commons_1 = require("jec-commons");
 class SandcatLocaleManager {
     constructor() {
+        const isInstanciated = SandcatLocaleManager.INSTANCE !== null;
         let msg = null;
-        let isInstanciated = SandcatLocaleManager.INSTANCE !== null;
         if (SandcatLocaleManager._locked || isInstanciated) {
             if (isInstanciated && SandcatLocaleManager.INSTANCE.isInitialized()) {
                 msg = SandcatLocaleManager.getInstance().get("errors.singleton", "SandcatLocaleManager");

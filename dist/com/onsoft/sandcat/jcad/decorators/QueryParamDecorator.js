@@ -5,7 +5,7 @@ const AnnotationType_1 = require("../../reflect/AnnotationType");
 class QueryParamDecorator {
     constructor() { }
     decorate(target, propertyKey, parameterIndex) {
-        let factory = new AnnotationParamFactory_1.AnnotationParamFactory();
+        const factory = new AnnotationParamFactory_1.AnnotationParamFactory();
         factory.registerParam(propertyKey, parameterIndex, AnnotationType_1.AnnotationType.QUERY_PARAM);
         return target;
     }

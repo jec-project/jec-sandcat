@@ -90,7 +90,7 @@ export class UrlPatternMapper {
    *                                          instance.
    */
   public addRouteDescriptor(routeDescriptor:RouteDescriptor):void {
-    let methodName:HttpMethod = routeDescriptor.getHttpMethod();
+    const methodName:HttpMethod = routeDescriptor.getHttpMethod();
     let coll:RouteDescriptor[] = null;
     if(this._routeDescMap.has(methodName)) {
       coll = this._routeDescMap.get(methodName);
@@ -122,8 +122,8 @@ export class UrlPatternMapper {
    *                            contains information about the request to check.
    */
   public matchRequest(requestProperties:RequestProperties):UrlPatternMatcher {
-    let htppMethod:HttpMethod = requestProperties.httpMethod;
-    let subRoute:string = requestProperties.subRoute;
+    const htppMethod:HttpMethod = requestProperties.httpMethod;
+    const subRoute:string = requestProperties.subRoute;
     let matcher:UrlPatternMatcher = null;
     let properties:any = null;
     let descriptor:RouteDescriptor = null;

@@ -80,7 +80,7 @@ export class RequestPropertiesBuilder {
    * @return {RequestProperties} a new <code>RequestProperties</code> instance.
    */
   public build(httpMethod:HttpMethod, req:HttpRequest):RequestProperties {
-    let props:RequestProperties = new RequestProperties();
+    const props:RequestProperties = new RequestProperties();
     props.httpMethod = httpMethod;
     props.subRoute = req.getOriginalUrl();
     props.acccept = req.getHeader(HttpHeader.ACCEPT);

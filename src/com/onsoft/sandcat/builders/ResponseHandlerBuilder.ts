@@ -51,7 +51,7 @@ export class ResponseHandlerBuilder {
    */
   public build(req:HttpRequest, res:HttpResponse,
           exit:(req:HttpRequest, res:HttpResponse, data:any) => void):Function {
-    let handler:Function = (data?:any, err?:any, status?:HttpStatusCode)=>{
+    const handler:Function = (data?:any, err?:any, status?:HttpStatusCode)=>{
         if(err) {
           //TODO: build a better error process:
           SandcatLoggerProxy.getInstance().log(

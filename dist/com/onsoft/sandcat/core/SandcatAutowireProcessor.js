@@ -23,12 +23,12 @@ class SandcatAutowireProcessor {
         this._contextManager.createContext();
     }
     transformResourceFiles(connector) {
-        let context = connector.getContainer().getJsletContext();
+        const context = connector.getContainer().getJsletContext();
+        const contextRoot = connector.getContextRoot();
+        const resources = new Array();
+        const factory = new ResourceProxyJsletFactory_1.ResourceProxyJsletFactory();
         let len = this._resourceFiles.length;
-        let resources = new Array();
-        let factory = new ResourceProxyJsletFactory_1.ResourceProxyJsletFactory();
         let jslet = null;
-        let contextRoot = connector.getContextRoot();
         while (len--) {
             jslet = factory.create(this._resourceFiles[len], contextRoot, this._sandcatContainer);
             context.addJslet(jslet);
@@ -36,9 +36,9 @@ class SandcatAutowireProcessor {
         this._resourceFiles.splice(0);
     }
     transformRootPathFiles() {
+        const rootPaths = new Array();
+        const factory = new RootPathDescriptorFactory_1.RootPathDescriptorFactory();
         let len = this._rootPathFiles.length;
-        let rootPaths = new Array();
-        let factory = new RootPathDescriptorFactory_1.RootPathDescriptorFactory();
         let rootPath = null;
         while (len--) {
             rootPath = factory.create(this._rootPathFiles[len]);
@@ -61,14 +61,14 @@ class SandcatAutowireProcessor {
         this.validateCallbackHandler();
     }
     process(file, connector) {
-        let decorators = file.decorators;
+        const decorators = file.decorators;
+        const logger = SandcatLoggerProxy_1.SandcatLoggerProxy.getInstance();
+        const i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
+        const fileName = file.name;
         let len = decorators.length;
         let decorator = null;
         let classPath = null;
         let decoratorName = null;
-        let logger = SandcatLoggerProxy_1.SandcatLoggerProxy.getInstance();
-        let fileName = file.name;
-        let i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
         while (len--) {
             decorator = decorators[len];
             classPath = decorator.classPath;

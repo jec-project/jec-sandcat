@@ -65,9 +65,9 @@ export class HttpHeadersValidator {
    */
   public validate(methodDesc:MethodDescriptor, 
                                 requestProps:RequestProperties):HttpStatusCode {
-    let result:HttpStatusCode = HttpStatusCode.OK;
-    let methodProp:string = methodDesc.consumes;
-    let requestProp:string = requestProps.contentType;
+    const result:HttpStatusCode = HttpStatusCode.OK;
+    const methodProp:string = methodDesc.consumes;
+    const requestProp:string = requestProps.contentType;
     if(methodProp && requestProp.indexOf(methodProp) === -1) {
       return HttpStatusCode.UNSUPPORTED_MEDIA_TYPE;
     }

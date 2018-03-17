@@ -114,10 +114,9 @@ export class SandcatResourceJsletProxy extends HttpJslet
    * @param {JsletMethod} jsletMethod the current HTTP transaction.
    */
   private processJsletOperation(jsletMethod:JsletMethod):void {
+    const operation:JsletMethodDescriptor =
+        this._resource.getResourceDescriptor().jsletMethodsMap.get(jsletMethod);
     let action:Function = null;
-    let operation:JsletMethodDescriptor = this._resource.getResourceDescriptor()
-                                                        .jsletMethodsMap
-                                                        .get(jsletMethod);
     if(operation) {
       action = operation.action;
       action.apply(this._resource);
@@ -154,14 +153,15 @@ export class SandcatResourceJsletProxy extends HttpJslet
                            req:HttpRequest,
                            res:HttpResponse, 
               exit:(req:HttpRequest, res:HttpResponse, data:any) => void):void {
+    const descriptor:ResourceDescriptor = 
+                                         this._resource.getResourceDescriptor();
+    const requestProperties:RequestProperties =
+                  RequestPropertiesBuilder.getInstance().build(httpMethod, req);
+                  const patternMatcher:UrlPatternMatcher =
+                         this._urlPatternMapper.matchRequest(requestProperties);
     let action:Function = null;
     let responseHandler:Function = null;
     let operation:MethodDescriptor = null;
-    let descriptor:ResourceDescriptor = this._resource.getResourceDescriptor();
-    let requestProperties:RequestProperties =
-                  RequestPropertiesBuilder.getInstance().build(httpMethod, req);
-    let patternMatcher:UrlPatternMatcher =
-                         this._urlPatternMapper.matchRequest(requestProperties);
     let parameters:any[] = null;
     let operationStatus:number = -1;
     let header:string = null;
@@ -222,10 +222,10 @@ export class SandcatResourceJsletProxy extends HttpJslet
    * @inheritDoc
    */
   public setResource(resource:any):void {
-    let mapperBuilder:UrlPatternMapperBuilder =
+    const mapperBuilder:UrlPatternMapperBuilder =
                                           UrlPatternMapperBuilder.getInstance();
-    let descriptor:ResourceDescriptor = resource.getResourceDescriptor();
-    let resourceName:string = resource.constructor.name;
+    const descriptor:ResourceDescriptor = resource.getResourceDescriptor();
+    const resourceName:string = resource.constructor.name;
     let message:string = null;
     if(!descriptor){
       message = SandcatLocaleManager.getInstance()

@@ -6,8 +6,8 @@ const MethodDescriptorBuilder_1 = require("../../builders/MethodDescriptorBuilde
 class POSTDecorator {
     constructor() { }
     decorate(target, key, descriptor, params) {
-        let resourceDesc = ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.getRegisteredDescriptor();
-        let methodDescriptor = MethodDescriptorBuilder_1.MethodDescriptorBuilder.getInstance().build(jec_commons_1.HttpMethod.POST, key, descriptor, params);
+        const resourceDesc = ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.getRegisteredDescriptor();
+        const methodDescriptor = MethodDescriptorBuilder_1.MethodDescriptorBuilder.getInstance().build(jec_commons_1.HttpMethod.POST, key, descriptor, params);
         resourceDesc.addMethod(methodDescriptor);
         return descriptor;
     }

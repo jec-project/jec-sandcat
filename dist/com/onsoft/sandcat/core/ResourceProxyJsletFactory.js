@@ -9,14 +9,14 @@ const path = require("path");
 class ResourceProxyJsletFactory {
     constructor() { }
     create(file, contextRoot, sandcatContainer) {
-        let descriptor = new ResourceDescriptor_1.ResourceDescriptor();
+        const descriptor = new ResourceDescriptor_1.ResourceDescriptor();
         ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.registerDescriptor(descriptor);
         descriptor.contextRoot = contextRoot;
-        let jslet = new SandcatResourceJsletProxy_1.SandcatResourceJsletProxy();
-        let filePath = path.join(file.path, file.name + jec_commons_1.UrlStringsEnum.DOT + jec_commons_1.JecStringsEnum.JS_EXTENSION);
-        let ConstObj = jec_commons_1.GlobalClassLoader.getInstance().loadClass(filePath);
-        let resourceObj = new ConstObj();
-        let descriptorUtil = new ResourceDescriptorUtil_1.ResourceDescriptorUtil(resourceObj, descriptor, sandcatContainer);
+        const jslet = new SandcatResourceJsletProxy_1.SandcatResourceJsletProxy();
+        const filePath = path.join(file.path, file.name + jec_commons_1.UrlStringsEnum.DOT + jec_commons_1.JecStringsEnum.JS_EXTENSION);
+        const ConstObj = jec_commons_1.GlobalClassLoader.getInstance().loadClass(filePath);
+        const resourceObj = new ConstObj();
+        const descriptorUtil = new ResourceDescriptorUtil_1.ResourceDescriptorUtil(resourceObj, descriptor, sandcatContainer);
         descriptorUtil.decorate();
         descriptorUtil.fixCompositeValues();
         jslet.setResource(resourceObj);

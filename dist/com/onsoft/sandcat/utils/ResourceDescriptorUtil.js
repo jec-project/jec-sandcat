@@ -16,8 +16,8 @@ class ResourceDescriptorUtil {
         this.initUrlPatterns(sandcatContainer);
     }
     fixParameterMethodDescriptors(descriptor) {
-        let paramDescColl = ParametersMapUtil_1.ParametersMapUtil.getParameterCollection(descriptor.name);
-        let paramNamesColl = descriptor.parameterNames;
+        const paramDescColl = ParametersMapUtil_1.ParametersMapUtil.getParameterCollection(descriptor.name);
+        const paramNamesColl = descriptor.parameterNames;
         let len = paramDescColl.length;
         let paramDesc = null;
         let paramName = null;
@@ -29,12 +29,12 @@ class ResourceDescriptorUtil {
         }
     }
     initUrlPatterns(sandcatContainer) {
-        let resourcePath = this._descriptor.resourcePath;
+        const resourcePath = this._descriptor.resourcePath;
+        const descriptorPatterns = new Array();
+        const rootPathRefs = this._descriptor.rootPathRefs;
         let len = -1;
-        let rootPathRefs = this._descriptor.rootPathRefs;
         let rootPathRef = null;
         let rootPathDescriptor = null;
-        let descriptorPatterns = new Array();
         this._urlPatterns = new Array();
         if (rootPathRefs) {
             len = rootPathRefs.length;
@@ -62,7 +62,7 @@ class ResourceDescriptorUtil {
         this._descriptor.urlPatterns = descriptorPatterns;
     }
     setMethodUrlPatterns(contextRoot, desc) {
-        let urlPatterns = new Array();
+        const urlPatterns = new Array();
         let len = this._urlPatterns.length;
         let rootPathPattern = null;
         let pattern = null;
@@ -74,7 +74,7 @@ class ResourceDescriptorUtil {
         desc.urlPatterns = urlPatterns;
     }
     decorate() {
-        let resource = this._resource;
+        const resource = this._resource;
         Object.defineProperty(resource, "__sandcatResourceDescriptor", {
             enumerable: false,
             configurable: false,
@@ -90,7 +90,7 @@ class ResourceDescriptorUtil {
         });
     }
     fixCompositeValues() {
-        let contextRoot = jec_commons_1.UrlStringsEnum.SLASH +
+        const contextRoot = jec_commons_1.UrlStringsEnum.SLASH +
             this._descriptor.contextRoot;
         this._descriptor.methodsMap.forEach((desc, key, map) => {
             this.setMethodUrlPatterns(contextRoot, desc);

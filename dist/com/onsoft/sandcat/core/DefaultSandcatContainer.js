@@ -20,9 +20,9 @@ class DefaultSandcatContainer {
         SandcatLoggerProxy_1.SandcatLoggerProxy.getInstance().log(message, logLevel);
     }
     initLocaleManager(container) {
+        const cfg = { directory: "" };
         let localeString = null;
         let localesPath = null;
-        let cfg = { directory: "" };
         if (container !== null &&
             container.getLocale !== undefined) {
             localeString = container.getLocale().toString();
@@ -44,7 +44,7 @@ class DefaultSandcatContainer {
         this.sendMessage(SandcatLocaleManager_1.SandcatLocaleManager.getInstance().get("process.domain"), jec_commons_1.LogLevel.DEBUG);
     }
     process(callback) {
-        let i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
+        const i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
         let processor = null;
         let error = null;
         if (this._domainContainer === null) {
@@ -69,7 +69,7 @@ class DefaultSandcatContainer {
         this._rootPathList.set(rootPath.ref, rootPath);
     }
     getRootPath(rootPathRef) {
-        let rootPath = this._rootPathList.get(rootPathRef);
+        const rootPath = this._rootPathList.get(rootPathRef);
         return rootPath;
     }
 }

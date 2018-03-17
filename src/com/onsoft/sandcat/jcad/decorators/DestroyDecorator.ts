@@ -44,9 +44,9 @@ export class DestroyDecorator implements Decorator {
    * @inheritDoc
    */
   public decorate(target:any, key:string, descriptor:PropertyDescriptor):any {
-    let resourceDesc:ResourceDescriptor =
+    const resourceDesc:ResourceDescriptor =
                            ResourceDescriptorRegistry.getRegisteredDescriptor();
-    let methodDescriptor:JsletMethodDescriptor =
+    const methodDescriptor:JsletMethodDescriptor =
       JsletMethodDescriptorBuilder.getInstance().build(
         JsletMethod.DESTROY, key, descriptor
       );

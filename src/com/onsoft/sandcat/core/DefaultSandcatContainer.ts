@@ -81,9 +81,9 @@ export class DefaultSandcatContainer implements Sandcat {
   }
 
   private initLocaleManager(container:DomainContainer):void {
+    const cfg:any = { directory: "" };
     let localeString:string = null;
     let localesPath:string = null;
-    let cfg:any = { directory: "" };
     if(container !== null &&
        container.getLocale !== undefined // !Determines test cases!
       ) {
@@ -130,7 +130,7 @@ export class DefaultSandcatContainer implements Sandcat {
    * @inheritDoc
    */
   public process(callback:(err:SandcatError)=>void):void {
-    let i18n:LocaleManager = SandcatLocaleManager.getInstance();
+    const i18n:LocaleManager = SandcatLocaleManager.getInstance();
     let processor:SandcatAutowireProcessor = null;
     let error:SandcatError = null;
     if(this._domainContainer === null) {
@@ -162,7 +162,7 @@ export class DefaultSandcatContainer implements Sandcat {
    * @inheritDoc
    */
   public getRootPath(rootPathRef:string):RootPathDescriptor {
-    let rootPath:RootPathDescriptor = this._rootPathList.get(rootPathRef);
+    const rootPath:RootPathDescriptor = this._rootPathList.get(rootPathRef);
     return rootPath;
   }
 };

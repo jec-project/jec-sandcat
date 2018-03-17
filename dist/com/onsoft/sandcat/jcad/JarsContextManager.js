@@ -27,21 +27,21 @@ class JarsContextManager {
         this._jcadContext = null;
     }
     initContext(jcadReference, decoratorClass) {
-        let ctxManager = jec_commons_1.JcadContextManager.getInstance();
-        let connManager = jec_commons_1.DecoratorConnectorManager.getInstance();
-        let decorator = new decoratorClass();
-        let connector = new SandcatConnector_1.SandcatConnector(jcadReference, decorator);
+        const ctxManager = jec_commons_1.JcadContextManager.getInstance();
+        const connManager = jec_commons_1.DecoratorConnectorManager.getInstance();
+        const decorator = new decoratorClass();
+        const connector = new SandcatConnector_1.SandcatConnector(jcadReference, decorator);
         ctxManager.addContext(jcadReference, this._jcadContext);
         connManager.addConnector(connector, this._jcadContext);
     }
     removeContext(jcadReference) {
-        let ctxManager = jec_commons_1.JcadContextManager.getInstance();
-        let connManager = jec_commons_1.DecoratorConnectorManager.getInstance();
+        const ctxManager = jec_commons_1.JcadContextManager.getInstance();
+        const connManager = jec_commons_1.DecoratorConnectorManager.getInstance();
         connManager.removeConnector(jcadReference, this._jcadContext);
         ctxManager.removeContext(jcadReference);
     }
     createContext() {
-        let ctxFactory = new jec_commons_1.JcadContextFactory();
+        const ctxFactory = new jec_commons_1.JcadContextFactory();
         this._jcadContext = ctxFactory.create();
         this.initContext(jec_jars_1.JarsConnectorRefs.COOKIE_PARAM_CONNECTOR_REF, CookieParamDecorator_1.CookieParamDecorator);
         this.initContext(jec_jars_1.JarsConnectorRefs.CONNECT_CONNECTOR_REF, CONNECTDecorator_1.CONNECTDecorator);

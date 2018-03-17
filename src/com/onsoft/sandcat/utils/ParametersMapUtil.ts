@@ -40,7 +40,7 @@ export class ParametersMapUtil {
    */
   public static getParameterCollection(methodName:string):
                                                     Array<ParameterDescriptor> {
-    let map:Map<string, Array<ParameterDescriptor>> =
+    const map:Map<string, Array<ParameterDescriptor>> =
                                   ResourceDescriptorRegistry.getParametersMap();
     let result:Array<ParameterDescriptor> = null;
     if(map.has(methodName)) {

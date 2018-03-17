@@ -79,10 +79,10 @@ export class RootPathSolver {
    */
   public resolvePath(params:RoutePathParams,
                                            descriptor:RootPathDescriptor):void {
-    let versionPath:string = null;
-    let path:string = descriptor.path;
-    let fixedPath:string = path.indexOf(UrlStringsEnum.SLASH) === 0 ?
+    const path:string = descriptor.path;
+    const fixedPath:string = path.indexOf(UrlStringsEnum.SLASH) === 0 ?
                            path : UrlStringsEnum.SLASH + path;
+    let versionPath:string = null;
     descriptor.fullPath = fixedPath;
     versionPath = this.buildVersionPath(params.version);
     descriptor.fullPath += UrlStringsEnum.SLASH + versionPath;

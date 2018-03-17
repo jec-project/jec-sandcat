@@ -4,9 +4,9 @@ const jec_commons_1 = require("jec-commons");
 class HttpHeadersValidator {
     constructor() { }
     validate(methodDesc, requestProps) {
-        let result = jec_commons_1.HttpStatusCode.OK;
-        let methodProp = methodDesc.consumes;
-        let requestProp = requestProps.contentType;
+        const result = jec_commons_1.HttpStatusCode.OK;
+        const methodProp = methodDesc.consumes;
+        const requestProp = requestProps.contentType;
         if (methodProp && requestProp.indexOf(methodProp) === -1) {
             return jec_commons_1.HttpStatusCode.UNSUPPORTED_MEDIA_TYPE;
         }

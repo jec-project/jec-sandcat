@@ -18,8 +18,8 @@ class MethodDescriptorBuilder {
         return MethodDescriptorBuilder.INSTANCE;
     }
     build(httpMethod, key, descriptor, params) {
-        let methodDesc = new MethodDescriptor_1.MethodDescriptor();
-        let action = descriptor.value;
+        const methodDesc = new MethodDescriptor_1.MethodDescriptor();
+        const action = descriptor.value;
         let route = null;
         methodDesc.httpMethod = httpMethod;
         methodDesc.name = key;

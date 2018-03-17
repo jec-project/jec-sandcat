@@ -44,7 +44,7 @@ export class RequestParamDecorator implements Decorator {
    */
   public decorate(target:any, propertyKey:string | symbol,
                                                     parameterIndex:number):any {
-    let factory:AnnotationParamFactory = new AnnotationParamFactory();
+    const factory:AnnotationParamFactory = new AnnotationParamFactory();
     factory.registerParam(
       propertyKey, parameterIndex, AnnotationType.HTTP_REQUEST
     );

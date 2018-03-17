@@ -48,11 +48,11 @@ export class ResourcePathDecorator implements Decorator {
    * @inheritDoc
    */
   public decorate(target:any, params:any):any {
-    let descriptor:ResourceDescriptor =
+    const descriptor:ResourceDescriptor =
                            ResourceDescriptorRegistry.getRegisteredDescriptor();
-    let solver:ResourcePathSolver = new ResourcePathSolver();
+    const solver:ResourcePathSolver = new ResourcePathSolver();
+    const i18n:LocaleManager = SandcatLocaleManager.getInstance();
     let path:string = null;
-    let i18n:LocaleManager = SandcatLocaleManager.getInstance();
     // Validation process:
     if(!params) {
       throw new JarsError(i18n.get("errors.path", target));

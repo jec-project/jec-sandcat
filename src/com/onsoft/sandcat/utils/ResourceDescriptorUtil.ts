@@ -103,9 +103,9 @@ export class ResourceDescriptorUtil {
    *                                      values.
    */
   private fixParameterMethodDescriptors(descriptor:MethodDescriptor):void {
-    let paramDescColl:ParameterDescriptor[] =
+    const paramDescColl:ParameterDescriptor[] =
                       ParametersMapUtil.getParameterCollection(descriptor.name);
-    let paramNamesColl:string[] = descriptor.parameterNames;
+    const paramNamesColl:string[] = descriptor.parameterNames;
     let len:number = paramDescColl.length;
     let paramDesc:ParameterDescriptor = null;
     let paramName:string = null;
@@ -126,12 +126,12 @@ export class ResourceDescriptorUtil {
    *                                   decorate.
    */
   private initUrlPatterns(sandcatContainer:Sandcat):void {
-    let resourcePath:string = this._descriptor.resourcePath;
+    const resourcePath:string = this._descriptor.resourcePath;
+    const descriptorPatterns:Array<string> = new Array<string>();
+    const rootPathRefs:string[] = this._descriptor.rootPathRefs;
     let len:number = -1;
-    let rootPathRefs:string[] = this._descriptor.rootPathRefs;
     let rootPathRef:string = null;
     let rootPathDescriptor:RootPathDescriptor = null;
-    let descriptorPatterns:Array<string> = new Array<string>();
     this._urlPatterns = new Array<string>();
     if(rootPathRefs) {
       len = rootPathRefs.length;
@@ -171,7 +171,7 @@ export class ResourceDescriptorUtil {
    *                                URL patterns.
    */
   private setMethodUrlPatterns(contextRoot:string, desc:MethodDescriptor):void {
-    let urlPatterns:string[] = new Array<string>();
+    const urlPatterns:string[] = new Array<string>();
     let len:number = this._urlPatterns.length;
     let rootPathPattern:string = null;
     let pattern:string = null;
@@ -192,7 +192,7 @@ export class ResourceDescriptorUtil {
    * object.
    */
   public decorate():void {
-    let resource:any = this._resource;
+    const resource:any = this._resource;
     Object.defineProperty(
       resource,
       "__sandcatResourceDescriptor",
@@ -221,7 +221,7 @@ export class ResourceDescriptorUtil {
    * object associated with the decorated resource object.
    */
   public fixCompositeValues():void {
-    let contextRoot:string = UrlStringsEnum.SLASH +
+    const contextRoot:string = UrlStringsEnum.SLASH +
                                                    this._descriptor.contextRoot;
     this._descriptor.methodsMap.forEach(
       (desc:MethodDescriptor, key:string, map:Map<string, MethodDescriptor>)=> {

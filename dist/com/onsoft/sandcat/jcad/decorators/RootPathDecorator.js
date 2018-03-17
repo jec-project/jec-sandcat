@@ -7,9 +7,9 @@ const SandcatLocaleManager_1 = require("../../i18n/SandcatLocaleManager");
 class RootPathDecorator {
     constructor() { }
     decorate(target, params) {
+        const i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
         let descriptor = null;
         let solver = null;
-        let i18n = SandcatLocaleManager_1.SandcatLocaleManager.getInstance();
         if (!params) {
             throw new jec_jars_1.JarsError(i18n.get("errors.params", target));
         }

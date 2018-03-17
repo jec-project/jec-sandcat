@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class RouteDescriptorUtil {
     constructor() { }
     match(descriptor, url, success, fail) {
-        let result = descriptor.getUrlPattern().match(url);
+        const result = descriptor.getUrlPattern().match(url);
         if (result)
             success(result);
         else

@@ -87,15 +87,15 @@ export class UrlPatternMapperBuilder {
    */
    private buildRouteDescriptors(mapper:UrlPatternMapper,
                                                    desc:MethodDescriptor):void {
-     let urlPatterns:string[] = desc.urlPatterns;
-     let len:number = urlPatterns.length;
-     let routeDesc:RouteDescriptor = null;
-     let name:string = desc.name;
-     let httpMethod:HttpMethod = desc.httpMethod;
-     while(len--) {
-       routeDesc = new RouteDescriptor(urlPatterns[len], name, httpMethod);
-       mapper.addRouteDescriptor(routeDesc);
-     }
+      const urlPatterns:string[] = desc.urlPatterns;
+      const name:string = desc.name;
+      const httpMethod:HttpMethod = desc.httpMethod;
+      let len:number = urlPatterns.length;
+      let routeDesc:RouteDescriptor = null;
+      while(len--) {
+        routeDesc = new RouteDescriptor(urlPatterns[len], name, httpMethod);
+        mapper.addRouteDescriptor(routeDesc);
+      }
    }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -112,9 +112,8 @@ export class UrlPatternMapperBuilder {
    * @return {UrlPatternMapper} a new <code>UrlPatternMapper</code> instance. 
    */
   public build(descriptor:ResourceDescriptor):UrlPatternMapper {
-    let mapper:UrlPatternMapper = new UrlPatternMapper();
-    let routeDescriptor:RouteDescriptor = null;
-    let methodsMap:Map<string, MethodDescriptor> = descriptor.methodsMap;
+    const mapper:UrlPatternMapper = new UrlPatternMapper();
+    const methodsMap:Map<string, MethodDescriptor> = descriptor.methodsMap;
     methodsMap.forEach((value:MethodDescriptor, key:string,
                                           map:Map<string, MethodDescriptor>)=> {
         this.buildRouteDescriptors(mapper, value);

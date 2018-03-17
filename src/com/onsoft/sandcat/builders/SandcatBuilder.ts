@@ -41,7 +41,7 @@ export class SandcatBuilder implements DelegatedContainerBuilder {
    * @inheritDoc
    */
   public build(container:DomainContainer):DelegatedContainer {
-    let sandcat:Sandcat = new DefaultSandcatContainer();
+    const sandcat:Sandcat = new DefaultSandcatContainer();
     sandcat.setDomainContainer(container);
     return sandcat;
   }

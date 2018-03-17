@@ -19,7 +19,7 @@ class JsletMethodDescriptorBuilder {
         return JsletMethodDescriptorBuilder.INSTANCE;
     }
     build(jsletMethod, key, descriptor) {
-        let methodDesc = new JsletMethodDescriptor_1.JsletMethodDescriptor();
+        const methodDesc = new JsletMethodDescriptor_1.JsletMethodDescriptor();
         methodDesc.jsletMethod = jsletMethod;
         methodDesc.name = key;
         methodDesc.action = descriptor.value;

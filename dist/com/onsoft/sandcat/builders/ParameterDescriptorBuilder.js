@@ -18,7 +18,7 @@ class ParameterDescriptorBuilder {
         return ParameterDescriptorBuilder.INSTANCE;
     }
     build(methodName, annotationType, parameterIndex) {
-        let paramDesc = new ParameterDescriptor_1.ParameterDescriptor();
+        const paramDesc = new ParameterDescriptor_1.ParameterDescriptor();
         paramDesc.annotationType = annotationType;
         paramDesc.index = parameterIndex;
         paramDesc.methodName = methodName;

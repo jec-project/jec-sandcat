@@ -18,20 +18,19 @@ class UrlPatternMapperBuilder {
         return UrlPatternMapperBuilder.INSTANCE;
     }
     buildRouteDescriptors(mapper, desc) {
-        let urlPatterns = desc.urlPatterns;
+        const urlPatterns = desc.urlPatterns;
+        const name = desc.name;
+        const httpMethod = desc.httpMethod;
         let len = urlPatterns.length;
         let routeDesc = null;
-        let name = desc.name;
-        let httpMethod = desc.httpMethod;
         while (len--) {
             routeDesc = new RouteDescriptor_1.RouteDescriptor(urlPatterns[len], name, httpMethod);
             mapper.addRouteDescriptor(routeDesc);
         }
     }
     build(descriptor) {
-        let mapper = new UrlPatternMapper_1.UrlPatternMapper();
-        let routeDescriptor = null;
-        let methodsMap = descriptor.methodsMap;
+        const mapper = new UrlPatternMapper_1.UrlPatternMapper();
+        const methodsMap = descriptor.methodsMap;
         methodsMap.forEach((value, key, map) => {
             this.buildRouteDescriptors(mapper, value);
         });

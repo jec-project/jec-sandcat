@@ -18,7 +18,7 @@ class UrlPatternMapper {
         return QueryString.parse(url);
     }
     addRouteDescriptor(routeDescriptor) {
-        let methodName = routeDescriptor.getHttpMethod();
+        const methodName = routeDescriptor.getHttpMethod();
         let coll = null;
         if (this._routeDescMap.has(methodName)) {
             coll = this._routeDescMap.get(methodName);
@@ -33,8 +33,8 @@ class UrlPatternMapper {
         return this._routeDescMap.has(methodName);
     }
     matchRequest(requestProperties) {
-        let htppMethod = requestProperties.httpMethod;
-        let subRoute = requestProperties.subRoute;
+        const htppMethod = requestProperties.httpMethod;
+        const subRoute = requestProperties.subRoute;
         let matcher = null;
         let properties = null;
         let descriptor = null;

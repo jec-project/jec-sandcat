@@ -45,9 +45,9 @@ export class RootPathDecorator implements Decorator {
    * @inheritDoc
    */
   public decorate(target:any, params:RoutePathParams):any {
+    const i18n:LocaleManager = SandcatLocaleManager.getInstance();
     let descriptor:RootPathDescriptor = null;
     let solver:RootPathSolver = null;
-    let i18n:LocaleManager = SandcatLocaleManager.getInstance();
     if(!params) {
       throw new JarsError(i18n.get("errors.params", target));
     }

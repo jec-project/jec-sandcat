@@ -7,8 +7,8 @@ const AnnotationTypeUtil_1 = require("../utils/AnnotationTypeUtil");
 class ParameterInjector {
     constructor() { }
     buildParameters(matcher, callbackHandler, methodDescriptor, req) {
-        let map = methodDescriptor.parametersMap;
-        let parameters = new Array(map.size);
+        const map = methodDescriptor.parametersMap;
+        const parameters = new Array(map.size);
         let annotationType = null;
         let index = -1;
         let annotationTypeString = null;

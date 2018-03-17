@@ -31,8 +31,8 @@ export class SandcatLocaleManager {
    * Creates a new <code>SandcatLocaleManager</code> instance.
    */
   constructor() {
+    const isInstanciated:boolean = SandcatLocaleManager.INSTANCE !== null;
     let msg:string = null;
-    let isInstanciated:boolean = SandcatLocaleManager.INSTANCE !== null;
     if(SandcatLocaleManager._locked || isInstanciated) {
       if(isInstanciated && SandcatLocaleManager.INSTANCE.isInitialized()) {
         msg = SandcatLocaleManager.getInstance().get(

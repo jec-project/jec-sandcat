@@ -110,12 +110,12 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
    *                                    pre-processing is performed.
    */
   private transformResourceFiles(connector:DomainConnector):void {
-    let context:JsletContext = connector.getContainer().getJsletContext();
+    const context:JsletContext = connector.getContainer().getJsletContext();
+    const contextRoot:string = connector.getContextRoot();
+    const resources:string[] = new Array<string>();
+    const factory:ResourceProxyJsletFactory = new ResourceProxyJsletFactory();
     let len:number = this._resourceFiles.length;
-    let resources:string[] = new Array<string>();
-    let factory:ResourceProxyJsletFactory = new ResourceProxyJsletFactory();
     let jslet:ResourceJsletProxy = null;
-    let contextRoot:string = connector.getContextRoot();
     while(len--) {
       jslet = factory.create(
         this._resourceFiles[len], contextRoot, this._sandcatContainer
@@ -130,9 +130,9 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
    * annotated files.
    */
   private transformRootPathFiles():void {
+    const rootPaths:string[] = new Array<string>();
+    const factory:RootPathDescriptorFactory = new RootPathDescriptorFactory();
     let len:number = this._rootPathFiles.length;
-    let rootPaths:string[] = new Array<string>();
-    let factory:RootPathDescriptorFactory = new RootPathDescriptorFactory();
     let rootPath:RootPathDescriptor = null;
     while(len--) {
       rootPath = factory.create(this._rootPathFiles[len]);
@@ -200,14 +200,14 @@ export class SandcatAutowireProcessor implements FilePreProcessor {
    * @inheritDoc
    */
   public process(file:FileProperties, connector:DomainConnector):void {
-    let decorators:DecoratorProperties[] = file.decorators;
+    const decorators:DecoratorProperties[] = file.decorators;
+    const logger:LoggerProxy = SandcatLoggerProxy.getInstance();
+    const i18n:LocaleManager = SandcatLocaleManager.getInstance();
+    const fileName:string = file.name;
     let len:number = decorators.length;
     let decorator:DecoratorProperties = null;
     let classPath:string = null;
     let decoratorName:string = null;
-    let logger:LoggerProxy = SandcatLoggerProxy.getInstance();
-    let fileName:string = file.name;
-    let i18n:LocaleManager = SandcatLocaleManager.getInstance();
     while(len--) {
       decorator = decorators[len];
       classPath = decorator.classPath;

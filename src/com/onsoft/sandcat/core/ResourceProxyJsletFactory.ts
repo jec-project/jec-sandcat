@@ -63,16 +63,16 @@ export class ResourceProxyJsletFactory {
    */
   public create(file:FileProperties, contextRoot:string,
                                   sandcatContainer:Sandcat):ResourceJsletProxy {
-    let descriptor:ResourceDescriptor = new ResourceDescriptor();
+    const descriptor:ResourceDescriptor = new ResourceDescriptor();
     ResourceDescriptorRegistry.registerDescriptor(descriptor);
     descriptor.contextRoot = contextRoot;
-    let jslet:ResourceJsletProxy = new SandcatResourceJsletProxy();
-    let filePath:string = path.join(
+    const jslet:ResourceJsletProxy = new SandcatResourceJsletProxy();
+    const filePath:string = path.join(
        file.path, file.name + UrlStringsEnum.DOT + JecStringsEnum.JS_EXTENSION
     );
-    let ConstObj:any = GlobalClassLoader.getInstance().loadClass(filePath);
-    let resourceObj:any = new ConstObj();
-    let descriptorUtil:ResourceDescriptorUtil =
+    const ConstObj:any = GlobalClassLoader.getInstance().loadClass(filePath);
+    const resourceObj:any = new ConstObj();
+    const descriptorUtil:ResourceDescriptorUtil =
           new ResourceDescriptorUtil(resourceObj, descriptor, sandcatContainer);
     descriptorUtil.decorate();
     descriptorUtil.fixCompositeValues();

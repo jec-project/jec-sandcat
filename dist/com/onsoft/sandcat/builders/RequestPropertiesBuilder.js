@@ -18,7 +18,7 @@ class RequestPropertiesBuilder {
         return RequestPropertiesBuilder.INSTANCE;
     }
     build(httpMethod, req) {
-        let props = new RequestProperties_1.RequestProperties();
+        const props = new RequestProperties_1.RequestProperties();
         props.httpMethod = httpMethod;
         props.subRoute = req.getOriginalUrl();
         props.acccept = req.getHeader(jec_commons_1.HttpHeader.ACCEPT);

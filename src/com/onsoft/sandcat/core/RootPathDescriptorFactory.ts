@@ -60,13 +60,13 @@ export class RootPathDescriptorFactory {
    *                              instance.
    */
   public create(file:FileProperties):RootPathDescriptor {
-    let pathDesc:RootPathDescriptor = new RootPathDescriptor();
+    const pathDesc:RootPathDescriptor = new RootPathDescriptor();
     RootPathDescriptorRegistry.registerDescriptor(pathDesc);
-    let filePath:string = path.join(
+    const filePath:string = path.join(
       file.path, file.name + UrlStringsEnum.DOT + JecStringsEnum.JS_EXTENSION
     );
-    let ConstObj:any = GlobalClassLoader.getInstance().loadClass(filePath);
-    let rootPathObj:any = new ConstObj();
+    const ConstObj:any = GlobalClassLoader.getInstance().loadClass(filePath);
+    const rootPathObj:any = new ConstObj();
     RootPathDescriptorUtil.getInstance().decorate(rootPathObj, pathDesc);
     RootPathDescriptorRegistry.registerDescriptor(null);
     return pathDesc;

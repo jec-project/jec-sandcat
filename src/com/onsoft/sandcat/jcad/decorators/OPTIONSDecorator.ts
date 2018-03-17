@@ -45,9 +45,9 @@ export class OPTIONSDecorator implements Decorator {
    */
   public decorate(target:any, key:string, descriptor:PropertyDescriptor,
                                           params?:HttpMethodParams):any {
-    let resourceDesc:ResourceDescriptor =
+    const resourceDesc:ResourceDescriptor =
                            ResourceDescriptorRegistry.getRegisteredDescriptor();
-    let methodDescriptor:MethodDescriptor =
+    const methodDescriptor:MethodDescriptor =
       MethodDescriptorBuilder.getInstance().build(
         HttpMethod.OPTIONS, key, descriptor, params
       );
