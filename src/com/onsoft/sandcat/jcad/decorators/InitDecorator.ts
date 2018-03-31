@@ -19,7 +19,7 @@ import {ResourceDescriptorRegistry} from "../../metadata/ResourceDescriptorRegis
 import {JsletMethodDescriptorBuilder} from "../../builders/JsletMethodDescriptorBuilder";
 import {ResourceDescriptor} from "../../reflect/ResourceDescriptor";
 import {JsletMethodDescriptor} from "../../reflect/JsletMethodDescriptor";
-import {JsletMethod} from "../../reflect/JsletMethod"
+import {JsletMethod} from "../../reflect/JsletMethod";
 
 /**
  * The <code>InitDecorator</code> class defines the <code>Decorator</code>  
