@@ -19,12 +19,10 @@ import {DomainContainer} from "jec-glasscat-core";
 import {SandcatAutowireProcessor} from "./SandcatAutowireProcessor";
 import {ResourceJsletProxy} from "../jslet/ResourceJsletProxy";
 import {SandcatResourceJsletProxy} from "../jslet/SandcatResourceJsletProxy";
-import {JecStringsEnum, UrlStringsEnum, GlobalClassLoader, FileProperties
-        } from "jec-commons";
+import {GlobalClassLoader, FileProperties, PathUtils} from "jec-commons";
 import {ResourceDescriptorRegistry} from "../metadata/ResourceDescriptorRegistry";
 import {ResourceDescriptor} from "../reflect/ResourceDescriptor";
 import {ResourceDescriptorUtil} from "../utils/ResourceDescriptorUtil";
-import * as path from "path";
 
 /**
  * The factory class which is used by Sandcat to create
@@ -67,9 +65,8 @@ export class ResourceProxyJsletFactory {
     ResourceDescriptorRegistry.registerDescriptor(descriptor);
     descriptor.contextRoot = contextRoot;
     const jslet:ResourceJsletProxy = new SandcatResourceJsletProxy();
-    const filePath:string = path.join(
-       file.path, file.name + UrlStringsEnum.DOT + JecStringsEnum.JS_EXTENSION
-    );
+    const filePath:string = 
+                    PathUtils.getInstance().buildFilePath(file.path, file.name);
     const ConstObj:any = GlobalClassLoader.getInstance().loadClass(filePath);
     const resourceObj:any = new ConstObj();
     const descriptorUtil:ResourceDescriptorUtil =

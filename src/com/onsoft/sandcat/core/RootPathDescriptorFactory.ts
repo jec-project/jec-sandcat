@@ -16,10 +16,8 @@
 
 import {RootPathDescriptor} from "../reflect/RootPathDescriptor";
 import {RootPathDescriptorRegistry} from "../metadata/RootPathDescriptorRegistry";
-import {JecStringsEnum, UrlStringsEnum, FileProperties, GlobalClassLoader
-        } from "jec-commons";
+import {PathUtils, FileProperties, GlobalClassLoader} from "jec-commons";
 import {RootPathDescriptorUtil} from "../utils/RootPathDescriptorUtil";
-import * as path from "path";
 
 /**
  * The factory class which is used by Sandcat to create new
@@ -62,9 +60,8 @@ export class RootPathDescriptorFactory {
   public create(file:FileProperties):RootPathDescriptor {
     const pathDesc:RootPathDescriptor = new RootPathDescriptor();
     RootPathDescriptorRegistry.registerDescriptor(pathDesc);
-    const filePath:string = path.join(
-      file.path, file.name + UrlStringsEnum.DOT + JecStringsEnum.JS_EXTENSION
-    );
+    const filePath:string = 
+                    PathUtils.getInstance().buildFilePath(file.path, file.name);
     const ConstObj:any = GlobalClassLoader.getInstance().loadClass(filePath);
     const rootPathObj:any = new ConstObj();
     RootPathDescriptorUtil.getInstance().decorate(rootPathObj, pathDesc);
