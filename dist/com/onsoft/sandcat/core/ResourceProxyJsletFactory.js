@@ -5,6 +5,7 @@ const jec_commons_1 = require("jec-commons");
 const ResourceDescriptorRegistry_1 = require("../metadata/ResourceDescriptorRegistry");
 const ResourceDescriptor_1 = require("../reflect/ResourceDescriptor");
 const ResourceDescriptorUtil_1 = require("../utils/ResourceDescriptorUtil");
+const jec_sokoke_1 = require("jec-sokoke");
 class ResourceProxyJsletFactory {
     constructor() { }
     create(file, contextRoot, sandcatContainer) {
@@ -19,6 +20,8 @@ class ResourceProxyJsletFactory {
         descriptorUtil.decorate();
         descriptorUtil.fixCompositeValues();
         jslet.setResource(resourceObj);
+        jec_sokoke_1.SokokeInjector.getInstance()
+            .inject(resourceObj, jec_sokoke_1.SokokeInjector.DEFAULT_SCOPE_TYPES);
         ResourceDescriptorRegistry_1.ResourceDescriptorRegistry.registerDescriptor(null);
         return jslet;
     }

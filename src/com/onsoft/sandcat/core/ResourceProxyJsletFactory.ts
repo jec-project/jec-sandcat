@@ -23,6 +23,7 @@ import {GlobalClassLoader, FileProperties, PathUtils} from "jec-commons";
 import {ResourceDescriptorRegistry} from "../metadata/ResourceDescriptorRegistry";
 import {ResourceDescriptor} from "../reflect/ResourceDescriptor";
 import {ResourceDescriptorUtil} from "../utils/ResourceDescriptorUtil";
+import {SokokeInjector} from "jec-sokoke";
 
 /**
  * The factory class which is used by Sandcat to create
@@ -74,6 +75,8 @@ export class ResourceProxyJsletFactory {
     descriptorUtil.decorate();
     descriptorUtil.fixCompositeValues();
     jslet.setResource(resourceObj);
+    SokokeInjector.getInstance()
+                    .inject(resourceObj, SokokeInjector.DEFAULT_SCOPE_TYPES);
     ResourceDescriptorRegistry.registerDescriptor(null);
     return jslet;
   }
