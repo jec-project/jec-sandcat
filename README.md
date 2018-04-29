@@ -129,6 +129,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-[jec-url]: https://github.com/pechemann/JEC
+[jec-url]: http://jecproject.org
 [jec-jars-url]: https://github.com/pechemann/jec-jars
 [jec-logo]: https://raw.githubusercontent.com/pechemann/JEC/master/assets/jec-logos/jec-logo.png
