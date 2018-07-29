@@ -45,7 +45,7 @@ export class RequestPropertiesBuilderTest {
     description: "should throw a singleton error when calling the constructor function"
   })
   public newInstanceTest():void {
-    let buildInstance:Function = function():void {
+    const buildInstance:Function = function():void {
       new RequestPropertiesBuilder();
     };
     expect(buildInstance).to.throw(SingletonError);
@@ -55,7 +55,7 @@ export class RequestPropertiesBuilderTest {
     description: "should return a GlobalGuidGenerator instance"
   })
   public getInstanceTest():void {
-    let builder:RequestPropertiesBuilder =
+    const builder:RequestPropertiesBuilder =
                                          RequestPropertiesBuilder.getInstance();
     expect(builder).to.be.an.instanceOf(RequestPropertiesBuilder);
   }
@@ -64,9 +64,9 @@ export class RequestPropertiesBuilderTest {
     description: "should return a singleton reference"
   })
   public singletonTest():void {
-    let builder1:RequestPropertiesBuilder =
+    const builder1:RequestPropertiesBuilder =
                                          RequestPropertiesBuilder.getInstance();
-    let builder2:RequestPropertiesBuilder =
+    const builder2:RequestPropertiesBuilder =
                                          RequestPropertiesBuilder.getInstance();
     expect(builder1).to.equal(builder2);
   }
@@ -86,7 +86,7 @@ export class RequestPropertiesBuilderTest {
     description: "should return a RequestProperties instance with the correct 'httpMethod' property value"
   })
   public httpMethodTest():void {
-    let props:RequestProperties = 
+    const props:RequestProperties = 
       RequestPropertiesBuilder.getInstance().build(
         HttpMethod.DELETE, this.request
       );
@@ -97,7 +97,7 @@ export class RequestPropertiesBuilderTest {
     description: "should return a RequestProperties instance with the correct 'subRoute' property value"
   })
   public subRouteTest():void {
-    let props:RequestProperties =
+    const props:RequestProperties =
       RequestPropertiesBuilder.getInstance().build(
         HttpMethod.DELETE, this.request
       );
@@ -108,7 +108,7 @@ export class RequestPropertiesBuilderTest {
     description: "should return a RequestProperties instance with the correct 'acccept' property value"
   })
   public accceptTest():void {
-    let props:RequestProperties =
+    const props:RequestProperties =
       RequestPropertiesBuilder.getInstance().build(
         HttpMethod.DELETE, this.request
       );
@@ -119,7 +119,7 @@ export class RequestPropertiesBuilderTest {
     description: "should return a RequestProperties instance with the correct 'contentType' property value"
   })
   public contentTypeTest():void {
-    let props:RequestProperties =
+    const props:RequestProperties =
       RequestPropertiesBuilder.getInstance().build(
         HttpMethod.DELETE, this.request
       );

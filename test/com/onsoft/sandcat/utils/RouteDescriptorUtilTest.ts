@@ -14,7 +14,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import { TestSuite, Test, BeforeAll, TestSorters, Async } from "jec-juta";
+import { TestSuite, Test, BeforeAll, Async } from "jec-juta";
 import { expect, assert } from "chai";
 import { RouteDescriptorUtil } from "../../../../../src/com/onsoft/sandcat/utils/RouteDescriptorUtil";
 import { RouteDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/RouteDescriptor";
@@ -94,7 +94,7 @@ export class RouteDescriptorUtilTest {
     description: "should return the route parameters of the specified URL"
   })
   public execOkTest():void {
-    let result:any = 
+    const result:any = 
                     this.descriptorUtil.exec(this.descriptor, utils.VALID_PATH);
     expect(result.id).to.equal('10');
   }

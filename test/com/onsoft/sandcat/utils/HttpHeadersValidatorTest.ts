@@ -37,8 +37,8 @@ export class HttpHeadersValidatorTest {
     description: "should return HttpStatusCode.OK"
   })
   public validateDefaultTest():void {
-    let desc:MethodDescriptor = new MethodDescriptor();
-    let props:RequestProperties = new RequestProperties();
+    const desc:MethodDescriptor = new MethodDescriptor();
+    const props:RequestProperties = new RequestProperties();
     expect(this.validator.validate(desc, props)).to.equal(HttpStatusCode.OK);
   }
 
@@ -46,8 +46,8 @@ export class HttpHeadersValidatorTest {
     description: "should return HttpStatusCode.OK"
   })
   public validateTest():void {
-    let desc:MethodDescriptor = new MethodDescriptor();
-    let props:RequestProperties = new RequestProperties();
+    const desc:MethodDescriptor = new MethodDescriptor();
+    const props:RequestProperties = new RequestProperties();
     desc.consumes = "application/json";
     props.contentType = "application/json";
     expect(this.validator.validate(desc, props)).to.equal(HttpStatusCode.OK);
@@ -57,8 +57,8 @@ export class HttpHeadersValidatorTest {
     description: "should return HttpStatusCode.UNSUPPORTED_MEDIA_TYPE"
   })
   public invalidMediaTest():void {
-    let desc:MethodDescriptor = new MethodDescriptor();
-    let props:RequestProperties = new RequestProperties();
+    const desc:MethodDescriptor = new MethodDescriptor();
+    const props:RequestProperties = new RequestProperties();
     desc.consumes = "application/json";
     props.contentType = "application/xml";
     expect(
@@ -70,8 +70,8 @@ export class HttpHeadersValidatorTest {
     description: "should return HttpStatusCode.OK"
   })
   public validateAllMimeTypeTest():void {
-    let desc:MethodDescriptor = new MethodDescriptor();
-    let props:RequestProperties = new RequestProperties();
+    const desc:MethodDescriptor = new MethodDescriptor();
+    const props:RequestProperties = new RequestProperties();
     props.contentType ="*/*";
     expect(this.validator.validate(desc, props)).to.equal(HttpStatusCode.OK);
   }
@@ -80,8 +80,8 @@ export class HttpHeadersValidatorTest {
     description: "should return HttpStatusCode.NOT_ACCEPTABLE"
   })
   public methodDescTest():void {
-    let desc:MethodDescriptor = new MethodDescriptor();
-    let props:RequestProperties = new RequestProperties();
+    const desc:MethodDescriptor = new MethodDescriptor();
+    const props:RequestProperties = new RequestProperties();
     props.contentType = "application/xml";
     expect(
       this.validator.validate(desc, props)

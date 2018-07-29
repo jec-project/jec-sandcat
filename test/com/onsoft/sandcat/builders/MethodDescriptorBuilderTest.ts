@@ -32,7 +32,7 @@ export class MethodDescriptorBuilderTest {
 
   @BeforeAll()
   public initTest():void {
-    let func:Function = function(param1:string, param2:string):void {};
+    const func:Function = function(param1:string, param2:string):void {};
     this.propertyDescriptor = ( { value: func } as PropertyDescriptor );
     this.key = "methodName";
     this.httpParams = {
@@ -47,7 +47,7 @@ export class MethodDescriptorBuilderTest {
     description: "should throw a singleton error when calling the constructor function"
   })
   public newInstanceTest():void {
-    let buildInstance:Function = function():void {
+    const buildInstance:Function = function():void {
       new MethodDescriptorBuilder();
     };
     expect(buildInstance).to.throw(SingletonError);
@@ -57,7 +57,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptorBuilder instance"
   })
   public getInstanceTest():void {
-    let builder:MethodDescriptorBuilder =
+    const builder:MethodDescriptorBuilder =
                                           MethodDescriptorBuilder.getInstance();
     expect(builder).to.be.an.instanceOf(MethodDescriptorBuilder);
   }
@@ -66,9 +66,9 @@ export class MethodDescriptorBuilderTest {
     description: "should return a singleton reference"
   })
   public singletonTest():void {
-    let builder1:MethodDescriptorBuilder =
+    const builder1:MethodDescriptorBuilder =
                                           MethodDescriptorBuilder.getInstance();
-    let builder2:MethodDescriptorBuilder =
+    const builder2:MethodDescriptorBuilder =
                                           MethodDescriptorBuilder.getInstance();
     expect(builder1).to.equal(builder2);
   }
@@ -88,7 +88,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'name' property value"
   })
   public nameTest():void {
-    let desc:MethodDescriptor = 
+    const desc:MethodDescriptor = 
       MethodDescriptorBuilder.getInstance().build(
         HttpMethod.GET, this.key, this.propertyDescriptor
       );
@@ -99,7 +99,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'httpMethod' property value"
   })
   public httpMethodTest():void {
-    let desc:MethodDescriptor = 
+    const desc:MethodDescriptor = 
       MethodDescriptorBuilder.getInstance().build(
         HttpMethod.GET, this.key, this.propertyDescriptor
       );
@@ -110,7 +110,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'action' property value"
   })
   public actionTest():void {
-    let desc:MethodDescriptor = 
+    const desc:MethodDescriptor = 
       MethodDescriptorBuilder.getInstance().build(
         HttpMethod.GET, this.key, this.propertyDescriptor
       );
@@ -121,7 +121,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the 'route' property set to 'null'"
   })
   public routeNullTest():void {
-    let desc:MethodDescriptor = 
+    const desc:MethodDescriptor = 
       MethodDescriptorBuilder.getInstance().build(
         HttpMethod.GET, this.key, this.propertyDescriptor
       );
@@ -132,7 +132,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the 'produces' property set to 'null'"
   })
   public producesNullTest():void {
-    let desc:MethodDescriptor = 
+    const desc:MethodDescriptor = 
       MethodDescriptorBuilder.getInstance().build(
         HttpMethod.GET, this.key, this.propertyDescriptor
       );
@@ -143,7 +143,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the 'crossDomainPolicy' property set to 'null'"
   })
   public crossDomainPolicyNullTest():void {
-    let desc:MethodDescriptor = 
+    const desc:MethodDescriptor = 
       MethodDescriptorBuilder.getInstance().build(
         HttpMethod.GET, this.key, this.propertyDescriptor
       );
@@ -154,7 +154,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the 'consumes' property set to 'null'"
   })
   public consumesNullTest():void {
-    let desc:MethodDescriptor = 
+    const desc:MethodDescriptor = 
       MethodDescriptorBuilder.getInstance().build(
         HttpMethod.GET, this.key, this.propertyDescriptor
       );
@@ -165,7 +165,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'route' property value"
   })
   public routeTest():void {
-    let desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
+    const desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
       HttpMethod.GET, this.key, this.propertyDescriptor, this.httpParams
     );
     expect(desc.route).to.equal(this.httpParams.route);
@@ -175,7 +175,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'consumes' property value"
   })
   public consumesTest():void {
-    let desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
+    const desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
       HttpMethod.GET, this.key, this.propertyDescriptor, this.httpParams
     );
     expect(desc.consumes).to.equal(this.httpParams.consumes);
@@ -185,7 +185,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'produces' property value"
   })
   public producesTest():void {
-    let desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
+    const desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
       HttpMethod.GET, this.key, this.propertyDescriptor, this.httpParams
     );
     expect(desc.produces).to.equal(this.httpParams.produces);
@@ -195,7 +195,7 @@ export class MethodDescriptorBuilderTest {
     description: "should return a MethodDescriptor instance with the correct 'crossDomainPolicy' property value"
   })
   public crossDomainPolicyTest():void {
-    let desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
+    const desc:MethodDescriptor = MethodDescriptorBuilder.getInstance().build(
       HttpMethod.GET, this.key, this.propertyDescriptor, this.httpParams
     );
     expect(desc.crossDomainPolicy).to.equal(this.httpParams.crossDomainPolicy);

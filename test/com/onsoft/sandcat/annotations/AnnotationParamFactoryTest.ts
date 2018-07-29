@@ -30,7 +30,7 @@ export class AnnotationParamFactoryTest {
 
   @BeforeAll()
   public initTest():void {
-    let desc:ResourceDescriptor = new ResourceDescriptor();
+    const desc:ResourceDescriptor = new ResourceDescriptor();
     ResourceDescriptorRegistry.registerDescriptor(desc);
   }
   
@@ -43,10 +43,10 @@ export class AnnotationParamFactoryTest {
     description: "should register the specified parameters into the ParametersMapUtil registery"
   })
   public registerParamTest():void {
-    let factory:AnnotationParamFactory = new AnnotationParamFactory();
-    let propertyKey:string = "methodName";
+    const factory:AnnotationParamFactory = new AnnotationParamFactory();
+    const propertyKey:string = "methodName";
     factory.registerParam(propertyKey, 1, AnnotationType.GET);
-    let descs:ParameterDescriptor[] =
+    const descs:ParameterDescriptor[] =
                           ParametersMapUtil.getParameterCollection(propertyKey);
     expect(descs).to.have.a.lengthOf(1);
     expect(descs[0].annotationType).to.equal(AnnotationType.GET);

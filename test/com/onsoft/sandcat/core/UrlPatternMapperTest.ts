@@ -84,7 +84,7 @@ export class UrlPatternMapperTest {
     order: 5
   })
   public matchRequestFailTest():void {
-    let props:RequestProperties = new RequestProperties();
+    const props:RequestProperties = new RequestProperties();
     props.subRoute = "/subroute";
     expect(this.mapper.matchRequest(props)).to.be.null;
   }
@@ -94,7 +94,7 @@ export class UrlPatternMapperTest {
     order: 6
   })
   public matchRequestTest():void {
-    let props:RequestProperties = new RequestProperties();
+    const props:RequestProperties = new RequestProperties();
     props.subRoute = "/api/search";
     props.httpMethod = HttpMethod.GET;
     expect(
@@ -107,10 +107,10 @@ export class UrlPatternMapperTest {
     order: 7
   })
   public matchRequestQueryTest():void {
-    let props:RequestProperties = new RequestProperties();
+    const props:RequestProperties = new RequestProperties();
     props.subRoute = "/api/search?name=foo&id=bar";
     props.httpMethod = HttpMethod.GET;
-    let matcher:UrlPatternMatcher = this.mapper.matchRequest(props);
+    const matcher:UrlPatternMatcher = this.mapper.matchRequest(props);
     expect(matcher.queryParams.name).to.equal("foo");
     expect(matcher.queryParams.id).to.equal("bar");
   }
@@ -120,10 +120,10 @@ export class UrlPatternMapperTest {
     order: 8
   })
   public matchDescriptorTest():void {
-    let props:RequestProperties = new RequestProperties();
+    const props:RequestProperties = new RequestProperties();
     props.subRoute = "/api/users/30";
     props.httpMethod = HttpMethod.GET;
-    let matcher:UrlPatternMatcher = this.mapper.matchRequest(props);
+    const matcher:UrlPatternMatcher = this.mapper.matchRequest(props);
     expect(matcher.descriptor).to.be.equal(this.descriptor1);
   }
   
@@ -132,10 +132,10 @@ export class UrlPatternMapperTest {
     order: 9
   })
   public matchPropertiesTest():void {
-    let props:RequestProperties = new RequestProperties();
+    const props:RequestProperties = new RequestProperties();
     props.subRoute = "/api/users/30";
     props.httpMethod = HttpMethod.GET;
-    let matcher:UrlPatternMatcher = this.mapper.matchRequest(props);
+    const matcher:UrlPatternMatcher = this.mapper.matchRequest(props);
     expect(matcher.properties.id).to.be.equal("30");
   }
   
@@ -144,7 +144,7 @@ export class UrlPatternMapperTest {
     order: 10
   })
   public matchKoTest():void {
-    let props:RequestProperties = new RequestProperties();
+    const props:RequestProperties = new RequestProperties();
     props.subRoute = "/api/users/30/data";
     props.httpMethod = HttpMethod.GET;
     expect(this.mapper.matchRequest(props)).to.be.null;

@@ -46,7 +46,7 @@ export class RootPathRefsDecoratorTest {
     description: "should throw a JarsError exception if 'pathRefs' parameter is 'null'"
   })
   public decoratePathRefsErrorTest():void {
-    let doDecorate:Function = function():void {
+    const doDecorate:Function = function():void {
       this.decorator.decorate(utils.TARGET, null);
     };
     expect(doDecorate.bind(this)).to.throw(JarsError);
@@ -56,7 +56,7 @@ export class RootPathRefsDecoratorTest {
     description: "should return the reference to the target instance"
   })
   public decorateTargetTest():void {
-    let target:any = this.decorator.decorate(utils.TARGET, []);
+    const target:any = this.decorator.decorate(utils.TARGET, []);
     expect(target).to.equal(utils.TARGET);
   }
 }

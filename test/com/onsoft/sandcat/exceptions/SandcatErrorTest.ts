@@ -27,7 +27,7 @@ export class SandcatErrorTest {
     description: "should extend the Error class"
   })
   public errorInstanceTest():void {
-    let error = new SandcatError(null);
+    const error = new SandcatError(null);
     expect(error).to.be.an.instanceOf(Error);
   }
   
@@ -35,8 +35,8 @@ export class SandcatErrorTest {
     description: "should return the same message as passed to the constructor function"
   })
   public messageTest():void {
-    let message:string = "foo bar";
-    let error = new SandcatError(message);
+    const message:string = "foo bar";
+    const error = new SandcatError(message);
     expect(error.message).to.equal(message);
   }
 }

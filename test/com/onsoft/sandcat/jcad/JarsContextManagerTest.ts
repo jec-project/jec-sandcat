@@ -28,8 +28,8 @@ export class JarsContextManagerTest {
     description: "should throw a JcadContextError excpetion when nor context have been created before"
   })
   public deleteContextErrorTest():void {
-    let manager:JarsContextManager = new JarsContextManager();
-    let doDeleteContext:Function = function():void {
+    const manager:JarsContextManager = new JarsContextManager();
+    const doDeleteContext:Function = function():void {
       manager.deleteContext();
     };
     expect(doDeleteContext).to.throw(JcadContextError);
@@ -39,7 +39,7 @@ export class JarsContextManagerTest {
     description: "should create and remove JCAD contexts without error"
   })
   public createContextTest():void {
-    let manager:JarsContextManager = new JarsContextManager();
+    const manager:JarsContextManager = new JarsContextManager();
     expect(manager.createContext()).to.be.undefined;
     expect(manager.deleteContext()).to.be.undefined;
   }

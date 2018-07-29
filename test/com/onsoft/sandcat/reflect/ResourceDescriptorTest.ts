@@ -100,7 +100,7 @@ export class ResourceDescriptorTest {
     description: "should add the specified MethodDescriptor isnatnce to the 'methodsMap' object"
   })
   public addMethodTest():void {
-    let methodDesc:MethodDescriptor = new MethodDescriptor();
+    const methodDesc:MethodDescriptor = new MethodDescriptor();
     methodDesc.name = "methodName";
     this.descriptor.addMethod(methodDesc);
     expect(
@@ -113,7 +113,7 @@ export class ResourceDescriptorTest {
     description: "should add the specified JsletMethodDescriptor isnatnce to the 'jsletMethodsMap' object"
   })
   public addJsletMethodTest():void {
-    let methodDesc:JsletMethodDescriptor = new JsletMethodDescriptor();
+    const methodDesc:JsletMethodDescriptor = new JsletMethodDescriptor();
     methodDesc.jsletMethod = JsletMethod.AFTER;
     this.descriptor.addJsletMethod(methodDesc);
     expect(

@@ -52,7 +52,7 @@ export class RootPathDescriptorUtilTest {
     description: "should throw a singleton error when calling the constructor function"
   })
   public newInstanceTest():void {
-    let buildInstance:Function = function():void {
+    const buildInstance:Function = function():void {
       new RootPathDescriptorUtil();
     };
     expect(buildInstance).to.throw(SingletonError);
@@ -62,7 +62,7 @@ export class RootPathDescriptorUtilTest {
     description: "should return a GlobalGuidGenerator instance"
   })
   public getInstanceTest():void {
-    let util:RootPathDescriptorUtil = RootPathDescriptorUtil.getInstance();
+    const util:RootPathDescriptorUtil = RootPathDescriptorUtil.getInstance();
     expect(util).to.be.an.instanceOf(RootPathDescriptorUtil);
   }
   
@@ -70,8 +70,8 @@ export class RootPathDescriptorUtilTest {
     description: "should return a singleton reference"
   })
   public singletonTest():void {
-    let util1:RootPathDescriptorUtil = RootPathDescriptorUtil.getInstance();
-    let util2:RootPathDescriptorUtil = RootPathDescriptorUtil.getInstance();
+    const util1:RootPathDescriptorUtil = RootPathDescriptorUtil.getInstance();
+    const util2:RootPathDescriptorUtil = RootPathDescriptorUtil.getInstance();
     expect(util1).to.equal(util2);
   }
   
@@ -90,7 +90,7 @@ export class RootPathDescriptorUtilTest {
   public decorateImmutablePropertyTest():void {
     RootPathDescriptorUtil.getInstance()
                           .decorate(this.rootPath, this.descriptor);
-    let doOverride:Function = function():void {
+    const doOverride:Function = function():void {
       this.rootPath.__sandcatRootPathDescriptor = {};
     };
     expect(doOverride.bind(this)).to.throw(TypeError);
@@ -111,7 +111,7 @@ export class RootPathDescriptorUtilTest {
   public decorateImmutableMethodTest():void {
     RootPathDescriptorUtil.getInstance()
                           .decorate(this.rootPath, this.descriptor);
-    let doOverride:Function = function():void {
+    const doOverride:Function = function():void {
       this.rootPath.getRootPathDescriptor = function():void {};
     };
     expect(doOverride.bind(this)).to.throw(TypeError);

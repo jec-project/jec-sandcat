@@ -17,7 +17,7 @@
 import { TestSuite, Test, BeforeAll, After } from "jec-juta";
 import { expect } from "chai";
 import { ParameterInjector } from "../../../../../src/com/onsoft/sandcat/reflect/ParameterInjector";
-import {AnnotationType} from "../../../../../src/com/onsoft/sandcat/reflect/AnnotationType";
+import { AnnotationType } from "../../../../../src/com/onsoft/sandcat/reflect/AnnotationType";
 
 // Utilities:
 import * as utils from "../../../../../utils/test-utils/utilities/ParameterInjectorTestUtils";
@@ -46,7 +46,7 @@ export class ParameterInjectorTest {
     utils.METHOD_DESCRIPTOR.parametersMap.set(
       utils.PARAMETER_NAME, utils.buildParameterDescriptor(AnnotationType.EXIT)
     );
-    let result:any[] = this.injector.buildParameters(
+    const result:any[] = this.injector.buildParameters(
       utils.MATCHER,
       utils.CALLBACK_HANDLER,
       utils.METHOD_DESCRIPTOR,
@@ -63,7 +63,7 @@ export class ParameterInjectorTest {
       utils.PARAMETER_NAME, 
       utils.buildParameterDescriptor(AnnotationType.PATH_PARAM)
     );
-    let result:any[] = this.injector.buildParameters(
+    const result:any[] = this.injector.buildParameters(
       utils.MATCHER,
       utils.CALLBACK_HANDLER,
       utils.METHOD_DESCRIPTOR,
@@ -80,7 +80,7 @@ export class ParameterInjectorTest {
       utils.PARAMETER_NAME, 
       utils.buildParameterDescriptor(AnnotationType.HTTP_REQUEST)
     );
-    let result:any[] = this.injector.buildParameters(
+    const result:any[] = this.injector.buildParameters(
       utils.MATCHER,
       utils.CALLBACK_HANDLER,
       utils.METHOD_DESCRIPTOR,
@@ -97,7 +97,7 @@ export class ParameterInjectorTest {
       utils.PARAMETER_NAME, 
       utils.buildParameterDescriptor(AnnotationType.QUERY_PARAM)
     );
-    let result:any[] = this.injector.buildParameters(
+    const result:any[] = this.injector.buildParameters(
       utils.MATCHER,
       utils.CALLBACK_HANDLER,
       utils.METHOD_DESCRIPTOR,
@@ -114,7 +114,7 @@ export class ParameterInjectorTest {
       utils.PARAMETER_NAME, 
       utils.buildParameterDescriptor(AnnotationType.REQUEST_BODY)
     );
-    let result:any[] = this.injector.buildParameters(
+    const result:any[] = this.injector.buildParameters(
       utils.MATCHER,
       utils.CALLBACK_HANDLER,
       utils.METHOD_DESCRIPTOR,
@@ -131,7 +131,7 @@ export class ParameterInjectorTest {
       utils.PARAMETER_NAME, 
       utils.buildParameterDescriptor(AnnotationType.COOKIE_PARAM)
     );
-    let result:any[] = this.injector.buildParameters(
+    const result:any[] = this.injector.buildParameters(
       utils.MATCHER,
       utils.CALLBACK_HANDLER,
       utils.METHOD_DESCRIPTOR,

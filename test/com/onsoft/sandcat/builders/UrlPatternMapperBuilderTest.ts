@@ -30,7 +30,7 @@ export class UrlPatternMapperBuilderTest {
     description: "should throw a singleton error when calling the constructor function"
   })
   public newInstanceTest():void {
-    let buildInstance:Function = function():void {
+    const buildInstance:Function = function():void {
       new UrlPatternMapperBuilder();
     };
     expect(buildInstance).to.throw(SingletonError);
@@ -40,7 +40,7 @@ export class UrlPatternMapperBuilderTest {
     description: "should return a GlobalGuidGenerator instance"
   })
   public getInstanceTest():void {
-    let builder:UrlPatternMapperBuilder =
+    const builder:UrlPatternMapperBuilder =
                                           UrlPatternMapperBuilder.getInstance();
     expect(builder).to.be.an.instanceOf(UrlPatternMapperBuilder);
   }
@@ -49,9 +49,9 @@ export class UrlPatternMapperBuilderTest {
     description: "should return a singleton reference"
   })
   public singletonTest():void {
-    let builder1:UrlPatternMapperBuilder =
+    const builder1:UrlPatternMapperBuilder =
                                           UrlPatternMapperBuilder.getInstance();
-    let builder2:UrlPatternMapperBuilder =
+    const builder2:UrlPatternMapperBuilder =
                                           UrlPatternMapperBuilder.getInstance();
     expect(builder1).to.equal(builder2);
   }
@@ -60,7 +60,7 @@ export class UrlPatternMapperBuilderTest {
     description: "should return a new UrlPatternMapper object"
   })
   public buildTest():void {
-    let descriptor:ResourceDescriptor = new ResourceDescriptor();
+    const descriptor:ResourceDescriptor = new ResourceDescriptor();
     expect(
       UrlPatternMapperBuilder.getInstance().build(descriptor)
     ).to.be.an.instanceOf(UrlPatternMapper);

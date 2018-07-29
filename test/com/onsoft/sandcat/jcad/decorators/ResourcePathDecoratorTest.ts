@@ -46,7 +46,7 @@ export class ResourcePathDecoratorTest {
     description: "should throw a JarsError exception if 'path' parameter is 'null'"
   })
   public decoratePathErrorTest():void {
-    let doDecorate:Function = function():void {
+    const doDecorate:Function = function():void {
       this.decorator.decorate(utils.TARGET, null);
     };
     expect(doDecorate.bind(this)).to.throw(JarsError);
@@ -56,7 +56,8 @@ export class ResourcePathDecoratorTest {
     description: "should return the reference to the target instance"
   })
   public decorateTargetTest():void {
-    let target:any = this.decorator.decorate(utils.TARGET, utils.RESOURCE_PATH);
+    const target:any = 
+                     this.decorator.decorate(utils.TARGET, utils.RESOURCE_PATH);
     expect(target).to.equal(utils.TARGET);
   }
 }

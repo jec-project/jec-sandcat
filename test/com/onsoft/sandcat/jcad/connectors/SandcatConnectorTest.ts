@@ -18,7 +18,7 @@ import { TestSuite, Test } from "jec-juta";
 import { expect } from "chai";
 import { SandcatConnector } from "../../../../../../src/com/onsoft/sandcat/jcad/connectors/SandcatConnector";
 import { JarsConnectorRefs } from "jec-jars";
-import { AbstractDecoratorConnector } from "jec-commons";
+import { AbstractDecoratorConnector, DecoratorConnector } from "jec-commons";
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/SandcatConnectorTestUtils";
@@ -32,7 +32,7 @@ export class SandcatConnectorTest {
     description: "should extend the AbstractDecoratorConnector class"
   })
   public errorInstanceTest():void {
-    let connector = new SandcatConnector(
+    const connector:DecoratorConnector = new SandcatConnector(
       JarsConnectorRefs.GET_CONNECTOR_REF, utils.DECORATOR
     );
     expect(connector).to.be.an.instanceOf(AbstractDecoratorConnector);
@@ -42,7 +42,7 @@ export class SandcatConnectorTest {
     description: "should return the JCAD reference passed as parameter of the constructor function"
   })
   public getJcadReferenceTest():void {
-    let connector = new SandcatConnector(
+    const connector:DecoratorConnector = new SandcatConnector(
       JarsConnectorRefs.GET_CONNECTOR_REF, utils.DECORATOR
     );
     expect(
@@ -54,7 +54,7 @@ export class SandcatConnectorTest {
     description: "should return the Decorator instance passed as parameter of the constructor function"
   })
   public getDecoratorTest():void {
-     let connector = new SandcatConnector(
+     const connector:DecoratorConnector = new SandcatConnector(
       JarsConnectorRefs.GET_CONNECTOR_REF, utils.DECORATOR
     );
     expect(connector.getDecorator()).to.be.equal(utils.DECORATOR);

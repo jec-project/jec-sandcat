@@ -48,7 +48,7 @@ export class RequestParamDecoratorTest {
     description: "should return the reference to the target instance"
   })
   public decorateTargetTest():void {
-    let target:any = this.decorator.decorate(
+    const target:any = this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.PARAMETER_INDEX
     );
     expect(target).to.equal(utils.TARGET);
@@ -79,7 +79,7 @@ export class RequestParamDecoratorTest {
   })
   public indexTest():void {
     this.decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
-    let desc:ParameterDescriptor = 
+    const desc:ParameterDescriptor = 
                          ParametersMapUtil.getParameterCollection(utils.KEY)[0];
     expect(desc.index).to.equal(utils.PARAMETER_INDEX);
   }
@@ -89,7 +89,7 @@ export class RequestParamDecoratorTest {
   })
   public methodNameTest():void {
     this.decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
-    let desc:ParameterDescriptor = 
+    const desc:ParameterDescriptor = 
                          ParametersMapUtil.getParameterCollection(utils.KEY)[0];
     expect(desc.methodName).to.equal(utils.KEY);
   }
@@ -99,7 +99,7 @@ export class RequestParamDecoratorTest {
   })
   public annotationTypeTest():void {
     this.decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
-    let desc:ParameterDescriptor = 
+    const desc:ParameterDescriptor = 
                          ParametersMapUtil.getParameterCollection(utils.KEY)[0];
     expect(desc.annotationType).to.equal(AnnotationType.HTTP_REQUEST);
   }
@@ -109,7 +109,7 @@ export class RequestParamDecoratorTest {
   })
   public keyTest():void {
     this.decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
-    let desc:ParameterDescriptor = 
+    const desc:ParameterDescriptor = 
                          ParametersMapUtil.getParameterCollection(utils.KEY)[0];
     expect(desc.key).to.be.null;
   }
@@ -119,7 +119,7 @@ export class RequestParamDecoratorTest {
   })
   public valueTest():void {
     this.decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
-    let desc:ParameterDescriptor = 
+    const desc:ParameterDescriptor = 
                          ParametersMapUtil.getParameterCollection(utils.KEY)[0];
     expect(desc.value).to.be.null;
   }

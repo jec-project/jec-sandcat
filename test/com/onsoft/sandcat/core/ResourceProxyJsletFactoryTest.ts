@@ -14,13 +14,12 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import { TestSuite, Test, AfterAll, BeforeAll, TestSorters } from "jec-juta";
+import { TestSuite, Test, AfterAll, BeforeAll } from "jec-juta";
 import { expect } from "chai";
 import { ResourceProxyJsletFactory } from "../../../../../src/com/onsoft/sandcat/core/ResourceProxyJsletFactory";
 import { SandcatResourceJsletProxy } from "../../../../../src/com/onsoft/sandcat/jslet/SandcatResourceJsletProxy";
 import { JarsContextManager } from "../../../../../src/com/onsoft/sandcat/jcad/JarsContextManager";
 import { ResourceJsletProxy } from "../../../../../src/com/onsoft/sandcat/jslet/ResourceJsletProxy";
-import { RootPathVersion } from "jec-jars";
 
 // Utilities:
 import * as utils from "../../../../../utils/test-utils/utilities/ResourceProxyJsletFactoryTestUtils";

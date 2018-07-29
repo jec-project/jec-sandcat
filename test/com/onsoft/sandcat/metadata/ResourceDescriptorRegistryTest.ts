@@ -79,7 +79,7 @@ export class ResourceDescriptorRegistryTest {
     order: 5
   })
   public getParametersMapTest():void {
-    let map:Map<string, Array<ParameterDescriptor>> =
+    const map:Map<string, Array<ParameterDescriptor>> =
                                   ResourceDescriptorRegistry.getParametersMap();
     expect(map.size).to.equal(0);
   }

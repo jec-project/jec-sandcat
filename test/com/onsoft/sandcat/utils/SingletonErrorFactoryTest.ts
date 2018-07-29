@@ -15,7 +15,7 @@
 //   limitations under the License.
 
 import { TestSuite, Test } from "jec-juta";
-import { expect, assert } from "chai";
+import { expect } from "chai";
 import { SingletonErrorFactory } from "../../../../../src/com/onsoft/sandcat/utils/SingletonErrorFactory";
 import { SingletonError } from "jec-commons";
 
@@ -28,10 +28,10 @@ export class SingletonErrorFactoryTest {
     description: "should throw a SingletonError exception"
   })
   public throwTest():void {
-    let factory:SingletonErrorFactory = new SingletonErrorFactory();
-    let invokeThrox:Function = function():void {
+    const factory:SingletonErrorFactory = new SingletonErrorFactory();
+    const invokeThrow:Function = function():void {
       factory.throw(SingletonErrorFactory);
     };
-    expect(invokeThrox).to.throw(SingletonError);
+    expect(invokeThrow).to.throw(SingletonError);
   }
 }

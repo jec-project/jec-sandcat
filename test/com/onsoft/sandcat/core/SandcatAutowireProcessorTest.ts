@@ -20,7 +20,6 @@ import * as sinon from "sinon";
 import { SandcatAutowireProcessor } from "../../../../../src/com/onsoft/sandcat/core/SandcatAutowireProcessor";
 import { SandcatLoggerProxy } from "../../../../../src/com/onsoft/sandcat/logging/SandcatLoggerProxy";
 import { Sandcat } from "../../../../../src/com/onsoft/sandcat/Sandcat";
-import { JarsConnectorRefs } from "jec-jars";
 import { JcadContextError } from "jec-commons";
 
 // Utilities:

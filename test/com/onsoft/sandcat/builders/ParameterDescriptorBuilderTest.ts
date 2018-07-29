@@ -37,7 +37,7 @@ export class ParameterDescriptorBuilderTest {
     description: "should throw a singleton error when calling the constructor function"
   })
   public newInstanceTest():void {
-    let buildInstance:Function = function():void {
+    const buildInstance:Function = function():void {
       new ParameterDescriptorBuilder();
     };
     expect(buildInstance).to.throw(SingletonError);
@@ -47,7 +47,7 @@ export class ParameterDescriptorBuilderTest {
     description: "should return a GlobalGuidGenerator instance"
   })
   public getInstanceTest():void {
-    let builder:ParameterDescriptorBuilder =
+    const builder:ParameterDescriptorBuilder =
                                        ParameterDescriptorBuilder.getInstance();
     expect(builder).to.be.an.instanceOf(ParameterDescriptorBuilder);
   }
@@ -56,9 +56,9 @@ export class ParameterDescriptorBuilderTest {
     description: "should return a singleton reference"
   })
   public singletonTest():void {
-    let builder1:ParameterDescriptorBuilder =
+    const builder1:ParameterDescriptorBuilder =
                                        ParameterDescriptorBuilder.getInstance();
-    let builder2:ParameterDescriptorBuilder =
+    const builder2:ParameterDescriptorBuilder =
                                        ParameterDescriptorBuilder.getInstance();
     expect(builder1).to.equal(builder2);
   }
@@ -78,7 +78,7 @@ export class ParameterDescriptorBuilderTest {
     description: "should return a ParameterDescriptor instance with the correct 'methodName' property value"
   })
   public methodNameTest():void {
-    let desc:ParameterDescriptor = 
+    const desc:ParameterDescriptor = 
       ParameterDescriptorBuilder.getInstance().build(
         this.methodName, AnnotationType.GET, 2
       );
@@ -89,7 +89,7 @@ export class ParameterDescriptorBuilderTest {
     description: "should return a ParameterDescriptor instance with the correct 'annotationType' property value"
   })
   public annotationTypeTest():void {
-    let desc:ParameterDescriptor = 
+    const desc:ParameterDescriptor = 
       ParameterDescriptorBuilder.getInstance().build(
         this.methodName, AnnotationType.GET, 2
       );
@@ -100,7 +100,7 @@ export class ParameterDescriptorBuilderTest {
     description: "should return a ParameterDescriptor instance with the correct 'index' property value"
   })
   public indexTest():void {
-    let desc:ParameterDescriptor = 
+    const desc:ParameterDescriptor = 
       ParameterDescriptorBuilder.getInstance().build(
         this.methodName, AnnotationType.GET, 2
       );

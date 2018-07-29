@@ -45,7 +45,7 @@ export class ParametersMapUtilTest {
     order: 1
   })
   public getParameterCollectionDefaultTest():void {
-    let descriptors:ParameterDescriptor[] = 
+    const descriptors:ParameterDescriptor[] = 
                             ParametersMapUtil.getParameterCollection(this.NAME);
     expect(descriptors).to.have.a.lengthOf(0);
   }
@@ -55,7 +55,7 @@ export class ParametersMapUtilTest {
     order: 2
   })
   public getParameterCollectionTest():void {
-    let descriptors:ParameterDescriptor[] = 
+    const descriptors:ParameterDescriptor[] = 
                             ParametersMapUtil.getParameterCollection(this.NAME);
     expect(descriptors).to.have.a.lengthOf(0);
   }

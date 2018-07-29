@@ -46,7 +46,7 @@ export class SandcatAutowireProcessorContextTest {
     order: 0
   })
   public initProcessorTest():void {
-    let buildProcessor:Function = function():void {
+    const buildProcessor:Function = function():void {
       this.processor = new SandcatAutowireProcessor();
       this.processor.processCompleteHandler = this.processCompleteHandler;
     };

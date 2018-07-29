@@ -30,8 +30,8 @@ export class SandcatBuilderTest {
     description: "should return a new DefaultSandcatContainer object"
   })
   public buildTest():void {
-    let builder = new SandcatBuilder();
-    let container:DomainContainer = ({
+    const builder = new SandcatBuilder();
+    const container:DomainContainer = ({
       init: null,
       getJsletContext: null,
       getLoginStrategy: null,

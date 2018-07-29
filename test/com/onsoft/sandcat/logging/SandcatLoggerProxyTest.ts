@@ -28,7 +28,7 @@ export class SandcatLoggerProxyTest {
     description: "should throw a singleton error when calling the constructor function"
   })
   public singletonErrorTest():void {
-    let buildInstance:Function = function():void {
+    const buildInstance:Function = function():void {
       new SandcatLoggerProxy();
     };
     expect(buildInstance).to.throw(SingletonError);
@@ -38,7 +38,7 @@ export class SandcatLoggerProxyTest {
     description: "should return a SandcatLoggerProxy instance"
   })
   public getInstanceTest():void {
-    let logger:LoggerProxy = SandcatLoggerProxy.getInstance();
+    const logger:LoggerProxy = SandcatLoggerProxy.getInstance();
     expect(logger).to.be.an.instanceOf(SandcatLoggerProxy);
   }
   
@@ -46,8 +46,8 @@ export class SandcatLoggerProxyTest {
     description: "should return a singleton reference"
   })
   public singletonTest():void {
-    let logger1:LoggerProxy = SandcatLoggerProxy.getInstance();
-    let logger2:LoggerProxy = SandcatLoggerProxy.getInstance();
+    const logger1:LoggerProxy = SandcatLoggerProxy.getInstance();
+    const logger2:LoggerProxy = SandcatLoggerProxy.getInstance();
     expect(logger1).to.equal(logger2);
   }
 }

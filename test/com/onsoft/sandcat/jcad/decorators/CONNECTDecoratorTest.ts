@@ -21,7 +21,6 @@ import { CONNECTDecorator } from "../../../../../../src/com/onsoft/sandcat/jcad/
 import { ResourceDescriptor } from "../../../../../../src/com/onsoft/sandcat/reflect/ResourceDescriptor";
 import { ResourceDescriptorRegistry } from "../../../../../../src/com/onsoft/sandcat/metadata/ResourceDescriptorRegistry";
 import { MethodDescriptor } from "../../../../../../src/com/onsoft/sandcat/reflect/MethodDescriptor";
-import { JarsConnectorRefs } from "jec-jars";
 import { Decorator, HttpMethod } from "jec-commons";
 
 // Utilities:

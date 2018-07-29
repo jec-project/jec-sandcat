@@ -39,7 +39,7 @@ export class JsletMethodDescriptorBuilderTest {
     description: "should throw a singleton error when calling the constructor function"
   })
   public newInstanceTest():void {
-    let buildInstance:Function = function():void {
+    const buildInstance:Function = function():void {
       new JsletMethodDescriptorBuilder();
     };
     expect(buildInstance).to.throw(SingletonError);
@@ -49,7 +49,7 @@ export class JsletMethodDescriptorBuilderTest {
     description: "should return a JsletMethodDescriptorBuilder instance"
   })
   public getInstanceTest():void {
-    let builder:JsletMethodDescriptorBuilder =
+    const builder:JsletMethodDescriptorBuilder =
                                      JsletMethodDescriptorBuilder.getInstance();
     expect(builder).to.be.an.instanceOf(JsletMethodDescriptorBuilder);
   }
@@ -58,9 +58,9 @@ export class JsletMethodDescriptorBuilderTest {
     description: "should return a singleton reference"
   })
   public singletonTest():void {
-    let builder1:JsletMethodDescriptorBuilder =
+    const builder1:JsletMethodDescriptorBuilder =
                                      JsletMethodDescriptorBuilder.getInstance();
-    let builder2:JsletMethodDescriptorBuilder =
+    const builder2:JsletMethodDescriptorBuilder =
                                      JsletMethodDescriptorBuilder.getInstance();
     expect(builder1).to.equal(builder2);
   }
@@ -80,7 +80,7 @@ export class JsletMethodDescriptorBuilderTest {
     description: "should return a JsletMethodDescriptor instance with the correct 'name' property value"
   })
   public nameTest():void {
-    let desc:JsletMethodDescriptor = 
+    const desc:JsletMethodDescriptor = 
       JsletMethodDescriptorBuilder.getInstance().build(
         JsletMethod.AFTER, this.key, this.propertyDescriptor
       );
@@ -91,7 +91,7 @@ export class JsletMethodDescriptorBuilderTest {
     description: "should return a JsletMethodDescriptor instance with the correct 'action' property value"
   })
   public actionTest():void {
-    let desc:JsletMethodDescriptor = 
+    const desc:JsletMethodDescriptor = 
       JsletMethodDescriptorBuilder.getInstance().build(
         JsletMethod.AFTER, this.key, this.propertyDescriptor
       );
@@ -102,7 +102,7 @@ export class JsletMethodDescriptorBuilderTest {
     description: "should return a JsletMethodDescriptor instance with the correct 'jsletMethod' property value"
   })
   public jsletMethodTest():void {
-    let desc:JsletMethodDescriptor = 
+    const desc:JsletMethodDescriptor = 
       JsletMethodDescriptorBuilder.getInstance().build(
         JsletMethod.AFTER, this.key, this.propertyDescriptor
       );

@@ -28,8 +28,8 @@ export class ResponseHandlerBuilderTest {
     description: "should return a function"
   })
   public buildTest():void {
-    let builder = new ResponseHandlerBuilder();
-    let exit:any =
+    const builder = new ResponseHandlerBuilder();
+    const exit:any =
                function(req: HttpRequest, res: HttpResponse, data: any):void {};
     expect(
       builder.build(( {} as HttpRequest ), ( {} as HttpResponse ), exit)
