@@ -50,7 +50,7 @@ export class SandcatAutowireProcessorContextTest {
       this.processor = new SandcatAutowireProcessor();
       this.processor.processCompleteHandler = this.processCompleteHandler;
     };
-    expect(buildProcessor.bind(this)()).to.be.OK;
+    expect(buildProcessor.bind(this)()).to.be.undefined;
   }
 
   @Test({
@@ -288,7 +288,7 @@ export class SandcatAutowireProcessorContextTest {
   public processCompleteTest():void {
     expect(
       this.processor.processComplete(utils.buildDomainConnector(), null)
-    ).to.be.OK;
+    ).to.be.undefined;
   }
 
   @Test({

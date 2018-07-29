@@ -1,5 +1,10 @@
 # JEC Sandcat Project
 
+[![JEC version](https://img.shields.io/badge/JEC-1.0-%23ba00ff.svg)](http://jecproject.org)
+[![GlassCat version](https://img.shields.io/badge/GlassCat-1.0-%230a50ff.svg)](http://jecproject.org)
+[![npm version](https://badge.fury.io/js/jec-sandcat.svg)](https://www.npmjs.com/package/jec-sandcat)
+[![Apache 2.0](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 Sandcat is the standard implementation of the [JavaScript API for RESTful Services*(JARS)*][jec-jars-url]
 specification for GlassCat JEC applications.
 
@@ -106,7 +111,7 @@ The documentation generator is [TypeDoc](http://typedoc.org/)
 
 ## Update Release Notes
 
-**Current stable release:** [1.0.6](CHANGELOG.md#jec-sandcat-1.0.6)
+**Current stable release:** [1.0.8](CHANGELOG.md#jec-sandcat-1.0.8)
  
 For a complete listing of release notes for all Sandcat update releases, see the [CHANGELOG](CHANGELOG.md) file. 
 

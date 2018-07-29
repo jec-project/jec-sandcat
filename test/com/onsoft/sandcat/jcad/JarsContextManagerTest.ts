@@ -40,7 +40,7 @@ export class JarsContextManagerTest {
   })
   public createContextTest():void {
     let manager:JarsContextManager = new JarsContextManager();
-    expect(manager.createContext()).to.be.OK;
-    expect(manager.deleteContext()).to.be.OK;
+    expect(manager.createContext()).to.be.undefined;
+    expect(manager.deleteContext()).to.be.undefined;
   }
 }

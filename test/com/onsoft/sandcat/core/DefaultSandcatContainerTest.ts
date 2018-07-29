@@ -15,8 +15,8 @@
 //   limitations under the License.
 
 import { TestSuite, Test, TestSorters, BeforeAll, AfterAll } from "jec-juta";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import { expect } from "chai";
+import * as sinon from "sinon";
 import { DefaultSandcatContainer } from "../../../../../src/com/onsoft/sandcat/core/DefaultSandcatContainer";
 import { RootPathDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/RootPathDescriptor";
 import { SandcatLoggerProxy } from "../../../../../src/com/onsoft/sandcat/logging/SandcatLoggerProxy";
@@ -25,10 +25,6 @@ import { SandcatError } from "../../../../../src/com/onsoft/sandcat/exceptions/S
 // Utilities:
 import * as utils from "../../../../../utils/test-utils/utilities/DefaultSandcatContainerTestUtils";
 
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
-
 @TestSuite({
   description: "Test the DefaultSandcatContainer class methods",
   testOrder: TestSorters.ORDER_ASCENDING
@@ -36,15 +32,19 @@ chai.use(spies);
 export class DefaultSandcatContainerTest {
 
   public container:DefaultSandcatContainer = null;
+  public loggerProxySpy: any = null;
 
   @BeforeAll()
   public initTest():void {
     this.container = new DefaultSandcatContainer();
+    this.loggerProxySpy = sinon.spy(SandcatLoggerProxy.getInstance(), "log");
   }
 
   @AfterAll()
   public resetTest():void {
     this.container = null;
+    sinon.restore();
+    this.loggerProxySpy = null;
   }
 
   @Test({
@@ -81,10 +81,10 @@ export class DefaultSandcatContainerTest {
     order: 3
   })
   public setLoggerTest():void {
-    let loggerSpy:any =
-                     chai.spy.on(SandcatLoggerProxy.getInstance(), "setLogger");
+    const loggerSpy:any =
+                       sinon.spy(SandcatLoggerProxy.getInstance(), "setLogger");
     this.container.setDomainContainer(utils.CONTAINER);
-    expect(loggerSpy).to.have.been.called.once;
+    sinon.assert.calledOnce(loggerSpy);
   }
   
   @Test({
@@ -131,10 +131,8 @@ export class DefaultSandcatContainerTest {
     order: 8
   })
   public processStartMessageTest():void {
-    let loggerSpy:any =
-                     chai.spy.on(SandcatLoggerProxy.getInstance(), "log");
     this.container.process((err:SandcatError)=> {
-      expect(loggerSpy).to.have.been.called.with(utils.START_MESSAGE);
+      sinon.assert.calledWith(this.loggerProxySpy, utils.START_MESSAGE);
     });
   }
   
@@ -143,10 +141,8 @@ export class DefaultSandcatContainerTest {
     order: 9
   })
   public processEndMessageTest():void {
-    let loggerSpy:any =
-                     chai.spy.on(SandcatLoggerProxy.getInstance(), "log");
     this.container.process((err:SandcatError)=> {
-      expect(loggerSpy).to.have.been.called.with(utils.END_MESSAGE);
+      expect(this.loggerProxySpy).to.have.been.called.with(utils.END_MESSAGE);
     });
   }
 

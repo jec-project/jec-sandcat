@@ -1,5 +1,24 @@
 # JEC Sandcat Project: Update Release Notes
 
+<a name="jec-sandcat-1.0.8"></a>
+## **1.0.8** (2018-08-29)
+
+### Bug Fixes
+
+### Features
+
+- Updating all dependencies
+- Test cases improvements
+
+<a name="jec-sandcat-1.0.7"></a>
+## **1.0.7** (2018-08-22)
+
+### Bug Fixes
+
+### Features
+
+- Dependencies upgrade
+
 <a name="jec-sandcat-1.0.6"></a>
 ## **1.0.6** (2017-12-26)
 

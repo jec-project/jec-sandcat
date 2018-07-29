@@ -15,16 +15,12 @@
 //   limitations under the License.
 
 import { TestSuite, Test, Before, After } from "jec-juta";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import { expect } from "chai";
+import * as sinon from "sinon";
 import { SandcatResourceJsletProxy } from "../../../../../src/com/onsoft/sandcat/jslet/SandcatResourceJsletProxy";
 import { JsletMethod } from "../../../../../src/com/onsoft/sandcat/reflect/JsletMethod";
 import { HttpMethod } from "jec-commons";
 import { HttpRequest, HttpResponse } from "jec-exchange";
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
 
 // Utilities:
 import * as utils from "../../../../../utils/test-utils/utilities/SandcatResourceJsletProxyTestUtils";
@@ -36,17 +32,28 @@ export class SandcatResourceJsletProxyTest {
   
   public proxy:SandcatResourceJsletProxy = null;
   public exitCallback:any = null;
+  public processJsletOperationSpy:any = null;
+  public processOperationSpy:any = null;
+  public exitCallbackSpy:any = null;
 
   @Before()
   public initTest():void {
     this.proxy = new SandcatResourceJsletProxy();
     this.exitCallback = (req:HttpRequest, res:HttpResponse, data:any)=> {};
+    this.processJsletOperationSpy =
+                                 sinon.spy(this.proxy, "processJsletOperation");
+    this.processOperationSpy = sinon.spy(this.proxy, "processOperation");
+    this.exitCallbackSpy = sinon.spy(this, "exitCallback");
   }
 
   @After()
   public resetTest():void {
     this.proxy = null;
     this.exitCallback = null;
+    sinon.restore();
+    this.processJsletOperationSpy = null;
+    this.processOperationSpy = null;
+    this.exitCallbackSpy = null;
   }
 
   @Test({
@@ -60,7 +67,7 @@ export class SandcatResourceJsletProxyTest {
     description: "should set the specified resource object to the proxy"
   })
   public setResourceTest():void {
-    let resource:any = utils.buildResource();
+    const resource:any = utils.buildResource();
     this.proxy.setResource(resource);
     expect(this.proxy.getResource()).to.equal(resource);
   }
@@ -83,40 +90,36 @@ export class SandcatResourceJsletProxyTest {
     description: "should invoke the internal operation process with JsletMethod.INIT"
   })
   public initMethodTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.init();
-    expect(spy).to.have.been.called.with(JsletMethod.INIT);
+    sinon.assert.calledWith(this.processJsletOperationSpy, JsletMethod.INIT);
   }
   
   @Test({
     description: "should invoke the internal operation process with JsletMethod.DESTROY"
   })
   public destroyMethodTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.destroy();
-    expect(spy).to.have.been.called.with(JsletMethod.DESTROY);
+    sinon.assert.calledWith(this.processJsletOperationSpy, JsletMethod.DESTROY);
   }
   
   @Test({
     description: "should invoke the internal operation process with JsletMethod.BEFORE"
   })
   public beforeMethodTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.before();
-    expect(spy).to.have.been.called.with(JsletMethod.BEFORE);
+    sinon.assert.calledWith(this.processJsletOperationSpy, JsletMethod.BEFORE);
   }
   
   @Test({
     description: "should invoke the internal operation process with JsletMethod.AFTER"
   })
   public afterMethodTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processJsletOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.after();
-    expect(spy).to.have.been.called.with(JsletMethod.AFTER);
+    sinon.assert.calledWith(this.processJsletOperationSpy, JsletMethod.AFTER);
   }
   
   // TODO: for each method, we whould test operation invokation when they exist.
@@ -125,223 +128,207 @@ export class SandcatResourceJsletProxyTest {
     description: "should invoke the internal operation process with HttpMethod.AFTER"
   })
   public doDeleteTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doDelete(
       utils.buildRequest(HttpMethod.DELETE),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.with(HttpMethod.DELETE);
+    sinon.assert.calledWith(this.processOperationSpy, HttpMethod.DELETE);
   }
   
   @Test({
     description: "should invoke the exit method passed as parameter"
   })
   public doDeleteExitTest():void {
-    let spy:any = chai.spy.on(this, "exitCallback");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doDelete(
       utils.buildRequest(HttpMethod.DELETE),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.once;
+    sinon.assert.calledOnce(this.exitCallbackSpy);
   }
   
   @Test({
     description: "should invoke the internal operation process with HttpMethod.GET"
   })
   public doGetTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doGet(
       utils.buildRequest(HttpMethod.GET),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.with(HttpMethod.GET);
+    sinon.assert.calledWith(this.processOperationSpy, HttpMethod.GET);
   }
   
   @Test({
     description: "should invoke the exit method passed as parameter"
   })
   public doGetExitTest():void {
-    let spy:any = chai.spy.on(this, "exitCallback");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doGet(
       utils.buildRequest(HttpMethod.GET),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.once;
+    sinon.assert.calledOnce(this.exitCallbackSpy);
   }
   
   @Test({
     description: "should invoke the internal operation process with HttpMethod.OPTIONS"
   })
   public doOptionsTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doOptions(
       utils.buildRequest(HttpMethod.OPTIONS),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.with(HttpMethod.OPTIONS);
+    sinon.assert.calledWith(this.processOperationSpy, HttpMethod.OPTIONS);
   }
   
   @Test({
     description: "should invoke the exit method passed as parameter"
   })
   public doOptionsExitTest():void {
-    let spy:any = chai.spy.on(this, "exitCallback");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doOptions(
       utils.buildRequest(HttpMethod.OPTIONS),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.once;
+    sinon.assert.calledOnce(this.exitCallbackSpy);
   }
   
   @Test({
     description: "should invoke the internal operation process with HttpMethod.TRACE"
   })
   public doTraceTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doTrace(
       utils.buildRequest(HttpMethod.TRACE),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.with(HttpMethod.TRACE);
+    sinon.assert.calledWith(this.processOperationSpy, HttpMethod.TRACE);
   }
   
   @Test({
     description: "should invoke the exit method passed as parameter"
   })
   public doTraceExitTest():void {
-    let spy:any = chai.spy.on(this, "exitCallback");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doTrace(
       utils.buildRequest(HttpMethod.TRACE),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.once;
+    sinon.assert.calledOnce(this.exitCallbackSpy);
   }
   
   @Test({
     description: "should invoke the internal operation process with HttpMethod.HEAD"
   })
   public doHeadTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doHead(
       utils.buildRequest(HttpMethod.HEAD),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.with(HttpMethod.HEAD);
+    sinon.assert.calledWith(this.processOperationSpy, HttpMethod.HEAD);
   }
   
   @Test({
     description: "should invoke the exit method passed as parameter"
   })
   public doHeadExitTest():void {
-    let spy:any = chai.spy.on(this, "exitCallback");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doHead(
       utils.buildRequest(HttpMethod.HEAD),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.once;
+    sinon.assert.calledOnce(this.exitCallbackSpy);
   }
   
   @Test({
     description: "should invoke the internal operation process with HttpMethod.CONNECT"
   })
   public doConnectTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doConnect(
       utils.buildRequest(HttpMethod.CONNECT),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.with(HttpMethod.CONNECT);
+    sinon.assert.calledWith(this.processOperationSpy, HttpMethod.CONNECT);
   }
   
   @Test({
     description: "should invoke the exit method passed as parameter"
   })
   public doConnectExitTest():void {
-    let spy:any = chai.spy.on(this, "exitCallback");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doConnect(
       utils.buildRequest(HttpMethod.CONNECT),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.once;
+    sinon.assert.calledOnce(this.exitCallbackSpy);
   }
   
   @Test({
     description: "should invoke the internal operation process with HttpMethod.PUT"
   })
   public doPutTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doPut(
       utils.buildRequest(HttpMethod.PUT),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.with(HttpMethod.PUT);
+    sinon.assert.calledWith(this.processOperationSpy, HttpMethod.PUT);
   }
   
   @Test({
     description: "should invoke the exit method passed as parameter"
   })
   public doPutExitTest():void {
-    let spy:any = chai.spy.on(this, "exitCallback");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doPut(
       utils.buildRequest(HttpMethod.PUT),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.once;
+    sinon.assert.calledOnce(this.exitCallbackSpy);
   }
   
   @Test({
     description: "should invoke the internal operation process with HttpMethod.POST"
   })
   public doPostTest():void {
-    let spy:any = chai.spy.on(this.proxy, "processOperation");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doPost(
       utils.buildRequest(HttpMethod.POST),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.with(HttpMethod.POST);
+    sinon.assert.calledWith(this.processOperationSpy, HttpMethod.POST);
   }
   
   @Test({
     description: "should invoke the exit method passed as parameter"
   })
   public doPostExitTest():void {
-    let spy:any = chai.spy.on(this, "exitCallback");
     this.proxy.setResource(utils.buildResource());
     this.proxy.doPost(
       utils.buildRequest(HttpMethod.POST),
       utils.buildResponse(),
       this.exitCallback
     );
-    expect(spy).to.have.been.called.once;
+    sinon.assert.calledOnce(this.exitCallbackSpy);
   }
 }

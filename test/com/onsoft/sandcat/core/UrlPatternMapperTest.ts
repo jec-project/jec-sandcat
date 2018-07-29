@@ -60,7 +60,7 @@ export class UrlPatternMapperTest {
     order: 2
   })
   public addRouteDescriptorTest():void {
-    expect(this.mapper.addRouteDescriptor(this.descriptor1)).to.be.OK;
+    expect(this.mapper.addRouteDescriptor(this.descriptor1)).to.be.undefined;
   }
 
   @Test({
@@ -76,7 +76,7 @@ export class UrlPatternMapperTest {
     order: 4
   })
   public addRouteDescriptorSameMethodTest():void {
-    expect(this.mapper.addRouteDescriptor(this.descriptor2)).to.be.OK;
+    expect(this.mapper.addRouteDescriptor(this.descriptor2)).to.be.undefined;
   }
 
   @Test({

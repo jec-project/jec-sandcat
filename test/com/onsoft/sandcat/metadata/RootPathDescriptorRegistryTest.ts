@@ -52,7 +52,7 @@ export class RootPathDescriptorRegistryTest {
   public registerDescriptorTest():void {
     expect(
       RootPathDescriptorRegistry.registerDescriptor(this.descriptor)
-    ).to.be.OK;
+    ).to.be.undefined;
   }
   
   @Test({
@@ -72,7 +72,7 @@ export class RootPathDescriptorRegistryTest {
   public resetDescriptorTest():void {
     expect(
       RootPathDescriptorRegistry.registerDescriptor(null)
-    ).to.be.OK;
+    ).to.be.undefined;
   }
   
   @Test({

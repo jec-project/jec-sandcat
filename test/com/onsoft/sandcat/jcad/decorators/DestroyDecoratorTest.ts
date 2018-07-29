@@ -15,18 +15,14 @@
 //   limitations under the License.
 
 import { TestSuite, Test, Before, After } from "jec-juta";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import { expect } from "chai";
+import * as sinon from "sinon";
 import { DestroyDecorator } from "../../../../../../src/com/onsoft/sandcat/jcad/decorators/DestroyDecorator";
 import { ResourceDescriptor } from "../../../../../../src/com/onsoft/sandcat/reflect/ResourceDescriptor";
 import { ResourceDescriptorRegistry } from "../../../../../../src/com/onsoft/sandcat/metadata/ResourceDescriptorRegistry";
 import { JsletMethodDescriptor } from "../../../../../../src/com/onsoft/sandcat/reflect/JsletMethodDescriptor";
 import { JsletMethod } from "../../../../../../src/com/onsoft/sandcat/reflect/JsletMethod";
 import { Decorator } from "jec-commons";
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/DecoratorsTestUtils";
@@ -59,7 +55,7 @@ export class DestroyDecoratorTest {
     description: "should return the reference to the PropertyDescriptor instance"
   })
   public decorateTargetTest():void {
-    let target:any = this.decorator.decorate(
+    const target:any = this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR
     );
     expect(target).to.equal(utils.DESCRIPTOR);
@@ -69,9 +65,10 @@ export class DestroyDecoratorTest {
     description: "should register information into the ResourceDescriptor by invoking the addJsletMethod() method"
   })
   public addJsletMethodTest():void {
-    let spy:any = chai.spy.on(this.resourceDesc, "addJsletMethod");
+    const spy:any = sinon.spy(this.resourceDesc, "addJsletMethod");
     this.decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR);
-    expect(spy).to.have.been.called.once;
+    sinon.assert.calledOnce(spy);
+    sinon.restore();
   }
 
   @Test({
@@ -101,7 +98,7 @@ export class DestroyDecoratorTest {
   })
   public httpMethodTest():void {
     this.decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR);
-    let desc:JsletMethodDescriptor = 
+    const desc:JsletMethodDescriptor = 
                     this.resourceDesc.jsletMethodsMap.get(JsletMethod.DESTROY);
     expect(desc.jsletMethod).to.equal(JsletMethod.DESTROY);
   }
@@ -111,7 +108,7 @@ export class DestroyDecoratorTest {
   })
   public nameTest():void {
     this.decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR);
-    let desc:JsletMethodDescriptor = 
+    const desc:JsletMethodDescriptor = 
                     this.resourceDesc.jsletMethodsMap.get(JsletMethod.DESTROY);
     expect(desc.name).to.equal(utils.KEY);
   }
@@ -121,7 +118,7 @@ export class DestroyDecoratorTest {
   })
   public actionTest():void {
     this.decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR);
-    let desc:JsletMethodDescriptor = 
+    const desc:JsletMethodDescriptor = 
                     this.resourceDesc.jsletMethodsMap.get(JsletMethod.DESTROY);
     expect(desc.action).to.equal(utils.DESCRIPTOR.value);
   }

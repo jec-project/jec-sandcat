@@ -14,7 +14,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import { RootPathVersion } from "jec-jars";
+import { RootPathVersion, RoutePathParams } from "jec-jars";
 
 /*!
  * This module constains utilities used by the RootPathSolverTest test suite.
@@ -25,8 +25,16 @@ export const BASE_PATH:string = "/url/pattern";
 export const NO_SLASH_BASE_PATH:string = "url/pattern";
 export const SLASH:string = "/";
 export const VERSION:RootPathVersion = ({
-  major: "1",
-  minor: "1",
+  major: 1,
+  minor: 1,
   prefix: "v"
 } as RootPathVersion);
 export const VERSION_STRING:string = "v1.1";
+export const buildRoutePathParams = function(version:RootPathVersion = null):RoutePathParams {
+  const params: RoutePathParams = {
+    path: null,
+    ref: null,
+    version: version
+  };
+  return params;
+}

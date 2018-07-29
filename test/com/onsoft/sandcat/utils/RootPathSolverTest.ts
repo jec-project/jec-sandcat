@@ -18,7 +18,6 @@ import { TestSuite, Test, BeforeAll, TestSorters } from "jec-juta";
 import { expect } from "chai";
 import { RootPathSolver } from "../../../../../src/com/onsoft/sandcat/utils/RootPathSolver";
 import { RootPathDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/RootPathDescriptor";
-import { UrlStringsEnum } from "jec-commons";
 import { RoutePathParams } from "jec-jars";
 
 // Utilities:
@@ -42,11 +41,11 @@ export class RootPathSolverTest {
     order: 1
   })
   public addSlashTest():void {
-    let descriptor:RootPathDescriptor = new RootPathDescriptor();
+    const descriptor:RootPathDescriptor = new RootPathDescriptor();
     descriptor.path = utils.BASE_PATH;
-    let params:RoutePathParams = {};
+    const params:RoutePathParams = utils.buildRoutePathParams();
     this.solver.resolvePath(params, descriptor);
-    let fullPath:string = descriptor.fullPath;
+    const fullPath:string = descriptor.fullPath;
     expect(fullPath.lastIndexOf(utils.SLASH)).to.equal(fullPath.length - 1);
   }
 
@@ -55,9 +54,9 @@ export class RootPathSolverTest {
     order: 2
   })
   public resolvePathTest():void {
-    let descriptor:RootPathDescriptor = new RootPathDescriptor();
+    const descriptor:RootPathDescriptor = new RootPathDescriptor();
     descriptor.path = utils.BASE_PATH;
-    let params:RoutePathParams = {};
+    const params:RoutePathParams = utils.buildRoutePathParams();
     this.solver.resolvePath(params, descriptor);
     expect(descriptor.fullPath).to.equal(utils.BASE_PATH + utils.SLASH);
   }
@@ -67,11 +66,11 @@ export class RootPathSolverTest {
     order: 3
   })
   public noSlashPathAddSlashTest():void {
-    let descriptor:RootPathDescriptor = new RootPathDescriptor();
+    const descriptor:RootPathDescriptor = new RootPathDescriptor();
     descriptor.path = utils.NO_SLASH_BASE_PATH;
-    let params:RoutePathParams = {};
+    const params:RoutePathParams = utils.buildRoutePathParams();
     this.solver.resolvePath(params, descriptor);
-    let fullPath:string = descriptor.fullPath;
+    const fullPath:string = descriptor.fullPath;
     expect(fullPath.lastIndexOf(utils.SLASH)).to.equal(fullPath.length - 1);
   }
 
@@ -80,11 +79,10 @@ export class RootPathSolverTest {
     order: 4
   })
   public noSlashPathTest():void {
-    let descriptor:RootPathDescriptor = new RootPathDescriptor();
+    const descriptor:RootPathDescriptor = new RootPathDescriptor();
     descriptor.path = utils.NO_SLASH_BASE_PATH;
-    let params:RoutePathParams = {};
+    const params:RoutePathParams = utils.buildRoutePathParams();
     this.solver.resolvePath(params, descriptor);
-    let fullPath:string = descriptor.fullPath;
     expect(descriptor.fullPath).to.equal(utils.BASE_PATH + utils.SLASH);
   }
   
@@ -93,13 +91,10 @@ export class RootPathSolverTest {
     order: 5
   })
   public minorVersionTest():void {
-    let descriptor:RootPathDescriptor = new RootPathDescriptor();
+    const descriptor:RootPathDescriptor = new RootPathDescriptor();
     descriptor.path = utils.BASE_PATH;
-    let params:RoutePathParams = {
-      version: utils.VERSION
-    };
+    const params:RoutePathParams = utils.buildRoutePathParams(utils.VERSION);
     this.solver.resolvePath(params, descriptor);
-    let fullPath:string = descriptor.fullPath;
     expect(descriptor.fullPath).to.include(utils.VERSION.minor);
   }
   
@@ -108,13 +103,10 @@ export class RootPathSolverTest {
     order: 6
   })
   public majorVersionTest():void {
-    let descriptor:RootPathDescriptor = new RootPathDescriptor();
+    const descriptor:RootPathDescriptor = new RootPathDescriptor();
     descriptor.path = utils.BASE_PATH;
-    let params:RoutePathParams = {
-      version: utils.VERSION
-    };
+    const params:RoutePathParams = utils.buildRoutePathParams(utils.VERSION);
     this.solver.resolvePath(params, descriptor);
-    let fullPath:string = descriptor.fullPath;
     expect(descriptor.fullPath).to.include(utils.VERSION.major);
   }
   
@@ -123,13 +115,10 @@ export class RootPathSolverTest {
     order: 7
   })
   public versionPrefixTest():void {
-    let descriptor:RootPathDescriptor = new RootPathDescriptor();
+    const descriptor:RootPathDescriptor = new RootPathDescriptor();
     descriptor.path = utils.BASE_PATH;
-    let params:RoutePathParams = {
-      version: utils.VERSION
-    };
+    const params:RoutePathParams = utils.buildRoutePathParams(utils.VERSION);
     this.solver.resolvePath(params, descriptor);
-    let fullPath:string = descriptor.fullPath;
     expect(descriptor.fullPath).to.include(utils.VERSION.prefix);
   }
   
@@ -138,13 +127,10 @@ export class RootPathSolverTest {
     order: 7
   })
   public versionTest():void {
-    let descriptor:RootPathDescriptor = new RootPathDescriptor();
+    const descriptor:RootPathDescriptor = new RootPathDescriptor();
     descriptor.path = utils.BASE_PATH;
-    let params:RoutePathParams = {
-      version: utils.VERSION
-    };
+    const params:RoutePathParams = utils.buildRoutePathParams(utils.VERSION);
     this.solver.resolvePath(params, descriptor);
-    let fullPath:string = descriptor.fullPath;
     expect(descriptor.fullPath).to.include(utils.VERSION_STRING);
   }
 }

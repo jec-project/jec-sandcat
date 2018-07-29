@@ -15,8 +15,8 @@
 //   limitations under the License.
 
 import { TestSuite, Test, BeforeAll, TestSorters, AfterAll } from "jec-juta";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import { expect } from "chai";
+import * as sinon from "sinon";
 import { SandcatAutowireProcessor } from "../../../../../src/com/onsoft/sandcat/core/SandcatAutowireProcessor";
 import { SandcatLoggerProxy } from "../../../../../src/com/onsoft/sandcat/logging/SandcatLoggerProxy";
 import { Sandcat } from "../../../../../src/com/onsoft/sandcat/Sandcat";
@@ -25,10 +25,6 @@ import { JcadContextError } from "jec-commons";
 
 // Utilities:
 import * as utils from "../../../../../utils/test-utils/utilities/SandcatAutowireProcessorTestUtils";
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
 
 @TestSuite({
   description: "Test the SandcatAutowireProcessor class methods",
@@ -60,7 +56,7 @@ export class SandcatAutowireProcessorTest {
     order: 1
   })
   public setSandcatContainerTest():void {
-    expect(this.processor.setSandcatContainer(this.sandcat)).to.be.OK;
+    expect(this.processor.setSandcatContainer(this.sandcat)).to.be.undefined;
   }
 
   @Test({
@@ -84,8 +80,8 @@ export class SandcatAutowireProcessorTest {
     order: 4
   })
   public processStartNoHandlerTest():void {
-    let processor:SandcatAutowireProcessor = this.processor;
-    let doProcessStart:Function = function():void {
+    const processor:SandcatAutowireProcessor = this.processor;
+    const doProcessStart:Function = function():void {
       processor.processStart(null, null);
     };
     expect(doProcessStart).to.throw(Error);
@@ -96,8 +92,8 @@ export class SandcatAutowireProcessorTest {
     order: 5
   })
   public processCompleteNoHandlerTest():void {
-    let processor:SandcatAutowireProcessor = this.processor;
-    let doProcessComplete:Function = function():void {
+    const processor:SandcatAutowireProcessor = this.processor;
+    const doProcessComplete:Function = function():void {
       processor.processComplete(utils.buildDomainConnector(), null);
     };
     expect(doProcessComplete).to.throw(Error);
@@ -116,7 +112,7 @@ export class SandcatAutowireProcessorTest {
     order: 7
   })
   public processStartTest():void {
-    expect(this.processor.processStart(null, null)).to.be.OK;
+    expect(this.processor.processStart(null, null)).to.be.undefined;
   }
 
   @Test({
@@ -124,11 +120,13 @@ export class SandcatAutowireProcessorTest {
     order: 8
   })
   public processTest():void {
-    let loggerSpy:any = chai.spy.on(SandcatLoggerProxy.getInstance(), "log");
+    const loggerSpy:any = sinon.spy(SandcatLoggerProxy.getInstance(), "log");
     this.processor.process(utils.FILE, utils.buildDomainConnector());
-    expect(loggerSpy).to.have.been.called.with(
+    sinon.assert.calledWith(
+      loggerSpy,
       "autowired resource detected: source file='" + utils.FILE.name + "'"
     );
+    sinon.restore();
   }
 
   @Test({
@@ -136,7 +134,7 @@ export class SandcatAutowireProcessorTest {
     order: 9
   })
   public multipleInstancesErrorTest():void {
-    let newInstance:Function = function():SandcatAutowireProcessor {
+    const newInstance:Function = function():SandcatAutowireProcessor {
       return new SandcatAutowireProcessor();
     };
     expect(newInstance).to.throw(JcadContextError);
@@ -149,6 +147,6 @@ export class SandcatAutowireProcessorTest {
   public processCompleteTest():void {
     expect(
       this.processor.processComplete(utils.buildDomainConnector(), null)
-    ).to.be.OK;
+    ).to.be.undefined;
   }
 }

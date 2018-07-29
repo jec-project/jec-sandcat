@@ -15,20 +15,16 @@
 //   limitations under the License.
 
 import { TestSuite, Test, BeforeAll, AfterAll, Before, After, TestSorters } from "jec-juta";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import { expect } from "chai";
+import * as sinon from "sinon";
 import { ResourceDescriptorUtil } from "../../../../../src/com/onsoft/sandcat/utils/ResourceDescriptorUtil";
 import { DefaultSandcatContainer } from "../../../../../src/com/onsoft/sandcat/core/DefaultSandcatContainer";
 import { ResourceDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/ResourceDescriptor";
 import { MethodDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/MethodDescriptor";
 import { Sandcat } from "../../../../../src/com/onsoft/sandcat/Sandcat";
-import {ParametersMapUtil} from "../../../../../src/com/onsoft/sandcat//utils/ParametersMapUtil";
+import { ParametersMapUtil } from "../../../../../src/com/onsoft/sandcat//utils/ParametersMapUtil";
 import { HttpMethod } from "jec-commons";
 import { ResourceDescriptorRegistry } from "../../../../../src/com/onsoft/sandcat/metadata/ResourceDescriptorRegistry";
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
 
 @TestSuite({
   description: "Test the ResourceDescriptorUtil class methods",
@@ -93,7 +89,7 @@ export class ResourceDescriptorUtilTest {
       this.resource, this.descriptor, this.sandcatContainer
     );
     this.descriptorUtil.decorate();
-    let doOverride:Function = function():void {
+    const doOverride:Function = function():void {
       this.resource.__sandcatResourceDescriptor = {};
     };
     expect(doOverride.bind(this)).to.throw(TypeError);
@@ -120,7 +116,7 @@ export class ResourceDescriptorUtilTest {
       this.resource, this.descriptor, this.sandcatContainer
     );
     this.descriptorUtil.decorate();
-    let doOverride:Function = function():void {
+    const doOverride:Function = function():void {
       this.resource.getResourceDescriptor = function():void {};
     };
     expect(doOverride.bind(this)).to.throw(TypeError);
@@ -134,7 +130,7 @@ export class ResourceDescriptorUtilTest {
     this.descriptorUtil = new ResourceDescriptorUtil(
       this.resource, this.descriptor, this.sandcatContainer
     );
-    expect(this.descriptorUtil.fixCompositeValues()).to.be.OK;
+    expect(this.descriptorUtil.fixCompositeValues()).to.be.undefined;
   }
   
   @Test({
@@ -142,14 +138,14 @@ export class ResourceDescriptorUtilTest {
     order: 5
   })
   public parametersMapUtilTest():void {
-    let spy:any = chai.spy.on(ParametersMapUtil, "getParameterCollection");
+    const spy:any = sinon.spy(ParametersMapUtil, "getParameterCollection");
     this.descriptor.addMethod(this.methodDescriptor);
     this.descriptorUtil = new ResourceDescriptorUtil(
       this.resource, this.descriptor, this.sandcatContainer
     );
     this.descriptorUtil.fixCompositeValues();
-    expect(spy).to.have.been.called.with(this.methodDescriptor.name);
-    
+    sinon.assert.calledWith(spy, this.methodDescriptor.name);
+    sinon.restore();
   }
   
   @Test({
@@ -157,7 +153,7 @@ export class ResourceDescriptorUtilTest {
     order: 6
   })
   public setMethodUrlPatternsTest():void {
-    let pattern:string = this.methodDescriptor.urlPatterns[0];
+    const pattern:string = this.methodDescriptor.urlPatterns[0];
     expect(pattern).to.include(this.descriptor.contextRoot);
     expect(pattern).to.include(this.descriptor.resourcePath);
     this.descriptor.methodsMap.clear();

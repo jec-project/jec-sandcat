@@ -15,8 +15,7 @@
 //   limitations under the License.
 
 import { TestSuite, Test, AfterAll, BeforeAll, TestSorters } from "jec-juta";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import { expect } from "chai";
 import { RootPathDescriptorFactory } from "../../../../../src/com/onsoft/sandcat/core/RootPathDescriptorFactory";
 import { RootPathDescriptor } from "../../../../../src/com/onsoft/sandcat/reflect/RootPathDescriptor";
 import { JarsContextManager } from "../../../../../src/com/onsoft/sandcat/jcad/JarsContextManager";
@@ -24,10 +23,6 @@ import { RootPathVersion } from "jec-jars";
 
 // Utilities:
 import * as utils from "../../../../../utils/test-utils/utilities/RootPathDescriptorFactoryTestUtils";
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
 
 @TestSuite({
   description: "Test the RootPathDescriptorFactory class properties",
@@ -91,7 +86,7 @@ export class RootPathDescriptorFactoryTest {
     order: 4
   })
   public versionPrefixTest():void {
-    let version:RootPathVersion = this.descriptor.version;
+    const version:RootPathVersion = this.descriptor.version;
     expect(version).to.have.a.property("prefix", utils.VERSION.prefix);
   }
   
@@ -100,7 +95,7 @@ export class RootPathDescriptorFactoryTest {
     order: 5
   })
   public versionMajorTest():void {
-    let version:RootPathVersion = this.descriptor.version;
+    const version:RootPathVersion = this.descriptor.version;
     expect(version).to.have.a.property("major", utils.VERSION.major);
   }
   
@@ -109,7 +104,7 @@ export class RootPathDescriptorFactoryTest {
     order: 6
   })
   public versionMinorTest():void {
-    let version:RootPathVersion = this.descriptor.version;
+    const version:RootPathVersion = this.descriptor.version;
     expect(version).to.have.a.property("minor", utils.VERSION.minor);
   }
 }

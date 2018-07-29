@@ -15,18 +15,13 @@
 //   limitations under the License.
 
 import { TestSuite, Test, Before, After } from "jec-juta";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import { expect } from "chai";
+import * as sinon from "sinon";
 import { HEADDecorator } from "../../../../../../src/com/onsoft/sandcat/jcad/decorators/HEADDecorator";
 import { ResourceDescriptor } from "../../../../../../src/com/onsoft/sandcat/reflect/ResourceDescriptor";
 import { ResourceDescriptorRegistry } from "../../../../../../src/com/onsoft/sandcat/metadata/ResourceDescriptorRegistry";
 import { MethodDescriptor } from "../../../../../../src/com/onsoft/sandcat/reflect/MethodDescriptor";
-import { JarsConnectorRefs } from "jec-jars";
 import { Decorator, HttpMethod } from "jec-commons";
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/DecoratorsTestUtils";
@@ -58,7 +53,7 @@ export class HEADDecoratorTest {
     description: "should return the reference to the PropertyDescriptor instance"
   })
   public decorateTargetTest():void {
-    let target:any = this.decorator.decorate(
+    const target:any = this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
     expect(target).to.equal(utils.DESCRIPTOR);
@@ -68,11 +63,12 @@ export class HEADDecoratorTest {
     description: "should register information into the ResourceDescriptor by invoking the addMethod() method"
   })
   public addMethodTest():void {
-    let spy:any = chai.spy.on(this.resourceDesc, "addMethod");
+    const spy:any = sinon.spy(this.resourceDesc, "addMethod");
     this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    expect(spy).to.have.been.called.once;
+    sinon.assert.calledOnce(spy);
+    sinon.restore();
   }
 
   @Test({
@@ -106,7 +102,7 @@ export class HEADDecoratorTest {
     this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    let desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
+    const desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
     expect(desc.httpMethod).to.equal(HttpMethod.HEAD);
   }
 
@@ -117,7 +113,7 @@ export class HEADDecoratorTest {
     this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    let desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
+    const desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
     expect(desc.name).to.equal(utils.KEY);
   }
   
@@ -128,7 +124,7 @@ export class HEADDecoratorTest {
     this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    let desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
+    const desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
     expect(desc.parameterNames).to.include(utils.PARAM_NAME_1);
     expect(desc.parameterNames).to.include(utils.PARAM_NAME_2);
   }
@@ -140,7 +136,7 @@ export class HEADDecoratorTest {
     this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    let desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
+    const desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
     expect(desc.action).to.equal(utils.DESCRIPTOR.value);
   }
   
@@ -151,7 +147,7 @@ export class HEADDecoratorTest {
     this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    let desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
+    const desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
     expect(desc.route).to.equal(utils.ROUTE);
   }
   
@@ -162,7 +158,7 @@ export class HEADDecoratorTest {
     this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    let desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
+    const desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
     expect(desc.consumes).to.equal(utils.CONSUMES);
   }
   
@@ -173,7 +169,7 @@ export class HEADDecoratorTest {
     this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    let desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
+    const desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
     expect(desc.produces).to.equal(utils.PRODUCES);
   }
   
@@ -184,7 +180,7 @@ export class HEADDecoratorTest {
     this.decorator.decorate(
       utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
     );
-    let desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
+    const desc:MethodDescriptor = this.resourceDesc.methodsMap.get(utils.KEY);
     expect(desc.crossDomainPolicy).to.equal(utils.CROSS_DOMAIN_POLICY);
   }
 }

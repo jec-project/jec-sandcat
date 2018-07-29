@@ -61,7 +61,7 @@ export class ResourceDescriptorRegistryTest {
   public registerDescriptorTest():void {
     expect(
       ResourceDescriptorRegistry.registerDescriptor(this.descriptor)
-    ).to.be.OK;
+    ).to.be.undefined;
   }
   
   @Test({
@@ -91,7 +91,7 @@ export class ResourceDescriptorRegistryTest {
   public resetDescriptorTest():void {
     expect(
       ResourceDescriptorRegistry.registerDescriptor(null)
-    ).to.be.OK;
+    ).to.be.undefined;
   }
   
   @Test({

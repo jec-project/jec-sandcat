@@ -76,7 +76,7 @@ export class ResourceProxyJsletFactory {
     descriptorUtil.fixCompositeValues();
     jslet.setResource(resourceObj);
     SokokeInjector.getInstance()
-                    .inject(resourceObj, SokokeInjector.DEFAULT_SCOPE_TYPES);
+                  .inject(resourceObj, SokokeInjector.DEFAULT_SCOPE_TYPES);
     ResourceDescriptorRegistry.registerDescriptor(null);
     return jslet;
   }
