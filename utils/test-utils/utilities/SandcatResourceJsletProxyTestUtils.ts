@@ -29,7 +29,7 @@ export const DEFINED_KEY:string = "definedKey";
 export const DEFINED_KEY_VALUE:string = "definedKeyValue";
 export const TEMPLATE_VALUE:string = "templateValue";
 export const buildRequest:Function = function(method:string):HttpRequest {
-  let request:any = (
+  const request:any = (
     {
       getMethod: function():string { return method; },
       getOriginalUrl: function():string { return "original/url"; },
@@ -39,7 +39,7 @@ export const buildRequest:Function = function(method:string):HttpRequest {
   return (request as HttpRequest);
 };
 export const buildResponse:Function = function():HttpResponse {
-  let response:HttpResponse = (
+  const response:HttpResponse = (
     {
       status(statusCode:number):HttpResponse { return this; },
       sendStatus(statusCode:number):HttpResponse { return this; }
@@ -48,8 +48,8 @@ export const buildResponse:Function = function():HttpResponse {
   return response;
 };
 export const buildResource:Function = function():any {
-  let descriptor:ResourceDescriptor = new ResourceDescriptor();
-  let resource:any = {
+  const descriptor:ResourceDescriptor = new ResourceDescriptor();
+  const resource:any = {
     getResourceDescriptor: function():ResourceDescriptor {
       return descriptor;
     }

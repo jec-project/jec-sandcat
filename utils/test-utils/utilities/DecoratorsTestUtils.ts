@@ -29,7 +29,7 @@ export const CONSUMES:string = "application/json";
 export const PRODUCES:string = "application/json";
 export const CROSS_DOMAIN_POLICY:string = "*";
 const buildHttpMethodParams:Function = function():HttpMethodParams {
-  let params:HttpMethodParams = ({
+  const params:HttpMethodParams = ({
     route: ROUTE,
     consumes: CONSUMES,
     produces: PRODUCES,
@@ -38,7 +38,7 @@ const buildHttpMethodParams:Function = function():HttpMethodParams {
   return params;
 };
 export const initRegistry:Function = function():void {
-  let descriptor:ResourceDescriptor = new ResourceDescriptor();
+  const descriptor:ResourceDescriptor = new ResourceDescriptor();
   ResourceDescriptorRegistry.registerDescriptor(descriptor);
 };
 export const resetRegistry:Function = function():void {

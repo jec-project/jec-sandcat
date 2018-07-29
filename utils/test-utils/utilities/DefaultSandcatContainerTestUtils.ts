@@ -26,7 +26,7 @@ import { ConsoleLogger, Logger, SourceFileInspector, FilePreProcessor } from "je
 // Utilities:
 export const ROOT_PATH_REF:string = "rootPathRef";
 const buildRootPath:Function = function():RootPathDescriptor {
-  let rootPath:RootPathDescriptor = new RootPathDescriptor();
+  const rootPath:RootPathDescriptor = new RootPathDescriptor();
   rootPath.ref = ROOT_PATH_REF;
   return rootPath;
 };

@@ -40,19 +40,19 @@ const CONTAINER:any = {
   }
 };
 const buildSandcat:Function = function ():Sandcat {
-  let builder:SandcatBuilder = new SandcatBuilder();
-  let result:DelegatedContainer = builder.build((CONTAINER as DomainContainer));
+  const builder:SandcatBuilder = new SandcatBuilder();
+  const result:DelegatedContainer = builder.build((CONTAINER as DomainContainer));
   return (result as Sandcat);
 };
 const FILE_PATH:string = process.cwd() + "/utils/test-utils/classes/ResourceTestClass.js";
 const FILE_NAME:string = "ResourceTestClass.js";
 const buildFile:Function = function():FileProperties {
-  let builder:FilePropertiesBuilder = new FilePropertiesBuilder();
-  let properties:FileProperties = builder.build(FILE_NAME, FILE_PATH, null);
+  const builder:FilePropertiesBuilder = new FilePropertiesBuilder();
+  const properties:FileProperties = builder.build(FILE_NAME, FILE_PATH, null);
   return properties;
 };
 export const buildDomainConnector:Function = function():DomainConnector {
-  let connector:any = {
+  const connector:any = {
     getContextRoot: function():string { return "contextroot"; },
     getContainer: function():DomainContainer { return (CONTAINER  as DomainContainer); }
   };

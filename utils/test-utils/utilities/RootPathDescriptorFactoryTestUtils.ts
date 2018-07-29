@@ -26,8 +26,8 @@ import { FilePropertiesBuilder } from "jec-commons-node";
 const FILE_PATH:string = process.cwd() + "/utils/test-utils/classes/RootPathTestClass.js";
 const FILE_NAME:string = "RootPathTestClass.js";
 const buildFile:Function = function():FileProperties {
-  let builder:FilePropertiesBuilder = new FilePropertiesBuilder();
-  let properties:FileProperties = builder.build(FILE_NAME, FILE_PATH, null);
+  const builder:FilePropertiesBuilder = new FilePropertiesBuilder();
+  const properties:FileProperties = builder.build(FILE_NAME, FILE_PATH, null);
   return properties;
 };
 export const FILE:FileProperties = buildFile();

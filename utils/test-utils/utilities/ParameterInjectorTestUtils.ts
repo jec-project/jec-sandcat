@@ -50,7 +50,7 @@ export const REQUEST:HttpRequest = ({
 } as HttpRequest);
 export const PARAMETER_NAME:string = "parameterName";
 export const buildParameterDescriptor:Function = function(annotationType:number):ParameterDescriptor {
-  let desc:ParameterDescriptor = new ParameterDescriptor();
+  const desc:ParameterDescriptor = new ParameterDescriptor();
   desc.annotationType = annotationType;
   desc.methodName = "methodName";
   desc.key = PARAMETER_NAME;
